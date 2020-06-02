@@ -1,0 +1,112 @@
+@import "../variables";
+
+$banner-url: url("~/assets/pages/home/banner.png");
+$cards-overlap: 50px;
+
+body {
+    padding-top: 0;
+}
+
+#content {
+    padding: 0 0 $content-padding;
+
+    .intro {
+        background: $banner-url no-repeat center / cover, #707070;
+        background-blend-mode: multiply;
+        color: white;
+        padding: $menu-height 0 $cards-overlap;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &--description {
+            padding: $content-padding;
+
+            img {
+                display: block;
+                margin: 1em auto;
+            }
+        }
+
+        &--side {
+            padding: $content-padding;
+            text-align: center;
+
+            flex-basis: 512px;
+
+            .download {
+                background: $accent-color;
+                border-radius: 5px;
+                color: white;
+                display: block;
+                font-size: 1.5em;
+                font-weight: 700;
+                padding: 10px 20px;
+                text-align: center;
+
+                &:active {
+                    transform: translateY(1px);
+                }
+            }
+        }
+
+        &--servers {
+            font-size: 1.2em;
+            white-space: nowrap;
+
+            h3 {
+                margin: 20px;
+            }
+
+            div {
+                background: rgba(white, 0.1);
+                border-radius: 5px;
+                margin: 10px 0;
+                padding: 10px;
+            }
+
+            pre {
+                font-size: 1.2em;
+            }
+        }
+
+        &--links {
+            margin: 20px 0;
+
+            a {
+                color: inherit;
+                display: inline-block;
+                border-bottom: 1px dashed;
+                margin: 0 5px;
+                text-decoration: none;
+
+                &:hover {
+                    border-bottom-style: solid;
+                }
+            }
+        }
+
+        &--discord-invite {
+            margin-top: 20px;
+
+            img {
+                height: 5em;
+            }
+        }
+
+        & + .cards--container {
+            margin-top: -$cards-overlap;
+        }
+    }
+
+    .fun-fact {
+        text-align: center;
+
+        p {
+            margin: 1em;
+            text-align: inherit;
+            text-indent: 0;
+        }
+    }
+}

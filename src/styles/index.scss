@@ -1,0 +1,40 @@
+@import "fonts", "article", "cards";
+@import "menu", "footer";
+
+* {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    outline: none;
+}
+
+html {
+    background: whitesmoke;
+    scroll-behavior: smooth;
+}
+
+body {
+    background: white;
+    box-shadow: 0 0 16px rgba(black, 0.1);
+    color: #444;
+    font-family: "Raleway", "Font Awesome 5 Free", "Font Awesome 5 Brands";
+    margin: 0 auto;
+    padding-top: $menu-height;
+
+    width: $body-width;
+
+    display: flex;
+    flex-direction: column;
+}
+
+#content {
+    padding: 20px $content-padding;
+
+    position: relative;
+
+    flex-grow: 1;
+}
+
+.flex-grow {
+    flex-grow: 1;
+}

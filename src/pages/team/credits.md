@@ -1,0 +1,18 @@
+- **Arekuzu** for creating the texture pack
+- **Hazzat** for general updates to 1.7.4
+- **Hawkseye21** for fancy MCPatcher features and general updates to 1.7.4
+- **Outa** for making the hunger bar
+- **HeadPikachu** for the liquids and various mobs.
+- **Lphemphill** for villager voices
+- **MehStrongBadMeh** for recruiting more people to help
+- **PandaTork** for the main screen logo
+- **Bronydog** for variant texture template and general updates from 1.10 onward
+- **SolisLink** for general texture and model updates from 1.11 onward
+- **Velvet** Remedy for general texture and model updates from 1.12 onward
+- **Vivian** for general maintenance and ctm fixes from 1.13 onward
+- **Sollace** for managing our GitHub, file cleanup from 1.15 onward and vectorizing logo resources
+- **PCelestia** for GitHub management and help with Add-ons from 1.15 onward
+- **SkyArrow** for developing our website
+- **Thunder Kick** for UI textures and addon help
+- **Vayandas** for redesigning the moon
+- **Keupoz** for upgrading the website

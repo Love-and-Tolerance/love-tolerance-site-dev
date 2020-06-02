@@ -1,0 +1,82 @@
+block settings
+
+- var title = title ? site.title.replace("%s", title) : site.name;
+- var description = description || site.description;
+- var js = js || (dev ? "_dumb" : null);
+
+mixin icon(name)
+    != icons[name]
+
+mixin card(card)
+    .card
+        img(src=`~/assets/cards/${card.image}.png`)
+        h2.card--title!= card.title
+        .card--description!= card.description
+
+mixin social-link(url, icon_name, hint)
+    a(href=url, title=hint, target="_blank")
+        +icon(icon_name)
+
+mixin team-card(card)
+    .card--team
+        img(src=`~/assets/cards/${card.avatar}`)
+        .card--team__content
+            h3.card--team__name
+                = card.name
+                if card.nickname
+                    span.card--team__nickname(title="Minecraft nickname")!= `&nbsp;(${card.nickname})`
+
+            if card.social
+                .card--team__social
+                    if card.social.email
+                        +social-link(`mailto:${card.social.email}`, "envelope", "E-Mail")
+
+                    if card.social.github
+                        +social-link(`https://github.com/${card.social.github}`, "github", "GitHub")
+
+                    if card.social.twitter
+                        +social-link(`https://twitter.com/${card.social.twitter}`, "twitter", "Twitter")
+
+                    if card.social.vk
+                        +social-link(`https://vk.com/${card.social.vk}`, "vk", "VK")
+
+                    if card.social.discord
+                        span.card--team__discord
+                            +icon("discord")
+                            != "&nbsp;"
+                            = card.social.discord
+
+            .card--team__role= card.role
+
+html
+    head
+        title= title
+
+        meta(name="viewport", content="width = device-width, min-width = 1024")
+        meta(charset="utf-8")
+
+        //- OpenGraph properties
+        meta(property="og:title", content=title)
+        meta(property="og:locale", content="en_US")
+        meta(name="description", content=description)
+        meta(property="og:description", content=description)
+        link(rel="canonical", href=site.url)
+        meta(property="og:url", content=site.url)
+        meta(property="og:site_name", content=site.name)
+
+        link(rel="shortcut icon", href="~/assets/favicon.ico")
+        link(rel="stylesheet", href="~/src/styles/index.scss")
+
+        if css
+            link(rel="stylesheet", href=`~/src/styles/pages/${css}.scss`)
+
+    body
+        include includes/menu.pug
+
+        #content
+            block content
+
+        include includes/footer.pug
+
+        if js
+            script(src=`~/src/scripts/${js}.ts`)

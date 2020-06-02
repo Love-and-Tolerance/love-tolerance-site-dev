@@ -1,0 +1,70 @@
+@import "variables";
+
+header {
+    background: rgba(white, 0.9);
+    box-sizing: border-box;
+    font-size: 1.2em;
+    font-weight: 700;
+    line-height: $menu-height;
+    padding: 0 $content-padding;
+
+    width: $body-width;
+    height: $menu-height;
+
+    position: fixed;
+    top: 0;
+    z-index: 10;
+
+    display: flex;
+    align-items: center;
+
+    // Shadow, because overflow property doesn't cut off position-fixed elements
+    &::after {
+        content: "";
+
+        background: linear-gradient(rgba(black, 0.1), transparent);
+        pointer-events: none;
+
+        width: 100%;
+        height: 16px;
+
+        position: absolute;
+        left: 0;
+        top: 100%;
+    }
+
+    .logo img {
+        height: floor($menu-height * 2/3);
+    }
+
+    menu {
+        ul {
+            list-style: none;
+
+            display: flex;
+            flex-direction: row;
+
+            a {
+                padding: 0 25px;
+                transition-property: background-color color;
+                transition-duration: 100ms;
+
+                &.current,
+                &:hover {
+                    background-color: rgba($accent-color, 0.7);
+                    color: white;
+                }
+
+                &.current {
+                    background-color: $accent-color;
+                }
+            }
+        }
+
+        a {
+            display: block;
+            color: inherit;
+            text-decoration: none;
+        }
+    }
+}

@@ -1,0 +1,32 @@
+[
+    {
+        "title": "Bright Colors",
+        "description": "Brightly colored textures, but not pink and girly! Just like the show",
+        "image": "features/bright-colors"
+    },
+    {
+        "title": "Paintings",
+        "description": "Features pony pictures as paintings",
+        "image": "features/paintings"
+    },
+    {
+        "title": "Close to Vanilla",
+        "description": "Being similar to the default textures, doesn't make your builds look completely different",
+        "image": "features/vanilla-close"
+    },
+    {
+        "title": "Ponified Creatures",
+        "description": "Designed for <a href='https://minelittlepony-mod.com/' target='_blank'>Mine Little Pony</a> ponified creatures",
+        "image": "features/minelp"
+    },
+    {
+        "title": "Cross-Platform",
+        "description": "Available for both Java and Bedrock (MCPE and Windows 10) editions",
+        "image": "features/cross-platform"
+    },
+    {
+        "title": "Add-on Packs",
+        "description": "Has various add-on packs to customize the look and feel of the pack",
+        "image": "features/addons"
+    }
+]
