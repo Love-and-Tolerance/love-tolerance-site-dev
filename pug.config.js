@@ -7,139 +7,155 @@ const MarkdownIt = require("markdown-it");
 const touch = require("touch");
 const { parse: parseYaml } = require("yaml");
 
+const { object, string, dict } = require("@mojotech/json-type-validation");
+
 const isProduction = process.env.NODE_ENV === "production";
 
-const ICONS = {};
-
-{
+/**
+ * Find FontAwesome free icon by name. Search for icons here: https://fontawesome.com/icons?d=gallery&m=free
+ * @param {string} name FontAwesome Free icon name
+ * @returns Found icon or placeholder code
+ */
+const getIcon = (() => {
     const iconsPath = require.resolve("@fortawesome/fontawesome-free/metadata/icons.yml");
-    const iconsYaml = readFileSync(iconsPath, { encoding: "utf-8" });
-    const iconsParsed = parseYaml(iconsYaml);
+    const iconsRaw = readFileSync(iconsPath, { encoding: "utf-8" });
+    const iconsParsed = parseYaml(iconsRaw);
 
-    Object.keys(iconsParsed).forEach((name) => {
-        /** @type {string[]} */
-        const styles = iconsParsed[name].styles;
+    const ICONS = dict(object({
+        unicode: string()
+    })).runWithException(iconsParsed);
 
-        if (styles.some((type) => /^(solid|brands)$/.test(type))) {
-            ICONS[name] = `&#x${iconsParsed[name].unicode};`;
+    return (
+        /** @param {string} name */
+        (name) => {
+            const icon = ICONS[name] || ICONS["exclamation-circle"];
+
+            return `&#x${icon.unicode};`;
         }
-    });
-}
+    );
+})();
 
-const DATA = {};
+const DATA = (() => {
+    /** @type {Record<string, any>} */
+    const HOLDER = {};
 
-const DATA_CACHE = {};
+    /** @type {Record<string, any>} */
+    const DATA_CACHE = {};
 
-/** @param {string} path */
-function processJson(path) {
-    const jsonFile = readFileSync(`./data/${path}`, { encoding: "utf-8" });
-    const json = JSON.parse(jsonFile);
-    const parsed = parsePath(path);
+    /** @param {string} path */
+    function processJson(path) {
+        const jsonFile = readFileSync(`./data/${path}`, { encoding: "utf-8" });
+        const json = JSON.parse(jsonFile);
+        const parsed = parsePath(path);
 
-    const updated = { path: "DATA", object: null };
+        const updated = { path: ["DATA"], object: null };
 
-    joinPath(parsed.dir, parsed.name).split("/").reduce((prev, curr, index, arr) => {
-        if (index == arr.length - 1) {
-            const cache = DATA_CACHE[path];
+        joinPath(parsed.dir, parsed.name).split("/").reduce((prev, curr, index, arr) => {
+            if (index == arr.length - 1) {
+                const cache = DATA_CACHE[path];
 
-            if (cache) {
-                /** @type {any[]} */
-                const arr = prev[curr];
+                if (cache) {
+                    /** @type {any[]} */
+                    const arr = prev[curr];
 
-                if (Array.isArray(cache)) {
-                    cache.forEach((item) => {
-                        const itemIndex = arr.indexOf(item);
+                    if (Array.isArray(cache)) {
+                        cache.forEach((item) => {
+                            const itemIndex = arr.indexOf(item);
 
-                        if (itemIndex > -1) {
-                            arr.splice(itemIndex, 1);
-                        }
-                    });
-                } else {
-                    Object.keys(cache).forEach((key) => {
+                            if (itemIndex > -1) {
+                                arr.splice(itemIndex, 1);
+                            }
+                        });
+                    } else {
+                        Object.keys(cache).forEach((key) => {
+                            delete prev[curr][key];
+                        });
+                    }
+                }
+
+                prev[curr] = Array.isArray(json) ? [].concat(prev[curr] || [], json) : Object.assign(prev[curr] || {}, json);
+                updated.object = prev[curr];
+            } else {
+                prev[curr] = prev[curr] || {};
+            }
+
+            updated.path.push(curr);
+            return prev[curr];
+        }, HOLDER);
+
+        DATA_CACHE[path] = json;
+
+        return updated;
+    }
+
+    /** @param {string} path */
+    function deleteObject(path) {
+        const parsed = parsePath(path);
+
+        let objectPath = "DATA";
+
+        joinPath(parsed.dir, parsed.name).split("/").reduce((prev, curr, index, arr) => {
+            if (index == arr.length - 1) {
+                if (DATA_CACHE[path]) {
+                    Object.keys(DATA_CACHE[path]).forEach((key) => {
                         delete prev[curr][key];
                     });
+
+                    if (!Object.keys(prev[curr]).length) {
+                        delete prev[curr];
+                    }
                 }
             }
 
-            prev[curr] = Array.isArray(json) ? [].concat(prev[curr] || [], json) : Object.assign(prev[curr] || {}, json);
-            updated.object = prev[curr];
-        } else {
-            prev[curr] = prev[curr] || {};
-        }
+            objectPath += `.${curr}`;
+            return prev[curr];
+        }, HOLDER);
 
-        updated.path += `.${curr}`;
-        return prev[curr];
-    }, DATA);
+        delete DATA_CACHE[path];
 
-    DATA_CACHE[path] = json;
+        return objectPath;
+    }
 
-    return updated;
-}
-
-/** @param {string} path */
-function deleteObject(path) {
-    const parsed = parsePath(path);
-
-    let objectPath = "DATA";
-
-    joinPath(parsed.dir, parsed.name).split("/").reduce((prev, curr, index, arr) => {
-        if (index == arr.length - 1) {
-            if (DATA_CACHE[path]) {
-                Object.keys(DATA_CACHE[path]).forEach((key) => {
-                    delete prev[curr][key];
-                });
-
-                if (!Object.keys(prev[curr]).length) {
-                    delete prev[curr];
-                }
-            }
-        }
-
-        objectPath += `.${curr}`;
-        return prev[curr];
-    }, DATA);
-
-    delete DATA_CACHE[path];
-
-    return objectPath;
-}
-
-glob.sync("**/*.json", { cwd: "data" }).forEach((path) => {
-    processJson(path);
-});
-
-if (process.env.NODE_ENV !== "production") {
-    /** @param {string} path */
-    const update = (path) => {
-        const updated = processJson(path);
-
-        if (process.env.NODE_ENV == "debug") {
-            console.log(`Updated object "${updated.path}":`, updated.object);
-        }
-
-        touch("./src/layout.pug", { nocreate: true });
-    };
-
-    const watcher = chokidar.watch("**/*.json", {
-        cwd: "data",
-        awaitWriteFinish: true,
-        ignoreInitial: true
+    glob.sync("**/*.json", { cwd: "data" }).forEach((path) => {
+        processJson(path);
     });
 
-    watcher
-        .on("add", update)
-        .on("change", update)
-        .on("unlink", (path) => {
-            const deletedPath = deleteObject(path);
+    if (process.env.NODE_ENV !== "production") {
+        /** @param {string} path */
+        const update = (path) => {
+            const updated = processJson(path);
 
             if (process.env.NODE_ENV == "debug") {
-                console.log(`Deleted object "${deletedPath}"`);
-                console.log("New DATA object:", DATA);
+                console.log(`Updated object "${updated.path.join(".")}":`, updated.object);
             }
 
             touch("./src/layout.pug", { nocreate: true });
+        };
+
+        const watcher = chokidar.watch("**/*.json", {
+            cwd: "data",
+            awaitWriteFinish: true,
+            ignoreInitial: true
         });
-}
+
+        watcher
+            .on("add", update)
+            .on("change", update)
+            .on("unlink", (path) => {
+                const deletedPath = deleteObject(path);
+
+                if (process.env.NODE_ENV == "debug") {
+                    console.log(`Deleted object "${deletedPath}"`);
+                    console.log("New DATA object:", HOLDER);
+                }
+
+                touch("./src/layout.pug", { nocreate: true });
+            });
+    }
+
+    return HOLDER;
+})();
+
 
 /** @param {string} text */
 function slugify(text) {
@@ -181,18 +197,23 @@ module.exports = {
         dev: !isProduction,
         currentYear: new Date().getFullYear(),
 
+        getIcon,
+
+        getMenuList() {
+            return Object.keys(DATA.menu);
+        },
+
         /** @param {string} name */
-        getMenuPath(name) {
-            let path = SITE.menu[name];
+        getMenuEntry(name) {
+            const path = SITE.menu[name];
             if (isProduction || path == "/") return path;
-            return path + "index.pug";
+            return joinPath(path, "index.pug");
         },
 
         menuEntry: null,
         css: null,
         js: null,
 
-        icons: ICONS,
         site: SITE,
         data: DATA
     },
