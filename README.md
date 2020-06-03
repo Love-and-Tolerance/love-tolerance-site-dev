@@ -42,7 +42,7 @@ Accessed via `site` Pug local.
 ```
 
 ### Site menu
-Accessed via `site.menu`. Use `getMenuPath(name)` to get the path of menu entry (must be used for dev server support)
+Use `getMenuList()` to get an array of entry names. Use `getMenuEntry(name)` to get the path of menu entry (must be used for dev server support)
 
 ```jsonc
 {
@@ -57,9 +57,10 @@ Accessed via `site.menu`. Use `getMenuPath(name)` to get the path of menu entry 
 Cards are accessed via `data.cards`.
 
 #### Regular cards
-Pass these cards to `card` Pug mixin:
+Pass these cards to `card` or `cards-container` Pug mixins:
 ```pug
 +card(data.cards.features[0])
++cards-container(data.cards.features)
 ```
 
 ```jsonc
@@ -74,9 +75,10 @@ Pass these cards to `card` Pug mixin:
 ```
 
 #### Team cards
-Pass these cards to `team-card` Pug mixin:
+Pass these cards to `team-card` or `team-cards-container` Pug mixins:
 ```pug
 +team-card(data.cards.team[0])
++team-cards-container(data.cards.team)
 ```
 
 ```jsonc
