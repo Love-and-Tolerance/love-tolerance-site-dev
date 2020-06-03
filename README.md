@@ -56,8 +56,8 @@ Accessed via `site.menu`. Use `getMenuPath(name)` to get the path of menu entry 
 ### Cards
 Cards are accessed via `data.cards`.
 
-#### Icon cards
-Pass these cards to `icon-card` Pug mixin:
+#### Regular cards
+Pass these cards to `card` Pug mixin:
 ```pug
 +card(data.cards.features[0])
 ```
