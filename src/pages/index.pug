@@ -14,7 +14,7 @@ block content
             p However, this is only in the sense that it's brightly colored and features some mild pony references, meaning it's not overtly pony-themed and won't make your world look totally different.
 
         .intro--side
-            a.download(href=getMenuPath("Downloads")) Download
+            a.download(href=getMenuEntry("Downloads")) Download
 
             .intro--servers
                 h3 Official Minecraft #{data.servers.version} servers
@@ -31,9 +31,7 @@ block content
                 a(href=site.links.discordInvite, target="_blank")
                     img(src="~/assets/discord-logo.svg")
 
-    .cards--container
-        each card in data.cards.features
-            +card(card)
+    +cards-container(data.cards.features)
 
     .fun-fact
         h1 Fun fact

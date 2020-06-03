@@ -4,9 +4,6 @@ block settings
 - var description = description || site.description;
 - var js = js || (dev ? "_dumb" : null);
 
-mixin icon(name)
-    != icons[name]
-
 mixin card(card)
     .card
         img(src=`~/assets/cards/${card.image}.png`)
@@ -14,8 +11,7 @@ mixin card(card)
         .card--description!= card.description
 
 mixin social-link(url, icon_name, hint)
-    a(href=url, title=hint, target="_blank")
-        +icon(icon_name)
+    a(href=url, title=hint, target="_blank")!= getIcon(icon_name)
 
 mixin team-card(card)
     .card--team
@@ -24,7 +20,9 @@ mixin team-card(card)
             h3.card--team__name
                 = card.name
                 if card.nickname
-                    span.card--team__nickname(title="Minecraft nickname")!= `&nbsp;(${card.nickname})`
+                    span.card--team__nickname(title="Minecraft nickname")
+                        != "&nbsp;"
+                        = `(${card.nickname})`
 
             if card.social
                 .card--team__social
@@ -42,11 +40,20 @@ mixin team-card(card)
 
                     if card.social.discord
                         span.card--team__discord
-                            +icon("discord")
-                            != "&nbsp;"
+                            != getIcon("discord") + "&nbsp;"
                             = card.social.discord
 
             .card--team__role= card.role
+
+mixin cards-container(cards)
+    .cards--container
+        each card in cards
+            +card(card)
+
+mixin team-cards-container(cards)
+    .cards--container__team
+        each card in cards
+            +team-card(card)
 
 html
     head

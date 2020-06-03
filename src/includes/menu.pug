@@ -7,6 +7,6 @@ header
 
     menu
         ul
-            each _, name in site.menu
+            each name in getMenuList()
                 li
-                    a(class={"current": name == menuEntry}, href=getMenuPath(name))= name
+                    a(class={"current": name == menuEntry}, href=getMenuEntry(name))= name
