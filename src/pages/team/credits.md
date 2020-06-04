@@ -15,4 +15,5 @@
 - **SkyArrow** for developing our website
 - **Thunder Kick** for UI textures and addon help
 - **Vayandas** for redesigning the moon
+- **Mr. Pibbles** for dried kelp block texture
 - **Keupoz** for upgrading the website
