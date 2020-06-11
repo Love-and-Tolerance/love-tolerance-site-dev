@@ -1,0 +1,34 @@
+#content {
+    .gallery {
+        display: flex;
+        align-content: space-between;
+
+        .column {
+            margin: 0 10px;
+
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            flex-grow: 1;
+            flex-basis: 33%;
+
+            a {
+                margin: 10px 0;
+
+                img {
+                    box-shadow: 0 8px 16px rgba(black, 0.2);
+                    transition: transform 300ms;
+
+                    width: 100%;
+
+                    &:hover {
+                        transform: scale(1.5);
+
+                        position: relative;
+                        z-index: 1;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -156,6 +156,36 @@ const DATA = (() => {
     return HOLDER;
 })();
 
+const GALLERY = (() => {
+    const PATTERN = "assets/pages/gallery/screenshots/*";
+
+    const FILES = glob.sync(PATTERN, { nodir: true })
+        .map((value) => joinPath("~/", value));
+
+    if (process.env.NODE_ENV !== "production") {
+        const watcher = chokidar.watch(PATTERN, {
+            awaitWriteFinish: true,
+            ignoreInitial: true
+        });
+
+        watcher.on("all", (event, path) => {
+            path = joinPath("~/", path);
+
+            const i = FILES.indexOf(path);
+
+            if (event === "unlink" && i > -1) {
+                FILES.splice(i, 1);
+            } else if (i == -1) {
+                FILES.push(path);
+            }
+
+            touch("./src/pages/gallery/index.pug", { nocreate: true });
+        });
+    }
+
+    return FILES;
+})();
+
 
 /** @param {string} text */
 function slugify(text) {
@@ -215,7 +245,9 @@ module.exports = {
         js: null,
 
         site: SITE,
-        data: DATA
+        data: DATA,
+
+        gallery: GALLERY
     },
     filters: {
         markdown

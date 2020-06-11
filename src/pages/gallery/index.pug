@@ -1,0 +1,22 @@
+extends ../../layout.pug
+
+block settings
+    - var title = "Gallery";
+    - var menuEntry = "Gallery";
+    - var description = "Screenshots showing off the resource pack";
+    - var css = "gallery";
+
+mixin column(filter)
+    .column
+        for url in gallery.filter(filter)
+            a(href=url, target="_blank")
+                img(src=url)
+
+block content
+    h2 Showcase
+    p Take a look at this resourcepack in action!
+
+    .gallery
+        +column((_, i) => i % 3 === 0)
+        +column((_, i) => i % 3 === 1)
+        +column((_, i) => i % 3 === 2)
