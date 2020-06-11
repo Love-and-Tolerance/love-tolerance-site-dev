@@ -46,7 +46,7 @@ header {
 
             a {
                 padding: 0 25px;
-                transition-property: background-color color;
+                transition-property: background-color, color;
                 transition-duration: 100ms;
 
                 &.current,
