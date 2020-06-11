@@ -8,32 +8,32 @@ block settings
 
 block content
     .intro
-        .intro--description
-            div #[img(src="~/assets/logo.svg", width="512")]
+        .intro__description
+            img.intro__description__logo(src="~/assets/logo.svg", width="512")
             h2 A My Little Pony: Friendship is Magic Inspired Resource Pack!
             p However, this is only in the sense that it's brightly colored and features some mild pony references, meaning it's not overtly pony-themed and won't make your world look totally different.
 
-        .intro--side
-            a.download(href=getMenuEntry("Downloads")) Download
+        .intro__side
+            a.intro__download(href=getMenuEntry("Downloads")) Download
 
-            .intro--servers
-                h3 Official Minecraft #{data.servers.version} servers
+            .intro__servers
+                h3.intro__servers__title Official Minecraft #{data.servers.version} servers
+
                 each host, name in data.servers.list
-                    div
+                    div.intro__servers__server
                         strong= name
-                        pre= host
+                        pre.intro__servers__server__host= host
 
-            .intro--links
-                a(href="https://github.com/Love-and-Tolerance/Love-and-Tolerance", target="_blank") GitHub
-                a(href=site.links.googleArchive, target="_blank") Archive
+            .intro__links
+                a.intro__links__link(href="https://github.com/Love-and-Tolerance/Love-and-Tolerance", target="_blank") GitHub
+                a.intro__links__link(href=site.links.googleArchive, target="_blank") Archive
 
-            .intro--discord-invite
-                a(href=site.links.discordInvite, target="_blank")
-                    img(src="~/assets/discord-logo.svg")
+            a.intro__discord-invite(href=site.links.discordInvite, target="_blank")
+                img.intro__discord-invite__logo(src="~/assets/discord-logo.svg")
 
     +cards-container(data.cards.features)
 
     .fun-fact
         h1 Fun fact
-        p This pack's style is used in Jan Animation Studios' popular animation "Don't Mine at Night"
+        p.fun-fact__description This pack's style is used in Jan Animation Studios' popular animation "Don't Mine at Night"
         iframe(width="560", height="315", src="https://www.youtube.com/embed/X_TMtgjQuZI", frameborder="0", allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture", allowfullscreen)

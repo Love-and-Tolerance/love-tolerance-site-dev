@@ -11,15 +11,15 @@ mixin download-card(icon, edition, entryName, extra)
     - var version = Object.keys(entry)[0];
     - var url = entry[version];
 
-    a.card--download(href=url, target="_blank")
-        img(src=`~/assets/pages/downloads/${icon}.png`)
-        h3 #{edition} Edition v#{version}
-        div= extra
+    a.card.card--download(href=url, target="_blank")
+        img.card--download__icon(src=`~/assets/pages/downloads/${icon}.png`)
+        h3.card--download__title #{edition} Edition v#{version}
+        div.card--download__extra= extra
 
 block content
     != markdown("## Latest releases")
 
-    .cards--container
+    .cards-container
         +download-card("grass-block", "Java", "java")
         +download-card("bedrock", "Bedrock", "bedrock", "WIP")
         +download-card("bedrock", "Bedrock", "bedrockExperimental", "Experimental WIP")
@@ -28,6 +28,6 @@ block content
 
     .java-releases
         for url, version in data.downloads.java
-            a(href=url, target="_blank")= version
+            a.java-releases__link(href=url, target="_blank")= version
 
     include:markdown installation.md

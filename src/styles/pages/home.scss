@@ -19,61 +19,61 @@ body {
         align-items: center;
         grid-template-columns: auto auto;
 
-        &--description {
+        &__description {
             padding: $content-padding;
 
-            img {
+            &__logo {
                 display: block;
                 margin: 1em auto;
             }
         }
 
-        &--side {
+        &__side {
             padding: $content-padding;
             text-align: center;
 
             flex-basis: 512px;
+        }
 
-            .download {
-                background: $accent-color;
-                border-radius: 5px;
-                color: white;
-                display: block;
-                font-size: 1.5em;
-                font-weight: 700;
-                padding: 10px 20px;
-                text-align: center;
+        &__download {
+            background: $accent-color;
+            border-radius: 5px;
+            color: white;
+            display: block;
+            font-size: 1.5em;
+            font-weight: 700;
+            padding: 10px 20px;
+            text-align: center;
 
-                &:active {
-                    transform: translateY(1px);
-                }
+            &:active {
+                transform: translateY(1px);
             }
         }
 
-        &--servers {
+        &__servers {
             font-size: 1.2em;
             white-space: nowrap;
 
-            h3 {
-                margin: 20px;
+            &__title {
+                margin: 20px !important;
             }
 
-            div {
+            &__server {
                 background: rgba(white, 0.1);
                 border-radius: 5px;
                 margin: 10px 0;
                 padding: 10px;
-            }
 
-            pre {
-                font-size: 1.2em;
+                &__host {
+                    font-size: 1.2em;
+                }
             }
         }
 
-        &--links {
+        &__links {
             margin: 20px 0;
 
-            a {
+            &__link {
                 color: inherit;
                 display: inline-block;
                 border-bottom: 1px dashed;
@@ -86,10 +86,10 @@ body {
             }
         }
 
-        &--discord-invite {
+        &__discord-invite {
             margin-top: 20px;
 
-            img {
+            &__logo {
                 height: 5em;
             }
         }
@@ -99,7 +99,7 @@ body {
         margin-top: 1em;
         text-align: center;
 
-        p {
+        &__description {
             margin: 1em;
             text-align: inherit;
             text-indent: 0;

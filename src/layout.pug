@@ -5,24 +5,24 @@ block settings
 - var js = js || (dev ? "_dumb" : null);
 
 mixin card(card)
-    .card
-        img(src=`~/assets/cards/${card.image}.png`)
-        h2.card--title= card.title
-        .card--description!= markdown(card.description, { inline: true })
+    .card.card--simple
+        img.card--simple__image(src=`~/assets/cards/${card.image}.png`)
+        h2.card--simple__title= card.title
+        .card--simple__description!= markdown(card.description, { inline: true })
 
 mixin social-link(url, icon_name, hint)
-    a(href=url, title=hint, target="_blank")!= getIcon(icon_name)
+    a.card--team__social-links__link(href=url, title=hint, target="_blank")!= getIcon(icon_name)
 
 mixin team-card(card)
-    .card--team
-        img(src=`~/assets/cards/${card.avatar}`)
+    .card.card--team
+        img.card--team__avatar(src=`~/assets/cards/${card.avatar}`)
         .card--team__content
             h3.card--team__name= card.name
                 if card.nickname
                     span.card--team__nickname(title="Minecraft nickname") &nbsp;(#{card.nickname})
 
             if card.social
-                .card--team__social
+                .card--team__social-links
                     if card.social.email
                         +social-link(`mailto:${card.social.email}`, "envelope", "E-Mail")
 
@@ -36,19 +36,17 @@ mixin team-card(card)
                         +social-link(`https://vk.com/${card.social.vk}`, "vk", "VK")
 
                     if card.social.discord
-                        span.card--team__discord
-                            != getIcon("discord") + "&nbsp;"
-                            = card.social.discord
+                        span.card--team__social-links__discord #{" "}!{getIcon("discord")} #{card.social.discord}
 
             .card--team__role= card.role
 
 mixin cards-container(cards)
-    .cards--container
+    .cards-container
         each card in cards
             +card(card)
 
 mixin team-cards-container(cards)
-    .cards--container__team
+    .cards-container.cards-container--team
         each card in cards
             +team-card(card)
 

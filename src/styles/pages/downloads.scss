@@ -1,29 +1,29 @@
 #content {
     .card--download {
-        background: white;
         border: 1px solid #eee;
         border-radius: 5px;
-        box-shadow: 0 8px 16px rgba(black, 0.1);
         display: block;
         text-align: center;
 
-        img {
+        &__icon {
             margin: 20px;
         }
 
-        h3,
-        div {
+        &__title,
+        &__extra {
             margin: 10px;
             padding: 0 20px;
         }
     }
 
-    .java-releases a {
-        background: #eee;
-        border: 1px solid #ddd;
-        border-radius: 3px;
-        display: inline-block;
-        margin: 5px;
-        padding: 3px 7px;
+    .java-releases {
+        &__link {
+            background: #eee;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            display: inline-block;
+            margin: 5px;
+            padding: 3px 7px;
+        }
     }
 }
