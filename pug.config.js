@@ -215,8 +215,14 @@ md.use(require("markdown-it-toc-done-right"), {
     slugify
 });
 
-/** @param {string} text */
-function markdown(text) {
+/**
+ * @param {string} text
+ * @param {{
+ *     inline?: boolean
+ * }} options
+ */
+function markdown(text, options = {}) {
+    if (options.inline) return md.renderInline(text);
     return md.render(text);
 }
 
