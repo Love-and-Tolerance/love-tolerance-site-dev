@@ -74,19 +74,6 @@
 
             max-width: 100%;
         }
-
-        &.images {
-            text-indent: 0;
-
-            display: flex;
-            align-items: center;
-
-            img {
-                margin: 0.5em 10px;
-                width: 0;
-                flex-grow: 1;
-            }
-        }
     }
 
     code {
