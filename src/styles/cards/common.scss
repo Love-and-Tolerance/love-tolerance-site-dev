@@ -1,0 +1,12 @@
+#content {
+    .cards-container {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .card {
+        background: white;
+        box-shadow: 0 8px 16px rgba(black, 0.1);
+    }
+}

@@ -1,0 +1,10 @@
+mixin card(card)
+    .card.card--simple
+        img.card--simple__image(src=`~/assets/cards/${card.image}.png`)
+        h2.card--simple__title= card.title
+        .card--simple__description!= markdown(card.description, { inline: true })
+
+mixin cards-container(cards)
+    .cards-container
+        each card in cards
+            +card(card)

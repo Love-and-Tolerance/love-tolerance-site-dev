@@ -1,0 +1,34 @@
+mixin social-link(url, icon_name, hint)
+    a.card--team__social-links__link(href=url, title=hint, target="_blank")!= getIcon(icon_name)
+
+mixin team-card(card)
+    .card.card--team
+        img.card--team__avatar(src=`~/assets/cards/${card.avatar}`)
+        .card--team__content
+            h3.card--team__name= card.name
+                if card.nickname
+                    span.card--team__nickname(title="Minecraft nickname") &nbsp;(#{card.nickname})
+
+            if card.social
+                .card--team__social-links
+                    if card.social.email
+                        +social-link(`mailto:${card.social.email}`, "envelope", "E-Mail")
+
+                    if card.social.github
+                        +social-link(`https://github.com/${card.social.github}`, "github", "GitHub")
+
+                    if card.social.twitter
+                        +social-link(`https://twitter.com/${card.social.twitter}`, "twitter", "Twitter")
+
+                    if card.social.vk
+                        +social-link(`https://vk.com/${card.social.vk}`, "vk", "VK")
+
+                    if card.social.discord
+                        span.card--team__social-links__discord #{" "}!{getIcon("discord")} #{card.social.discord}
+
+            .card--team__role= card.role
+
+mixin team-cards-container(cards)
+    .cards-container.cards-container--team
+        each card in cards
+            +team-card(card)

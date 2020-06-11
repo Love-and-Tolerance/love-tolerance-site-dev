@@ -1,20 +1,12 @@
 extends ../../layout.pug
 
+include ../../mixins/cards/download.pug
+
 block settings
     - var title = "Downloads";
     - var menuEntry = "Downloads";
     - var description = "Download Love & Tolerance resource pack for Minecraft Java and Bedrock editions"
     - var css = "downloads";
-
-mixin download-card(icon, edition, entryName, extra)
-    - var entry = data.downloads[entryName];
-    - var version = Object.keys(entry)[0];
-    - var url = entry[version];
-
-    a.card.card--download(href=url, target="_blank")
-        img.card--download__icon(src=`~/assets/pages/downloads/${icon}.png`)
-        h3.card--download__title #{edition} Edition v#{version}
-        div.card--download__extra= extra
 
 block content
     != markdown("## Latest releases")

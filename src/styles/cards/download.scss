@@ -1,0 +1,20 @@
+@import "common";
+
+#content {
+    .card--download {
+        border: 1px solid #eee;
+        border-radius: 5px;
+        display: block;
+        text-align: center;
+
+        &__icon {
+            margin: 20px;
+        }
+
+        &__title,
+        &__extra {
+            margin: 10px;
+            padding: 0 20px;
+        }
+    }
+}

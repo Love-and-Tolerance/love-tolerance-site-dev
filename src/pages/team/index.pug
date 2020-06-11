@@ -1,9 +1,12 @@
 extends ../../layout.pug
 
+include ../../mixins/cards/team.pug
+
 block settings
     - var title = "Team";
     - var menuEntry = "Team";
     - var description = "Team of the resource pack development and credits to other contributors and used resources";
+    - var css = "team";
 
 block content
     != markdown("## The Development team")
