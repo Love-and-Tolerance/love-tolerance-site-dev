@@ -7,8 +7,8 @@ block settings
 mixin card(card)
     .card
         img(src=`~/assets/cards/${card.image}.png`)
-        h2.card--title!= card.title
-        .card--description!= card.description
+        h2.card--title= card.title
+        .card--description!= markdown(card.description, { inline: true })
 
 mixin social-link(url, icon_name, hint)
     a(href=url, title=hint, target="_blank")!= getIcon(icon_name)
@@ -17,12 +17,9 @@ mixin team-card(card)
     .card--team
         img(src=`~/assets/cards/${card.avatar}`)
         .card--team__content
-            h3.card--team__name
-                = card.name
+            h3.card--team__name= card.name
                 if card.nickname
-                    span.card--team__nickname(title="Minecraft nickname")
-                        != "&nbsp;"
-                        = `(${card.nickname})`
+                    span.card--team__nickname(title="Minecraft nickname") &nbsp;(#{card.nickname})
 
             if card.social
                 .card--team__social
