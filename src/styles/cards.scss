@@ -2,18 +2,15 @@ $icon-size: 70px;
 
 #content {
     .cards--container {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(3, 1fr);
     }
 
     .card {
         background: white;
         box-shadow: 0 8px 16px rgba(black, 0.1);
-        margin: 10px;
         text-align: center;
-
-        flex-basis: 30%;
 
         img {
             width: 100%;
@@ -27,7 +24,8 @@ $icon-size: 70px;
 
     .cards--container__team {
         display: grid;
-        grid-template-columns: 50% 50%;
+        gap: 10px;
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .card--team {
@@ -36,17 +34,20 @@ $icon-size: 70px;
         border: 1px solid #eee;
         border-radius: 5px;
         line-height: 1.5em;
-        margin: 5px;
         padding: 10px;
 
-        display: flex;
-        align-items: center;
+        display: grid;
+        gap: 10px;
+        grid-template-columns: auto 1fr;
 
         img {
             border-radius: 50%;
-            margin-right: 10px;
 
             width: 75px;
+        }
+
+        &__content {
+            align-self: center;
         }
 
         &__name {
@@ -78,10 +79,6 @@ $icon-size: 70px;
             &:not(:hover) {
                 color: #a0a0a0 !important;
             }
-        }
-
-        &__role {
-            text-align: justify;
         }
     }
 }

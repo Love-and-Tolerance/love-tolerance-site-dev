@@ -26,7 +26,11 @@
     h4,
     h5,
     h6 {
-        margin: 0.7em 0 0.5em;
+        margin: 1em 0 0.5em;
+
+        &:first-child {
+            margin-top: 0;
+        }
 
         // https://stackoverflow.com/a/22655654
         &:target::before {

@@ -8,17 +8,16 @@ body {
 }
 
 #content {
-    padding: 0 0 $content-padding;
-
     .intro {
         background: $banner-url no-repeat center / cover, #707070;
         background-blend-mode: multiply;
         color: white;
+        margin: (-$content-padding) (-$content-padding) (-$cards-overlap);
         padding: $menu-height 0 $cards-overlap;
 
-        display: flex;
+        display: grid;
         align-items: center;
-        justify-content: center;
+        grid-template-columns: auto auto;
 
         &--description {
             padding: $content-padding;
@@ -94,13 +93,10 @@ body {
                 height: 5em;
             }
         }
-
-        & + .cards--container {
-            margin-top: -$cards-overlap;
-        }
     }
 
     .fun-fact {
+        margin-top: 1em;
         text-align: center;
 
         p {
