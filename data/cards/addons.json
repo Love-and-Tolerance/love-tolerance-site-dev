@@ -1,0 +1,50 @@
+[
+    {
+        "title": "Spring Edition",
+        "description": "Includes spring based textures to theme your Minecraft experience",
+        "image": "addons/spring-edition",
+        "url": "https://github.com/Love-and-Tolerance/Spring-Edition-Addon"
+    },
+    {
+        "title": "Blue UI Addon (WIP)",
+        "description": "A nice new fancy blue UI for Love and Tolerance, also works great with any other texture pack",
+        "image": "addons/blue-ui",
+        "url": "https://github.com/Love-and-Tolerance/Blue-UI-Addon"
+    },
+    {
+        "title": "Optifine Addon",
+        "description": "Adds connected textures and variants with Optifine",
+        "image": "addons/optifine",
+        "url": "https://github.com/Love-and-Tolerance/Optifine-Addon"
+    },
+    {
+        "title": "3D Models Addon (WIP)",
+        "description": "Includes the custom 3d models for the pack",
+        "image": "addons/3d-models",
+        "url": "https://github.com/Love-and-Tolerance/3d-Models-Addon"
+    },
+    {
+        "title": "Classic Textures Addon",
+        "description": "Includes any of the original textures of the pack with variants for vanilla and Optifine",
+        "image": "addons/classic",
+        "url": "https://github.com/Love-and-Tolerance/Classic-Textures-Addon"
+    },
+    {
+        "title": "Bronydog Textures Addon",
+        "description": "Includes some alternative textures and GUI done by Bronydog",
+        "image": "addons/bronydog",
+        "url": "https://github.com/Love-and-Tolerance/Bronydog-Textures-Addon"
+    },
+    {
+        "title": "Alt Door Addon",
+        "description": "Includes an alternative set of textures for some of the doors",
+        "image": "addons/alt-door",
+        "url": "https://github.com/Love-and-Tolerance/Alternative-Doors-Addon"
+    },
+    {
+        "title": "3D Alt Door Addon",
+        "description": "Includes the alt door textures with custom 3d models",
+        "image": "addons/alt-door-3d",
+        "url": "https://github.com/Love-and-Tolerance/Alternative-3d-Doors-Addon"
+    }
+]
