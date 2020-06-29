@@ -1,32 +1,41 @@
+@import "../../../node_modules/swiper/swiper.scss";
+@import "../../../node_modules/swiper/components/navigation/navigation.scss";
+
+@import "../variables";
+
+$gallery-height: 512px;
+
 #content {
+    .swiper-slide {
+        background: #eee;
+        object-fit: cover;
+    }
+
     .gallery {
-        display: flex;
-        align-content: space-between;
+        background: #303030;
+        box-shadow: 0 8px 16px rgba(black, 0.25);
 
-        &__column {
-            margin: 0 10px;
+        &-top {
+            width: 100%;
+            height: $gallery-height;
+        }
 
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-            flex-grow: 1;
-            flex-basis: 33%;
+        &-thumbs {
+            box-sizing: border-box;
+            padding: 10px 0;
 
-            &__item {
-                margin: 10px 0;
+            height: floor($gallery-height * 0.3);
 
-                &__image {
-                    box-shadow: 0 8px 16px rgba(black, 0.2);
-                    transition: transform 300ms;
+            .swiper {
+                &-slide {
+                    opacity: 0.4;
 
-                    width: 100%;
+                    width: 25%;
+                    height: 100%;
+                }
 
-                    &:hover {
-                        transform: scale(1.5);
-
-                        position: relative;
-                        z-index: 1;
-                    }
+                &-slide-thumb-active {
+                    opacity: 1;
                 }
             }
         }

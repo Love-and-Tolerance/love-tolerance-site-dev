@@ -6,7 +6,7 @@ block settings
     - var title = "Home";
     - var menuEntry = "Home";
     - var css = "home";
-    //- - var js = "home";
+    - var js = "home";
 
 block content
     .intro
@@ -35,7 +35,21 @@ block content
 
     +cards-container(data.cards.features)
 
-    .fun-fact
-        h1 Fun fact
-        p.fun-fact__description This pack's style is used in Jan Animation Studios' popular animation "Don't Mine at Night"
-        iframe(width="560", height="315", src="https://www.youtube.com/embed/X_TMtgjQuZI", frameborder="0", allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture", allowfullscreen)
+    h1 Showcase
+    .gallery
+        .swiper-container.gallery-top
+            .swiper-wrapper
+                for url in gallery
+                    img.swiper-slide(src=url)
+
+            .swiper-button-next.swiper-button-white
+            .swiper-button-prev.swiper-button-white
+
+        .swiper-container.gallery-thumbs
+            .swiper-wrapper
+                for url in gallery
+                    img.swiper-slide(src=url)
+
+    h1 Fun fact
+    p This pack's style is used in Jan Animation Studios' popular animation "Don't Mine at Night"
+    iframe(width="560", height="315", src="https://www.youtube.com/embed/X_TMtgjQuZI", frameborder="0", allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture", allowfullscreen)

@@ -1,5 +1,6 @@
 @import "../variables";
 @import "../cards/simple";
+@import "gallery";
 
 $banner-url: url("~/assets/pages/home/banner.png");
 $cards-overlap: 50px;
@@ -9,6 +10,20 @@ body {
 }
 
 #content {
+    & > p,
+    & > h1 {
+        text-align: center;
+    }
+
+    & > p {
+        text-indent: 0;
+    }
+
+    iframe {
+        display: block;
+        margin: 1em auto 0;
+    }
+
     .intro {
         background: $banner-url no-repeat center / cover, #707070;
         background-blend-mode: multiply;
@@ -93,17 +108,6 @@ body {
             &__logo {
                 height: 5em;
             }
-        }
-    }
-
-    .fun-fact {
-        margin-top: 1em;
-        text-align: center;
-
-        &__description {
-            margin: 1em;
-            text-align: inherit;
-            text-indent: 0;
         }
     }
 }
