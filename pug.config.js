@@ -9,7 +9,8 @@ const { parse: parseYaml } = require("yaml");
 
 const { object, string, dict } = require("@mojotech/json-type-validation");
 
-const isProduction = process.env.NODE_ENV === "production";
+const isProduction = !process.env.NODE_ENV_FPARCEL;
+console.log(`Pug config environment is ${isProduction ? "production" : "development"}`);
 
 /**
  * Find FontAwesome free icon by name. Search for icons here: https://fontawesome.com/icons?d=gallery&m=free

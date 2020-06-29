@@ -4,7 +4,7 @@
     "description": "Love & Tolerance resource pack website",
     "scripts": {
         "build": "parcel build src/pages/*.pug src/pages/**/index.pug --no-cache",
-        "dev": "parcel serve src/pages/*.pug --no-cache"
+        "dev": "NODE_ENV_FPARCEL=development parcel serve src/pages/*.pug --no-cache"
     },
     "repository": {
         "type": "git",
