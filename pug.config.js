@@ -1,5 +1,5 @@
 const { readFileSync } = require("fs");
-const { join: joinPath, parse: parsePath } = require("path");
+const { join: joinPath, parse: parsePath } = require("path").posix;
 
 const chokidar = require("chokidar");
 const glob = require("glob");
