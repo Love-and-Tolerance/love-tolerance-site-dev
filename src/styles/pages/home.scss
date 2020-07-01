@@ -19,9 +19,31 @@ body {
         text-indent: 0;
     }
 
-    iframe {
-        display: block;
-        margin: 1em auto 0;
+    .did-you-know {
+        background: #404040;
+        color: #eee;
+        margin: $content-padding (-$content-padding) (-$content-padding);
+        padding: $content-padding;
+        text-align: center;
+
+        p {
+            text-align: center;
+            text-indent: 0;
+        }
+
+        iframe {
+            display: block;
+            margin: 1em auto 0;
+
+            $original-width: 560px;
+            $original-height: 315px;
+            $ratio: $original-width / $original-height;
+            $new-width: $body-width - $content-padding * 2;
+            $new-height: round($new-width / $ratio);
+
+            width: $new-width;
+            height: $new-height;
+        }
     }
 
     .intro {
