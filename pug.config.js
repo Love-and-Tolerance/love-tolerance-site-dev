@@ -121,7 +121,7 @@ const DATA = (() => {
         processJson(path);
     });
 
-    if (process.env.NODE_ENV !== "production") {
+    if (!isProduction) {
         /** @param {string} path */
         const update = (path) => {
             const updated = processJson(path);
@@ -163,7 +163,7 @@ const GALLERY = (() => {
     const FILES = glob.sync(PATTERN, { nodir: true })
         .map((value) => joinPath("~/", value));
 
-    if (process.env.NODE_ENV !== "production") {
+    if (!isProduction) {
         const watcher = chokidar.watch(PATTERN, {
             awaitWriteFinish: true,
             ignoreInitial: true
