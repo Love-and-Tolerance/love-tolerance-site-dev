@@ -1,9 +1,9 @@
 mixin addon-card(card)
-    .card.card--simple
-        img.card--simple__image(src=`~/assets/cards/${card.image}.png`)
-        h2.card--simple__title
+    .card.simple
+        img(src=`~/assets/cards/${card.image}.png`)
+        h2.title
             a(href=card.url, target="_blank")= card.title
-        .card--simple__description!= markdown(card.description, { inline: true })
+        .description!= markdown(card.description)
 
 mixin addon-cards-container(cards)
     .cards-container

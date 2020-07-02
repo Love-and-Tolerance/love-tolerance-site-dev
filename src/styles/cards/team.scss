@@ -2,57 +2,59 @@
 @import "common";
 
 #content {
-    .cards-container--team {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .card--team {
-        border: 1px solid #eee;
-        border-radius: 5px;
-        line-height: 1.5em;
-        padding: 10px;
-
-        display: grid;
-        gap: 10px;
-        grid-template-columns: auto 1fr;
-
-        &__avatar {
-            border-radius: 50%;
-
-            width: 75px;
+    .team {
+        &.cards-container {
+            grid-template-columns: repeat(2, 1fr);
         }
 
-        &__content {
-            align-self: center;
-        }
+        &.card {
+            border: 1px solid #eee;
+            border-radius: 5px;
+            line-height: 1.5em;
+            padding: 10px;
 
-        &__name {
-            margin: 0 !important;
-        }
+            display: grid;
+            gap: 10px;
+            grid-template-columns: auto 1fr;
 
-        &__nickname {
-            color: #a0a0a0;
-        }
+            .avatar {
+                border-radius: 50%;
 
-        &__social-links {
-            &__link {
-                $size: 1.2em;
-
-                color: #a0a0a0;
-                display: inline-block;
-                font-size: $size;
-                text-align: center;
-
-                width: $size;
-
-                &:hover {
-                    color: $accent-color;
-                    text-decoration: none;
-                }
+                width: 75px;
             }
 
-            &__discord {
-                color: #808080;
+            .content {
+                align-self: center;
+            }
+
+            .name {
+                margin: 0 !important;
+            }
+
+            .nickname {
+                color: #a0a0a0;
+            }
+
+            .social-links {
+                a {
+                    $size: 1.2em;
+
+                    color: #a0a0a0;
+                    display: inline-block;
+                    font-size: $size;
+                    text-align: center;
+
+                    width: $size;
+
+                    &:hover {
+                        color: $accent-color;
+                        text-decoration: none;
+                    }
+                }
+
+                .discord {
+                    color: #808080;
+                }
             }
         }
     }

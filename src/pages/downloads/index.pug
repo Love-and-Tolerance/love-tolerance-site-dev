@@ -9,14 +9,14 @@ block settings
     - var css = "downloads";
 
 block content
-    != markdown("## Latest releases")
+    +md("## Latest releases")
 
     .cards-container
         +download-card("grass-block", "Java", "java")
         +download-card("bedrock", "Bedrock", "bedrock", "WIP")
         +download-card("bedrock", "Bedrock", "bedrockExperimental", "Experimental WIP")
 
-    != markdown("## All Java Edition releases")
+    +md("## All Java Edition releases")
 
     .java-releases
         for url, version in data.downloads.java

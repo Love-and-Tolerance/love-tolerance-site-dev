@@ -9,11 +9,11 @@ block settings
     - var css = "team";
 
 block content
-    != markdown("## The Development team")
+    +md("## The Development team")
 
     +team-cards-container(data.cards.team)
 
-    != markdown("## Special thanks")
+    +md("## Special thanks")
     p This resource pack has come a long way and has been touched by many different people, we would like to make sure that each and every one of these people is credited. If you have worked on this pack and are not listed here please contact us #[a(href=site.links.discordInvite, target="_blank") via Discord] to get you added.
 
     include:markdown credits.md

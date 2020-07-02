@@ -1,7 +1,4 @@
 {
-    "version": "1.15.2",
-    "list": {
-        "Survival": "mc.love-tolerance.com",
-        "Creative": "ponk.love-tolerance.com"
-    }
+    "Survival": "mc.love-tolerance.com",
+    "Creative": "ponk.love-tolerance.com"
 }

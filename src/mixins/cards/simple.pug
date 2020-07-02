@@ -1,8 +1,8 @@
 mixin card(card)
-    .card.card--simple
-        img.card--simple__image(src=`~/assets/cards/${card.image}.png`)
-        h2.card--simple__title= card.title
-        .card--simple__description!= markdown(card.description, { inline: true })
+    .card.simple
+        img(src=`~/assets/cards/${card.image}.png`)
+        h2.title= card.title
+        .description!= markdown(card.description)
 
 mixin cards-container(cards)
     .cards-container

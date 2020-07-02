@@ -4,6 +4,9 @@ block settings
 - var description = description || site.description;
 - var js = js || (dev ? "_dumb" : null);
 
+mixin md(text)
+    != markdown(text, { inline: false })
+
 html
     head
         title= title

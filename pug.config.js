@@ -229,8 +229,6 @@ function markdown(text, options = {}) {
 
 module.exports = {
     locals: {
-        markdown,
-
         dev: !isProduction,
         currentYear: new Date().getFullYear(),
 
@@ -245,6 +243,11 @@ module.exports = {
             const path = SITE.menu[name];
             if (isProduction || path == "/") return path;
             return joinPath(path, "index.pug");
+        },
+
+        /** @param {string} text */
+        markdown(text, options = { inline: true }) {
+            return markdown(text, options);
         },
 
         menuEntry: null,

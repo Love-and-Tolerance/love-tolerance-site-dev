@@ -24,18 +24,20 @@ $gallery-height: 512px;
             box-sizing: border-box;
             padding: 10px 0;
 
-            height: floor($gallery-height * 0.3);
+            height: round($gallery-height * 0.3);
 
             .swiper {
                 &-slide {
                     opacity: 0.4;
+                    transition: opacity 100ms;
 
                     width: 25%;
                     height: 100%;
-                }
 
-                &-slide-thumb-active {
-                    opacity: 1;
+                    &:hover,
+                    &-thumb-active {
+                        opacity: 1;
+                    }
                 }
             }
         }

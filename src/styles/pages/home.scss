@@ -35,14 +35,12 @@ body {
             display: block;
             margin: 1em auto 0;
 
-            $original-width: 560px;
-            $original-height: 315px;
-            $ratio: $original-width / $original-height;
-            $new-width: $body-width - $content-padding * 2;
-            $new-height: round($new-width / $ratio);
+            $ratio: 16 / 9;
+            $width: $body-width - $content-padding * 2;
+            $height: round($width / $ratio);
 
-            width: $new-width;
-            height: $new-height;
+            width: $width;
+            height: $height;
         }
     }
 
@@ -57,23 +55,23 @@ body {
         align-items: center;
         grid-template-columns: auto auto;
 
-        &__description {
+        .description {
             padding: $content-padding;
 
-            &__logo {
+            .logo {
                 display: block;
                 margin: 1em auto;
             }
         }
 
-        &__side {
+        .side {
             padding: $content-padding;
             text-align: center;
 
             flex-basis: 512px;
         }
 
-        &__download {
+        .download {
             background: $accent-color;
             border-radius: 5px;
             color: white;
@@ -88,30 +86,31 @@ body {
             }
         }
 
-        &__servers {
+        .servers {
             font-size: 1.2em;
             white-space: nowrap;
 
-            &__title {
+            .title {
                 margin: 20px !important;
             }
 
-            &__server {
+            .server {
                 background: rgba(white, 0.1);
                 border-radius: 5px;
                 margin: 10px 0;
                 padding: 10px;
 
-                &__host {
+                .host {
                     font-size: 1.2em;
+                    margin: 0;
                 }
             }
         }
 
-        &__links {
+        .links {
             margin: 20px 0;
 
-            &__link {
+            a {
                 color: inherit;
                 display: inline-block;
                 border-bottom: 1px dashed;
@@ -124,10 +123,10 @@ body {
             }
         }
 
-        &__discord-invite {
+        .discord-invite {
             margin-top: 20px;
 
-            &__logo {
+            img {
                 height: 5em;
             }
         }
