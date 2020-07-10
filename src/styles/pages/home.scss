@@ -49,23 +49,19 @@ body {
         background-blend-mode: multiply;
         color: white;
         margin: (-$content-padding) (-$content-padding) (-$cards-overlap);
-        padding: $menu-height 0 $cards-overlap;
+        padding: ($menu-height + $content-padding) $content-padding ($cards-overlap + $content-padding);
 
         display: grid;
         align-items: center;
+        gap: $content-padding;
         grid-template-columns: auto auto;
 
-        .description {
-            padding: $content-padding;
-
-            .logo {
-                display: block;
-                margin: 1em auto;
-            }
+        .description .logo {
+            display: block;
+            margin: 1em auto;
         }
 
         .side {
-            padding: $content-padding;
             text-align: center;
 
             flex-basis: 512px;
