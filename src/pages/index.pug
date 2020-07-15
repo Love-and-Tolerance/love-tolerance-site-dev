@@ -22,9 +22,11 @@ block content
                 h3.title Official Minecraft servers
 
                 each host, name in data.servers
-                    div.server
-                        strong= name
-                        pre.host= host
+                    .server
+                        .name= name
+                        .version
+                        .players
+                        .host= host
 
             .links
                 a(href="https://github.com/Love-and-Tolerance/Love-and-Tolerance", target="_blank") GitHub

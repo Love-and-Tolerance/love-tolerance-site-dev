@@ -1,4 +1,6 @@
+import { querySelectorAll } from "@keupoz/strict-queryselector";
 import Swiper from "swiper";
+import { initServerCard } from "./ServerCard";
 
 const thumbs = new Swiper(".gallery-thumbs", {
     freeMode: true,
@@ -20,3 +22,5 @@ new Swiper(".gallery-top", {
         swiper: thumbs
     }
 });
+
+querySelectorAll(".intro .server", Element).forEach(initServerCard);

@@ -83,7 +83,6 @@ body {
         }
 
         .servers {
-            font-size: 1.2em;
             white-space: nowrap;
 
             .title {
@@ -96,9 +95,56 @@ body {
                 margin: 10px 0;
                 padding: 10px;
 
+                display: grid;
+                align-items: center;
+                gap: 5px;
+                grid-template:
+                    "a b c" 1fr
+                    "d d d" 1fr / 1fr auto auto;
+
+                &.initialized .name {
+                    font-weight: bold;
+                    text-align: left;
+                }
+
+                .version {
+                    opacity: 0.5;
+                }
+
                 .host {
-                    font-size: 1.2em;
-                    margin: 0;
+                    cursor: pointer;
+                    font-family: monospace;
+                    font-size: 1.5em;
+
+                    position: relative;
+
+                    grid-area: d;
+
+                    &::after {
+                        background: rgba(black, 0.5);
+                        border-radius: 5px;
+                        font-size: 0.9rem;
+                        padding: 5px;
+                        transform: translate(-50%, -5px);
+
+                        position: absolute;
+                        bottom: 100%;
+                        left: 50%;
+                    }
+
+                    &:hover::after {
+                        content: "Click to copy";
+                    }
+
+                    &.copied::after {
+                        content: "Copied!";
+                    }
+                }
+
+                .error {
+                    color: tomato;
+                    font-family: monospace;
+                    font-weight: bold;
                 }
             }
         }
