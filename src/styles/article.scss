@@ -64,4 +64,26 @@
         padding: 2px 5px;
         white-space: nowrap;
     }
+
+    .button {
+        background: $accent-color;
+        border: 0;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(black, 0.1);
+        color: white;
+        display: block;
+        font: inherit;
+        font-weight: bold;
+        outline: none;
+        padding: 10px 20px;
+        text-align: center;
+
+        &:active {
+            transform: translateY(1px);
+        }
+    }
+
+    label {
+        user-select: none;
+    }
 }
