@@ -1,0 +1,42 @@
+@import "../cards/simple";
+
+#content {
+    .card.addon {
+        user-select: none;
+
+        position: relative;
+
+        &.conflicts {
+            opacity: 0.8;
+        }
+
+        &[data-conflicts] .icons .conflicts {
+            display: inline-block;
+        }
+
+        &.selected .icons .selected {
+            display: inline-block;
+        }
+
+        .icons {
+            font-size: 1.5em;
+
+            position: absolute;
+            top: 0;
+            right: 0;
+
+            div {
+                display: none;
+                margin: 5px;
+            }
+
+            .conflicts {
+                color: gold;
+            }
+
+            .selected {
+                color: limegreen;
+            }
+        }
+    }
+}

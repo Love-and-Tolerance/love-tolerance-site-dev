@@ -21,6 +21,7 @@
         "@keupoz/strict-queryselector": "^1.1.0",
         "@mojotech/json-type-validation": "^3.1.0",
         "clipboard": "^2.0.6",
+        "jszip": "^3.5.0",
         "swiper": "^5.4.5"
     },
     "devDependencies": {

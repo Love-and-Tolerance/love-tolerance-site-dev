@@ -39,12 +39,14 @@
         "title": "Alt Door Addon",
         "description": "Includes an alternative set of textures for some of the doors",
         "image": "addons/alt-door",
-        "url": "https://github.com/Love-and-Tolerance/Alternative-Doors-Addon"
+        "url": "https://github.com/Love-and-Tolerance/Alternative-Doors-Addon",
+        "conflicts": "3D Alt Door Addon"
     },
     {
         "title": "3D Alt Door Addon",
         "description": "Includes the alt door textures with custom 3d models",
         "image": "addons/alt-door-3d",
-        "url": "https://github.com/Love-and-Tolerance/Alternative-3d-Doors-Addon"
+        "url": "https://github.com/Love-and-Tolerance/Alternative-3d-Doors-Addon",
+        "conflicts": "Alt Door Addon"
     }
 ]

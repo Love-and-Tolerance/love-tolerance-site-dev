@@ -1,1 +1,37 @@
-@import "../cards/simple";
+@import "../cards/addons.scss";
+
+#content {
+    .bundler-panel {
+        border-top: 2px dashed #c0c0c0;
+        color: #606060;
+        padding: 1em 0;
+
+        display: none;
+        align-items: center;
+        gap: 10px;
+        grid-template-columns: auto auto 1fr auto auto;
+
+        &.initialized {
+            display: grid;
+        }
+
+        .unselect-all {
+            font-size: 1.2em;
+            opacity: 0.7;
+            user-select: none;
+
+            &:hover {
+                opacity: 1;
+            }
+
+            &.invisible {
+                visibility: hidden;
+            }
+        }
+
+        .include-rp {
+            display: flex;
+            align-items: center;
+        }
+    }
+}

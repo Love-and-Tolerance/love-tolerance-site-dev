@@ -7,9 +7,20 @@ block settings
     - var menuEntry = "Add-ons";
     - var description = "Some add-ons for the resource pack to extend its feel and look";
     - var css = "addons";
+    - var js = "addons";
 
 block content
     h2 Add-ons
     p Newer versions of Minecraft allow you to have more than one resource pack active at a time, so we decided to create some add-on packs to customize your experience with our texture pack.
+
+    .bundler-panel
+        .count Add-ons bundler
+        .unselect-all(title="Unselect all")!= getIcon("times")
+        .space
+        .include-rp
+            input#include-rp(type="checkbox")
+            label(for="include-rp") Include the resource pack
+
+        button.button Download
 
     +addon-cards-container(data.cards.addons)

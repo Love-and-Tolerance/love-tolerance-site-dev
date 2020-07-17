@@ -1,5 +1,10 @@
 mixin addon-card(card)
-    .card.simple
+    .card.simple.addon(data-conflicts=card.conflicts || false)
+        .icons
+            if card.conflicts
+                .conflicts(title=`Conflicts with ${card.conflicts}`)!= getIcon("exclamation-circle")
+            .selected(title="Selected")!= getIcon("check")
+
         img(src=`~/assets/cards/${card.image}.png`)
         h2.title
             a(href=card.url, target="_blank")= card.title
