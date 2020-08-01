@@ -8,7 +8,7 @@ If you're downloading the resource pack from GitHub repository, follow next inst
 * Click "Download ZIP" in the appeared popup
 * Extract the folder from the downloaded zip file to resource packs folder (see next steps)
 
-![Downloading from GitHub](~/assets/pages/downloads/github-download.png)
+![Downloading from GitHub](/assets/pages/downloads/github-download.png)
 
 ### Installing the resource pack
 After you've downloaded a zip file (or you're extracting from the repo zip) you need to put it in `resourcepacks` folder:

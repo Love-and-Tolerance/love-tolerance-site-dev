@@ -1,6 +1,6 @@
 mixin addon-card(card)
     .card.simple
-        img(src=`~/assets/cards/${card.image}.png`)
+        img(src=`/assets/cards/${card.image}.png`)
         h2.title
             a(href=card.url, target="_blank")= card.title
         .description!= markdown(card.description)

@@ -1,6 +1,6 @@
 import { querySelectorAll } from "@keupoz/strict-queryselector";
 import Swiper from "swiper";
-import { initServerCard } from "./ServerCard";
+import { initServerCard } from "./lib/ServerCard";
 
 const thumbs = new Swiper(".gallery-thumbs", {
     freeMode: true,

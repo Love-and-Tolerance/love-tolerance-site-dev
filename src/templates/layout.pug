@@ -2,7 +2,6 @@ block settings
 
 - var title = title ? site.title.replace("%s", title) : site.name;
 - var description = description || site.description;
-- var js = js || (dev ? "_dumb" : null);
 
 mixin md(text)
     != markdown(text, { inline: false })
@@ -23,11 +22,11 @@ html
         meta(property="og:url", content=site.url)
         meta(property="og:site_name", content=site.name)
 
-        link(rel="shortcut icon", href="~/assets/favicon.ico")
-        link(rel="stylesheet", href="~/src/styles/index.scss")
+        link(rel="shortcut icon", href="/assets/favicon.ico")
+        link(rel="stylesheet", href="/styles/index.css")
 
         if css
-            link(rel="stylesheet", href=`~/src/styles/pages/${css}.scss`)
+            link(rel="stylesheet", href=`/styles/pages/${css}.css`)
 
     body
         include includes/menu.pug
@@ -38,4 +37,4 @@ html
         include includes/footer.pug
 
         if js
-            script(src=`~/src/scripts/${js}.ts`)
+            script(src=`/scripts/${js}.js`)

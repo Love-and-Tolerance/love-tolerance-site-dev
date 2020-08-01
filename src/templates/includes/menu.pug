@@ -1,0 +1,12 @@
+header
+    .logo
+        a(href="/")
+            img(src="/assets/lt.svg")
+
+    .flex-grow
+
+    menu
+        ul
+            each path, name in data.menu
+                li
+                    a(class={"current": name == menuEntry}, href=path)= name

@@ -1,9 +1,9 @@
 mixin social-link(url, icon_name, hint)
-    a(href=url, title=hint, target="_blank")!= getIcon(icon_name)
+    a(href=url, title=hint, target="_blank")!= icon(icon_name)
 
 mixin team-card(card)
     .card.team
-        img.avatar(src=`~/assets/cards/${card.avatar}`)
+        img.avatar(src=`/assets/cards/${card.avatar}`)
         .content
             h3.name= card.name
                 if card.nickname
@@ -24,7 +24,7 @@ mixin team-card(card)
                         +social-link(`https://vk.com/${card.social.vk}`, "vk", "VK")
 
                     if card.social.discord
-                        span.discord #{" "}!{getIcon("discord")} #{card.social.discord}
+                        span.discord #{" "}!{icon("discord")} #{card.social.discord}
 
             .role= card.role
 

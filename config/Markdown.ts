@@ -1,7 +1,6 @@
-const MarkdownIt = require("markdown-it");
+import MarkdownIt from "markdown-it";
 
-/** @param {string} text */
-function slugify(text) {
+function slugify(text: string) {
     return encodeURIComponent(text.replace(/\s+/g, "-").replace(/(!|\?)/g, "").toLowerCase());
 }
 
@@ -25,13 +24,11 @@ md.use(require("markdown-it-toc-done-right"), {
     slugify
 });
 
-/**
- * @param {string} text
- * @param {{
- *     inline?: boolean
- * }} options
- */
-module.exports = function markdown(text, options = {}) {
+export interface Options {
+    inline?: boolean;
+}
+
+export function markdown(text: string, options: Options = { inline: true }) {
     if (options.inline) return md.renderInline(text);
     return md.render(text);
-};
+}

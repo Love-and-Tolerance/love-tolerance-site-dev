@@ -11,12 +11,12 @@ block settings
 block content
     .intro
         .description
-            img.logo(src="~/assets/logo.svg", width="512")
+            img.logo(src="/assets/logo.svg", width="512")
             h2 A My Little Pony: Friendship is Magic Inspired Resource Pack!
             p However, this is only in the sense that it's brightly colored and features some mild pony references, meaning it's not overtly pony-themed and won't make your world look totally different.
 
         .side
-            a.download(href=getMenuEntry("Downloads")) Download
+            a.download(href="/downloads") Download
 
             .servers
                 h3.title Official Minecraft servers
@@ -33,11 +33,12 @@ block content
                 a(href=site.links.googleArchive, target="_blank") Archive
 
             a.discord-invite(href=site.links.discordInvite, target="_blank")
-                img(src="~/assets/discord-logo.svg")
+                img(src="/assets/discord-logo.svg")
 
     +cards-container(data.cards.features)
 
     h1 Showcase
+    - var gallery = glob("assets/pages/gallery/screenshots/*");
     .gallery
         .swiper-container.gallery-top
             .swiper-wrapper
