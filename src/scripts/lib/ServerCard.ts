@@ -1,5 +1,5 @@
 import { wrapQuerySelector } from "@keupoz/strict-queryselector";
-import { number, object, string } from "@mojotech/json-type-validation";
+import { array, number, object, optional, string } from "@mojotech/json-type-validation";
 import Clipboard from "clipboard";
 import { template } from "./utils";
 
@@ -8,7 +8,10 @@ const PING_URL = template`https://keupoztest.herokuapp.com/mcping?host=${"HOST"}
 const PingResponseDecoder = object({
     players: object({
         max: number(),
-        online: number()
+        online: number(),
+        sample: optional(array(object({
+            name: string()
+        })))
     }),
     version: object({
         name: string()
@@ -60,5 +63,9 @@ export async function initServerCard($el: Element): Promise<void> {
         finalInit();
         $version.innerText = version.name;
         $players.innerText = `${players.online}/${players.max}`;
+
+        if (players.sample) {
+            $players.title = players.sample.map(({ name }) => name).join("\n");
+        }
     }
 }
