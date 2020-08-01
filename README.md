@@ -1,5 +1,5 @@
 # Official Love & Tolerance Resource Pack site source code
-This is the source code of the site. The site is built with [Parcel 2](https://github.com/parcel-bundler/parcel) using [Pug](https://github.com/pugjs/pug), [Sass](https://github.com/sass/sass) and [TypeScript](https://github.com/microsoft/typescript).
+This is the source code of the site. The site is built with [Gulp](https://github.com/gulpjs/gulp) using [Pug](https://github.com/pugjs/pug), [Sass](https://github.com/sass/sass) and [TypeScript](https://github.com/microsoft/typescript).
 
 ## Prerequisites
 - Unix-based OS, e.g. Ubuntu (recommended but not required)
@@ -14,9 +14,13 @@ Extract `node` and `npm` binaries to your binaries folder. If you haven't create
 
 Check the setup by typing `node -v` and `npm -v`. This should print versions of installed binaries (check Prerequisites).
 
+[NPM team installation guide](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+
 ### NPM permission issues
 It is recommended to install global modules to a directory which doesn't require superuser to write. To make modules be installed in that folder automatically run this in your terminal: `npm config set prefix "/home/PUT_USERNAME_HERE/.npm-global"` (you can use different folder).
 NPM shouldn't have this issue on Windows.
+
+[NPM team guide on this issue](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally)
 
 ### Cloning the repo
 Open terminal, go to your projects folder and clone this repo with `git clone https://github.com/keupoz/love-tolerance-site-dev`. Go to the downloaded folder and type `npm i` to install dependencies.
@@ -45,6 +49,8 @@ Accessed via `site` Pug local.
     "description": "Hello, and welcome to the home of Love and Tolerance, a My Little Pony: Friendship is Magic-inspired resource pack!",
     // Links to use in templates globally
     "links": {
+        // Main GitHub repo of the resource pack
+        "githubRepo": "https://github.com/Love-and-Tolerance/Love-and-Tolerance",
         // Google archive of old versions of the resource pack
         "googleArchive": "https://drive.google.com/drive/folders/1Tz9zB1VWenbSsVrwjBYRs4gwy28sHU5P?usp=sharing",
         // The Discord invite
