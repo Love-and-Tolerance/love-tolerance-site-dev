@@ -121,4 +121,58 @@ Pass these cards to `team-card` or `team-cards-container` Pug mixins:
 ```
 
 ## Pug templates
-TODO Complete README
+### Layout
+Pages of this site use a layout which is defined in `src/templates/layout.pug` file. A pages that uses it should look like this:
+
+```pug
+//- Instruct Pug compiler to extend our layout
+extends ../../layout.pug
+
+//- Include some needed mixins
+include ../../mixins/something.pug
+
+//- Here are the settings of the page
+//- All settings are optional as the block itself
+block settings
+    //- Page title which will show up in tab title of a browser
+    - var title = "Tab title";
+    //- Menu entry name if you want to highlight
+    - var menuEntry = "Menu entry";
+    //- Description which will show up in embeds like Discord one when you share a link
+    - var description = "Some description";
+    //- CSS file name without extension to load for this page.
+    //- The file must be stored in `src/styles/pages/filename.scss`
+    - var css = "some-styles";
+    //- Same as `css` but for scripts
+    //- Scripts are stored in `src/scripts/filename.ts` and written in TypeScript
+    - var js = "some-scripts";
+
+//- The content of the page
+block content
+    h1 Hello, world!
+
+```
+
+### Markdown
+Pug config provides a filter and a function to render markdown. Main layout also provides a mixin.
+
+Markdown is rendered by [`markdown-it`](https://www.npmjs.com/package/markdown-it) which supports plugins. Active plugins:
+- [`markdown-it-attrs`](https://www.npmjs.com/package/markdown-it-attrs) - lets you add attributes to rendered HTML elements
+- [`markdown-it-anchor`](https://www.npmjs.com/package/markdown-it-anchor) - auto generates anchors for headers
+- [`markdown-it-toc-done-right`](https://www.npmjs.com/package/markdown-it-toc-done-right) - lets you add a table of content (e.g. `[[toc]]`)
+
+```pug
+extends ../../layout.pug
+
+block content
+    //- Mixin for rendering markdown blocks
+    //- Useful to create a header with anchor
+    +md("## I have an anchor")
+
+    //- Render markdown inline
+    //- Useful to create some generated info which is defined in json files to support some syntax
+    p!= markdown("See extra information [here](/extra/)")
+
+    //- Include a markdown file and render it to HTML
+    include:markdown ./info.md
+```
