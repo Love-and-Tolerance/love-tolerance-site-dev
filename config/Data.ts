@@ -27,7 +27,11 @@ export function data(touchPattern: string, getData: () => any, update: (data: an
                     return prev[curr] = index === arr.length - 1 ? value : {};
                 }, json);
 
-                update(merge(getData(), json));
+                update(merge(getData(), json, {
+                    arrayMerge(_, sourceArray) {
+                        return sourceArray;
+                    }
+                }));
 
                 glob.sync(touchPattern).forEach((path) => {
                     touch(path);
