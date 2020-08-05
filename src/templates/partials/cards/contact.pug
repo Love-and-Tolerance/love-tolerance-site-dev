@@ -1,16 +1,18 @@
 mixin social-link(url, icon_name, hint)
     a(href=url, title=hint, target="_blank")!= icon(icon_name)
 
-mixin team-card(card)
-    .card.team
-        img.avatar(src=`/assets/cards/${card.avatar}`)
+mixin contact-card(card)
+    .card.contact
+        figure.card-image
+            img.avatar(src=`/assets/cards/${card.avatar}`)
+
         .content
-            h3.name= card.name
+            h3.card-title= card.name
                 if card.nickname
                     span.nickname(title="Minecraft nickname") &nbsp;(#{card.nickname})
 
             if card.social
-                .social-links
+                .card-links
                     if card.social.email
                         +social-link(`mailto:${card.social.email}`, "envelope", "E-Mail")
 
@@ -26,9 +28,9 @@ mixin team-card(card)
                     if card.social.discord
                         span.discord #{" "}!{icon("discord")} #{card.social.discord}
 
-            .role= card.role
+            .card-content= card.role
 
-mixin team-cards-container(cards)
-    .cards-container.team
+mixin contact-cards(cards)
+    .cards.contact
         each card in cards
-            +team-card(card)
+            +contact-card(card)

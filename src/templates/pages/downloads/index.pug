@@ -1,6 +1,6 @@
 extends ../../layout.pug
 
-include ../../mixins/cards/download.pug
+include ../../partials/cards/download.pug
 
 block settings
     - var title = "Downloads";
@@ -11,7 +11,7 @@ block settings
 block content
     +md("## Latest releases")
 
-    .cards-container
+    .cards
         +download-card("grass-block", "Java", "java")
         +download-card("bedrock", "Bedrock", "bedrock", "WIP")
         +download-card("bedrock", "Bedrock", "bedrockExperimental", "Experimental WIP")
@@ -20,6 +20,6 @@ block content
 
     .java-releases
         for url, version in data.downloads.java
-            a.java-releases__link(href=url, target="_blank")= version
+            a(href=url, target="_blank")= version
 
     include:markdown installation.md

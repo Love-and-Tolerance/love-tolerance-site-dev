@@ -1,14 +1,14 @@
-@import "../cards/download";
+@import "../variables";
 
-#content {
-    .java-releases {
-        &__link {
-            background: #eee;
-            border: 1px solid #ddd;
-            border-radius: 3px;
-            display: inline-block;
-            margin: 5px;
-            padding: 3px 7px;
-        }
+.java-releases {
+    margin-bottom: $content-gap;
+
+    a {
+        background: #eee;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        display: inline-block;
+        margin: 5px;
+        padding: 3px 7px;
     }
 }

@@ -1,32 +1,32 @@
 [
     {
+        "figure": "features/bright-colors.png",
         "title": "Bright Colors",
-        "description": "Brightly colored textures, but not pink and girly! Just like the show",
-        "image": "features/bright-colors"
+        "content": "Brightly colored textures, but not pink and girly! Just like the show"
     },
     {
+        "figure": "features/paintings.png",
         "title": "Paintings",
-        "description": "Features pony pictures as paintings",
-        "image": "features/paintings"
+        "content": "Features pony pictures as paintings"
     },
     {
+        "figure": "features/vanilla-close.png",
         "title": "Close to Vanilla",
-        "description": "Being similar to the default textures, doesn't make your builds look completely different",
-        "image": "features/vanilla-close"
+        "content": "Being similar to the default textures, doesn't make your builds look completely different"
     },
     {
+        "figure": "features/minelp.png",
         "title": "Ponified Mobs",
-        "description": "Compatible with [Mine Little Pony](https://minelittlepony-mod.com/){target='_blank'} ponified mobs",
-        "image": "features/minelp"
+        "content": "Compatible with [Mine Little Pony](https://minelittlepony-mod.com/){target='_blank'} ponified mobs"
     },
     {
+        "figure": "features/cross-platform.png",
         "title": "Cross-Platform",
-        "description": "Available for both Java and Bedrock (MCPE and Windows 10) editions",
-        "image": "features/cross-platform"
+        "content": "Available for both Java and Bedrock (MCPE and Windows 10) editions"
     },
     {
+        "figure": "features/addons.png",
         "title": "Add-on Packs",
-        "description": "Has various add-on packs to customize the look and feel of the pack",
-        "image": "features/addons"
+        "content": "Has various add-on packs to customize the look and feel of the pack"
     }
 ]

@@ -1,0 +1,124 @@
+$banner-url: url("/assets/pages/home/banner.png");
+$cards-overlap: 50px;
+
+.intro {
+    background: $banner-url no-repeat center / cover, #707070;
+    background-blend-mode: multiply;
+    color: white;
+    margin: (-$content-padding) (-$content-padding) (-$cards-overlap);
+    padding: ($menu-height + $content-padding) $content-padding ($cards-overlap + $content-padding);
+
+    display: grid;
+    align-items: center;
+    gap: $content-padding;
+    grid-template-columns: auto auto;
+
+    // prettier-ignore
+    .logo, .download, .servers, .links {
+        margin-bottom: $content-gap;
+    }
+
+    .logo {
+        text-align: center;
+    }
+
+    .side {
+        text-align: center;
+
+        flex-basis: 512px;
+    }
+
+    .download {
+        background: $primary-color;
+        border-radius: 5px;
+        color: white;
+        display: block;
+        font-size: 1.5em;
+        font-weight: 700;
+        padding: 10px 20px;
+        text-align: center;
+
+        &:active {
+            transform: translateY(1px);
+        }
+    }
+
+    .servers {
+        white-space: nowrap;
+
+        .server {
+            background: rgba(white, 0.1);
+            border-radius: 5px;
+            margin-bottom: 10px;
+            padding: 10px;
+
+            display: grid;
+            align-items: center;
+            gap: 5px;
+            grid-template:
+                "a b c" 1fr
+                "d d d" 1fr / 1fr auto auto;
+
+            &.initialized .name {
+                font-weight: bold;
+                text-align: left;
+            }
+
+            .version {
+                opacity: 0.5;
+            }
+
+            .host {
+                cursor: pointer;
+                font-family: monospace;
+                font-size: 1.5em;
+
+                position: relative;
+
+                grid-area: d;
+
+                &::after {
+                    background: rgba(black, 0.5);
+                    border-radius: 5px;
+                    font-size: 0.9rem;
+                    padding: 5px;
+                    transform: translate(-50%, -5px);
+
+                    position: absolute;
+                    bottom: 100%;
+                    left: 50%;
+                }
+
+                &:hover::after {
+                    content: "Click to copy";
+                }
+
+                &.copied::after {
+                    content: "Copied!";
+                }
+            }
+
+            .error {
+                color: tomato;
+                font-family: monospace;
+                font-weight: bold;
+            }
+        }
+    }
+
+    .links a {
+        color: inherit;
+        display: inline-block;
+        border-bottom: 1px dashed;
+        margin: 0 5px;
+        text-decoration: none;
+
+        &:hover {
+            border-bottom-style: solid;
+        }
+    }
+
+    .discord-invite img {
+        height: 5em;
+    }
+}

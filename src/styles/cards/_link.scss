@@ -1,0 +1,16 @@
+.card.link {
+    border: 1px solid #eee;
+    border-radius: 5px;
+
+    .card-image {
+        background: transparent;
+
+        img {
+            object-fit: contain;
+
+            height: calc(100% - 40px);
+
+            top: 20px;
+        }
+    }
+}

@@ -1,15 +1,12 @@
 @import "../variables";
-@import "../cards/simple";
-@import "gallery";
-
-$banner-url: url("/assets/pages/home/banner.png");
-$cards-overlap: 50px;
+@import "home/intro";
+@import "home/gallery";
 
 body {
     padding-top: 0;
 }
 
-#content {
+main {
     & > p,
     & > h1 {
         text-align: center;
@@ -18,159 +15,29 @@ body {
     & > p {
         text-indent: 0;
     }
+}
 
-    .did-you-know {
-        background: #404040;
-        color: #eee;
-        margin: $content-padding (-$content-padding) (-$content-padding);
-        padding: $content-padding;
+.did-you-know {
+    background: #404040;
+    color: #eee;
+    margin: $content-padding (-$content-padding) (-$content-padding);
+    padding: $content-padding;
+    text-align: center;
+
+    p {
         text-align: center;
-
-        p {
-            text-align: center;
-            text-indent: 0;
-        }
-
-        iframe {
-            display: block;
-            margin: 1em auto 0;
-
-            $ratio: 16 / 9;
-            $width: $body-width - $content-padding * 2;
-            $height: round($width / $ratio);
-
-            width: $width;
-            height: $height;
-        }
+        text-indent: 0;
     }
 
-    .intro {
-        background: $banner-url no-repeat center / cover, #707070;
-        background-blend-mode: multiply;
-        color: white;
-        margin: (-$content-padding) (-$content-padding) (-$cards-overlap);
-        padding: ($menu-height + $content-padding) $content-padding ($cards-overlap + $content-padding);
+    iframe {
+        display: block;
+        margin: 1em auto 0;
 
-        display: grid;
-        align-items: center;
-        gap: $content-padding;
-        grid-template-columns: auto auto;
+        $ratio: 16 / 9;
+        $width: $body-width - $content-padding * 2;
+        $height: round($width / $ratio);
 
-        .description .logo {
-            display: block;
-            margin: 1em auto;
-        }
-
-        .side {
-            text-align: center;
-
-            flex-basis: 512px;
-        }
-
-        .download {
-            background: $accent-color;
-            border-radius: 5px;
-            color: white;
-            display: block;
-            font-size: 1.5em;
-            font-weight: 700;
-            padding: 10px 20px;
-            text-align: center;
-
-            &:active {
-                transform: translateY(1px);
-            }
-        }
-
-        .servers {
-            white-space: nowrap;
-
-            .title {
-                margin: 20px !important;
-            }
-
-            .server {
-                background: rgba(white, 0.1);
-                border-radius: 5px;
-                margin: 10px 0;
-                padding: 10px;
-
-                display: grid;
-                align-items: center;
-                gap: 5px;
-                grid-template:
-                    "a b c" 1fr
-                    "d d d" 1fr / 1fr auto auto;
-
-                &.initialized .name {
-                    font-weight: bold;
-                    text-align: left;
-                }
-
-                .version {
-                    opacity: 0.5;
-                }
-
-                .host {
-                    cursor: pointer;
-                    font-family: monospace;
-                    font-size: 1.5em;
-
-                    position: relative;
-
-                    grid-area: d;
-
-                    &::after {
-                        background: rgba(black, 0.5);
-                        border-radius: 5px;
-                        font-size: 0.9rem;
-                        padding: 5px;
-                        transform: translate(-50%, -5px);
-
-                        position: absolute;
-                        bottom: 100%;
-                        left: 50%;
-                    }
-
-                    &:hover::after {
-                        content: "Click to copy";
-                    }
-
-                    &.copied::after {
-                        content: "Copied!";
-                    }
-                }
-
-                .error {
-                    color: tomato;
-                    font-family: monospace;
-                    font-weight: bold;
-                }
-            }
-        }
-
-        .links {
-            margin: 20px 0;
-
-            a {
-                color: inherit;
-                display: inline-block;
-                border-bottom: 1px dashed;
-                margin: 0 5px;
-                text-decoration: none;
-
-                &:hover {
-                    border-bottom-style: solid;
-                }
-            }
-        }
-
-        .discord-invite {
-            margin-top: 20px;
-
-            img {
-                height: 5em;
-            }
-        }
+        width: $width;
+        height: $height;
     }
 }

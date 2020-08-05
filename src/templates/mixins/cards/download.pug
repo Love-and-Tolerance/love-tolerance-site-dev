@@ -1,9 +1,0 @@
-mixin download-card(icon, edition, entryName, extra)
-    - var entry = data.downloads[entryName];
-    - var version = Object.keys(entry)[0];
-    - var url = entry[version];
-
-    a.card.download(href=url, target="_blank")
-        img.icon(src=`/assets/pages/downloads/${icon}.png`)
-        h3.title #{edition} Edition v#{version}
-        div.extra= extra

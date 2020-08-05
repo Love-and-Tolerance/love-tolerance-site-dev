@@ -1,7 +1,5 @@
 extends ../layout.pug
 
-include ../mixins/cards/simple.pug
-
 block settings
     - var title = "Home";
     - var menuEntry = "Home";
@@ -11,7 +9,8 @@ block settings
 block content
     .intro
         .description
-            img.logo(src="/assets/logo.svg", width="512")
+            figure.logo
+                img(src="/assets/logo.svg", alt="Love & Tolerance logo", width="512")
             h2 A My Little Pony: Friendship is Magic Inspired Resource Pack!
             p However, this is only in the sense that it's brightly colored and features some mild pony references, meaning it's not overtly pony-themed and won't make your world look totally different.
 
@@ -36,7 +35,7 @@ block content
             a.discord-invite(href=site.links.discordInvite, target="_blank")
                 img(src="/assets/discord-logo.svg")
 
-    +cards-container(data.cards.features)
+    +cards(data.cards.features)
 
     h1 Showcase
     - var gallery = glob("assets/pages/home/screenshots/*");

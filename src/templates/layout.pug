@@ -6,7 +6,41 @@ block settings
 mixin md(text)
     != markdown(text, { inline: false })
 
-html
+//-
+    {
+        "figure": "namespace/filename.ext",
+        "title": "Example card",
+        "content": "Content of the card. **Markdown supported.**",
+        "url": "https://example.com/optional/link"
+    }
+mixin card(card, link = false)
+    mixin body()
+        figure.card-image
+            img(src=`/assets/cards/${card.figure}`, alt=card.title)
+
+        .card-body
+            h3.card-title
+                if card.url && !link
+                    a(href=card.url, target="_blank")= card.title
+                else
+                    = card.title
+
+            p.card-content!= markdown(card.content)
+
+    if link && card.url
+        .card.common.link
+            a(href=card.url, target="_blank")
+                +body
+    else
+        .card.common
+            +body
+
+mixin cards(cards)
+    .cards
+        each card in cards
+            +card(card)
+
+html(lang="en")
     head
         title= title
 
@@ -29,12 +63,12 @@ html
             link(rel="stylesheet", href=`/styles/pages/${css}.css`)
 
     body
-        include includes/menu.pug
+        include partials/header.pug
 
-        #content
+        main
             block content
 
-        include includes/footer.pug
+        include partials/footer.pug
 
         if js
             script(src=`/scripts/${js}.js`)

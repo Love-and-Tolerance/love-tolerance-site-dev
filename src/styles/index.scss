@@ -1,6 +1,13 @@
 @import "variables";
-@import "fonts", "article";
-@import "menu", "footer";
+@import "fonts", "article", "cards";
+@import "header", "footer";
+
+* {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    outline: none;
+}
 
 html {
     background: whitesmoke;
@@ -21,7 +28,7 @@ body {
     flex-direction: column;
 }
 
-#content {
+main {
     padding: $content-padding;
 
     position: relative;
