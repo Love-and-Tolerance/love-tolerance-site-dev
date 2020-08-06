@@ -40,6 +40,11 @@ task("clean", () => {
     return del("dist");
 });
 
+task("web", () => {
+    return src("CNAME")
+        .pipe(dest("dist"));
+});
+
 task("images", () => {
     return src("assets/**/*.{png,jp?(e)g,svg,gif,ico}", {
         since: lastRun("images"),
@@ -149,5 +154,5 @@ const templates = series("data", "pug"),
     assets = parallel("images", "fonts"),
     common = parallel(assets, templates, "sass", "typescript");
 
-export const build = series("build:init", "clean", common);
+export const build = series("build:init", "clean", "web", common);
 export const dev = series("dev:init", "clean", common, "serve");
