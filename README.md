@@ -75,28 +75,33 @@ Use `getMenuList()` to get an array of entry names. Use `getMenuEntry(name)` to 
 Cards are accessed via `data.cards`.
 
 #### Regular cards
-Pass these cards to `card` or `cards-container` Pug mixins:
+Pass these cards to `card` or `cards` Pug mixins which are available on every page that extends main layout:
 ```pug
 +card(data.cards.features[0])
-+cards-container(data.cards.features)
++cards(data.cards.features)
+
+//- Pass an extra boolean pararameter `link` which turns
+//- the card into a link (example on Downloads page)
++card(data.cards.features[0], true)
++cards(data.cards.features, true)
 ```
 
 ```jsonc
 [
     {
-        "title": "Title of the card",
-        "description": "Description of the card",
-        // Image of the card. Images are stored in src/assets/cards/${path}.png
-        "image": "type/name"
+        "figure": "namespace/filename.ext",
+        "title": "Example card",
+        "content": "Content of the card. **Markdown supported.**",
+        "url": "https://example.com/optional/link"
     }
 ]
 ```
 
-#### Team cards
-Pass these cards to `team-card` or `team-cards-container` Pug mixins:
+#### Contact cards
+Pass these cards to `contact-card` or `contact-cards` Pug mixins which are available in `src/templates/partials/cards/contact.pug`:
 ```pug
-+team-card(data.cards.team[0])
-+team-cards-container(data.cards.team)
++contact-card(data.cards.team[0])
++contact-cards(data.cards.team)
 ```
 
 ```jsonc
@@ -129,7 +134,7 @@ Pages of this site use a layout which is defined in `src/templates/layout.pug` f
 extends ../../layout.pug
 
 //- Include some needed mixins
-include ../../mixins/something.pug
+include ../../partials/something.pug
 
 //- Here are the settings of the page
 //- All settings are optional as the block itself
