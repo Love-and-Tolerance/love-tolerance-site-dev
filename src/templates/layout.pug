@@ -35,10 +35,10 @@ mixin card(card, link = false)
         .card.common
             +body
 
-mixin cards(cards)
+mixin cards(cards, link = false)
     .cards
         each card in cards
-            +card(card)
+            +card(card, link)
 
 html(lang="en")
     head
