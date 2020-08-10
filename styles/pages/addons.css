@@ -1,0 +1,1 @@
+#content .cards-container{display:grid;gap:10px;grid-template-columns:repeat(3, 1fr)}#content .card{background:#fff;box-shadow:0 8px 16px rgba(0,0,0,.1)}#content .card.simple{text-align:center}#content .card.simple img{width:100%}#content .card.simple .description,#content .card.simple .title{margin:20px}
