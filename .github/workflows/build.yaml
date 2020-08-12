@@ -1,9 +1,9 @@
-name: Build and Deploy
+name: Deploy GitHub Pages
 
 on:
   push:
-    branches:
-      - master
+    tags:
+      - "v*"
 
 jobs:
   build-and-deploy:
@@ -15,7 +15,7 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: 🔧 Install, Test and Build
+      - name: 🔧 Install and Build
         run: |
           npm install
           npm run build
