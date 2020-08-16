@@ -48,10 +48,16 @@ task("web", () => {
 task("images", () => {
     return src("assets/**/*.{png,jp?(e)g,svg,gif,ico}", {
         since: lastRun("images"),
-        ignore: ["**/_*", "**/sources/**"]
+        ignore: ["**/_*", "**/sources/**", "assets/favicon.ico"]
     })
         .pipe(gulpIf(isProduction, imagemin()))
         .pipe(dest("dist/assets"));
+});
+
+task("favicon", () => {
+    return src("assets/favicon.ico", { since: lastRun("favicon") })
+        .pipe(gulpIf(isProduction, imagemin()))
+        .pipe(dest("dist"));
 });
 
 task("fonts", () => {
@@ -151,7 +157,7 @@ task("serve", () => {
 });
 
 const templates = series("data", "pug"),
-    assets = parallel("images", "fonts"),
+    assets = parallel("images", "favicon", "fonts"),
     common = parallel(assets, templates, "sass", "typescript");
 
 export const build = series("build:init", "clean", "web", common);
