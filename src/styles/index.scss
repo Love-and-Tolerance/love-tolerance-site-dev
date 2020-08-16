@@ -17,12 +17,14 @@ html {
 body {
     background: white;
     box-shadow: 0 0 16px rgba(black, 0.1);
+    box-sizing: border-box;
     color: #444;
     font-family: "Raleway", "Font Awesome 5 Free", "Font Awesome 5 Brands";
     margin: 0 auto;
     padding-top: $menu-height;
 
     width: $body-width;
+    min-height: 100%;
 
     display: flex;
     flex-direction: column;
