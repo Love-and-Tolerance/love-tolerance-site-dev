@@ -2,8 +2,8 @@ name: Deploy GitHub Pages
 
 on:
   push:
-    tags:
-      - "v*"
+    branches:
+    - "deploy"
 
 jobs:
   build-and-deploy:
