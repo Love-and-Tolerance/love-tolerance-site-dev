@@ -5,8 +5,8 @@ This is the source code of the site. The site is built with [Gulp](https://githu
 ## Prerequisites
 
 - Unix-based OS, e.g. Ubuntu (recommended but not required)
-- Node JS v13.9.x
-- NPM v6.14.x
+- node.js v14.x (dependencies do not install correctly on node.js v16.x)
+- NPM v7.x or v6.x
 
 ## Development
 
