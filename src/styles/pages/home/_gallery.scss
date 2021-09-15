@@ -1,7 +1,7 @@
-@import "../../../node_modules/swiper/swiper.scss";
-@import "../../../node_modules/swiper/components/navigation/navigation.scss";
+@use "../../../../node_modules/swiper/swiper.min.css";
+@use "../../../../node_modules/swiper/modules/navigation/navigation.min.css";
 
-@import "../variables";
+@import "../../variables";
 
 $gallery-height: 512px;
 
@@ -11,6 +11,8 @@ $gallery-height: 512px;
 }
 
 .gallery {
+    --swiper-navigation-color: white;
+
     background: #303030;
     box-shadow: 0 8px 16px rgba(black, 0.25);
 

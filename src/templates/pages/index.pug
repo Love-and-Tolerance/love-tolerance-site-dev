@@ -10,12 +10,12 @@ block content
     .intro
         .description
             figure.logo
-                img(src="/assets/logo.svg", alt="Love & Tolerance logo", width="512")
+                img(src=r`assets/logo.svg`, alt="Love & Tolerance logo", width="512")
             h2 A My Little Pony: Friendship is Magic Inspired Resource Pack!
             p However, this is only in the sense that it's brightly colored and features some mild pony references, meaning it's not overtly pony-themed and won't make your world look totally different.
 
         .side
-            a.download(href="/downloads") Download
+            a.download(href=r`downloads`) Download
 
             .servers
                 h3.title Official Minecraft servers
@@ -28,19 +28,21 @@ block content
                         .host= host
 
             .links
-                a(href=site.links.githubRepo, target="_blank") GitHub
-                a(href=site.links.githubRepo + "/issues", target="_blank") Issues
-                a(href=site.links.googleArchive, target="_blank") Archive
+                a(href=data.site.links.githubRepo, target="_blank") GitHub
+                a(href=data.site.links.githubRepo + "/issues", target="_blank") Issues
+                a(href=data.site.links.googleArchive, target="_blank") Archive
 
-            a.discord-invite(href=site.links.discordInvite, target="_blank")
-                img(src="/assets/discord-logo.svg")
+            a.discord-invite(href=data.site.links.discordInvite, target="_blank")
+                img(src=r`assets/discord-logo.svg`)
 
     +cards(data.cards.features)
 
     h1 Showcase
+
     - var gallery = glob("assets/pages/home/screenshots/*");
+
     .gallery
-        .swiper-container.gallery-top
+        .swiper.gallery-top
             .swiper-wrapper
                 for url in gallery
                     img.swiper-slide(src=url)
@@ -48,7 +50,7 @@ block content
             .swiper-button-next.swiper-button-white
             .swiper-button-prev.swiper-button-white
 
-        .swiper-container.gallery-thumbs
+        .swiper.gallery-thumbs
             .swiper-wrapper
                 for url in gallery
                     img.swiper-slide(src=url)

@@ -1,4 +1,6 @@
-$image-ratio: 640 / 1024;
+@use "sass:math";
+
+$image-ratio: math.div(640, 1024);
 
 .cards {
     display: grid;

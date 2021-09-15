@@ -93,8 +93,14 @@ $cards-overlap: 50px;
                     content: "Click to copy";
                 }
 
-                &.copied::after {
+                &.success::after {
                     content: "Copied!";
+                }
+
+                &.error::after {
+                    content: "Failed to copy";
+
+                    color: tomato;
                 }
             }
 

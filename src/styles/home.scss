@@ -1,6 +1,6 @@
-@import "../variables";
-@import "home/intro";
-@import "home/gallery";
+@import "./variables";
+@import "pages/home/intro";
+@import "pages/home/gallery";
 
 body {
     padding-top: 0;

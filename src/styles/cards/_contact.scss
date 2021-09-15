@@ -1,10 +1,12 @@
+@use "sass:math";
+
 .cards.contact {
     grid-template-columns: repeat(2, 1fr);
 }
 
 .card.contact {
     $image-size: 75px;
-    $line-height: $image-size / 3;
+    $line-height: math.div($image-size, 3);
 
     border: 1px solid #eee;
     border-radius: 5px;

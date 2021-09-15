@@ -1,3 +1,5 @@
+@use "sass:math";
+
 @import "variables";
 
 header {
@@ -34,7 +36,7 @@ header {
     }
 
     .logo img {
-        height: floor($menu-height * 2/3);
+        height: floor($menu-height * math.div(2, 3));
     }
 
     nav {

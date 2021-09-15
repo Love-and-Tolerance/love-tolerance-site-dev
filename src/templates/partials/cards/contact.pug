@@ -4,7 +4,7 @@ mixin social-link(url, icon_name, hint)
 mixin contact-card(card)
     .card.contact
         figure.card-image
-            img.avatar(src=`/assets/cards/${card.avatar}`)
+            img.avatar(src=r`assets/cards/${card.avatar}`)
 
         .content
             h3.card-title= card.name
