@@ -1,0 +1,1 @@
+require("@keupoz/gulp-static");
