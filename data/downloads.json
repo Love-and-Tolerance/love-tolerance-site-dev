@@ -1,8 +1,9 @@
 {
     "java": {
-        "1.15 / 1.16": "https://github.com/Love-and-Tolerance/Love-and-Tolerance",
-        "1.14": "https://drive.google.com/open?id=1mCh7mdbnrghsEnvwixX5qMC_1WcUveWy",
-        "1.13": "https://drive.google.com/open?id=1FvkD9nbgQ2vt0ODAt_h_S316aWwMUSGh",
+        "1.17": "https://github.com/Love-and-Tolerance/Love-and-Tolerance/releases/tag/wip-5",
+        "1.16": "https://github.com/Love-and-Tolerance/Love-and-Tolerance/releases/tag/wip-4",
+        "1.15": "https://github.com/Love-and-Tolerance/Love-and-Tolerance/releases/tag/wip-2",
+        "1.13 / 1.14": "https://github.com/Love-and-Tolerance/Love-and-Tolerance/releases/tag/wip-1",
         "1.12": "https://drive.google.com/open?id=1IxY-1XSr_U8-Z9RPita3jmrG7eNU-LtI",
         "1.11": "https://drive.google.com/open?id=1Yjx64qLTm12EJVutggutZcHVYGcEkORF",
         "1.10": "https://drive.google.com/open?id=13vvzJaB-8lxmuZsOrf_ZTyeGOjpZ2MO7",
@@ -18,6 +19,7 @@
         "1.0": "https://drive.google.com/open?id=18c7qdrAgV3ru4AXD2cQv4lf9zll8dKyA"
     },
     "bedrock": {
+        "1.17": "https://github.com/Love-and-Tolerance/Love-and-Tolerance/releases/tag/wip-5",
         "1.14": "https://drive.google.com/open?id=1BRpWwoCJ7drfrEQNGyeBCWmWQW_RK306"
     },
     "bedrockExperimental": {
