@@ -1,3 +1,4 @@
 {
-    "extends": "@keupoz/typescript-config/tsconfig.json"
+    "extends": "@keupoz/typescript-config/tsconfig.json",
+    "include": ["src/scripts"]
 }
