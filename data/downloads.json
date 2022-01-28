@@ -1,5 +1,6 @@
 {
     "java": {
+        "1.18": "https://github.com/Love-and-Tolerance/Love-and-Tolerance/releases/tag/1.0.0-format.8"
         "1.17": "https://github.com/Love-and-Tolerance/Love-and-Tolerance/releases/tag/wip-5",
         "1.16": "https://github.com/Love-and-Tolerance/Love-and-Tolerance/releases/tag/wip-4",
         "1.15": "https://github.com/Love-and-Tolerance/Love-and-Tolerance/releases/tag/wip-2",
@@ -19,10 +20,12 @@
         "1.0": "https://drive.google.com/open?id=18c7qdrAgV3ru4AXD2cQv4lf9zll8dKyA"
     },
     "bedrock": {
+        "1.18": "https://github.com/Love-and-Tolerance/Love-and-Tolerance/releases/tag/1.0.0-format.8"
         "1.17": "https://github.com/Love-and-Tolerance/Love-and-Tolerance/releases/tag/wip-5",
         "1.14": "https://drive.google.com/open?id=1BRpWwoCJ7drfrEQNGyeBCWmWQW_RK306"
     },
     "bedrockExperimental": {
+        "1.18": "https://github.com/Love-and-Tolerance/Love-and-Tolerance/releases/tag/1.0.0-format.8"
         "1.14": "https://drive.google.com/open?id=1hRM4KAbNFRSVKByZQ0n4K3Tg5WWFeozp"
     }
 }
