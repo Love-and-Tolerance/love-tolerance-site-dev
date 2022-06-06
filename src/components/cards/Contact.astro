@@ -1,0 +1,111 @@
+---
+import Icon from '../Icon.astro'
+import { ContactCard } from './types'
+
+export interface Props extends ContactCard {
+  namespace: string
+}
+
+const Props = Astro.props as Props
+const path = `/cards/${Props.namespace}/${Props.avatar}`
+---
+
+<div class="contact-card">
+  <img class="contact-card__image" src={ path } alt={ Props.name } />
+
+  <div class="contact-card__body">
+    <h5 class="contact-card__title">
+      { Props.name }
+
+      { Props.nickname ?
+      <span class="contact-card__nickname" title="Minecraft nickname">
+        { Props.nickname }
+      </span>
+      : null }
+    </h5>
+
+    { !Props.social ||
+    <div class="contact-card__links">
+      { Props.social.email ?
+      <a href={ `mailto:${Props.social.email}` } title="E-Mail">
+        <Icon icon="envelope" />
+      </a>
+      : null }
+
+      { Props.social.github ?
+      <a href={ `https://github.com/${Props.social.github}` } title="GitHub">
+        <Icon icon="github" />
+      </a>
+      : null }
+
+      { Props.social.twitter ?
+      <a href={ `https://twitter.com/${Props.social.twitter}` } title="Twitter">
+        <Icon icon="twitter" />
+      </a>
+      : null }
+
+      { Props.social.vk ?
+      <a href={ `https://vk.com/${Props.social.vk}` } title="VK">
+        <Icon icon="vk" />
+      </a>
+      : null }
+
+      { Props.social.discord ?
+      <span class="contact-card__link--discord">
+        <Icon icon="discord" /> { Props.social.discord }
+      </span>
+      : null }
+    </div>
+    }
+
+    <div class="contact-card__content">{ Props.role }</div>
+  </div>
+</div>
+
+<style lang="scss">
+  .contact-card {
+    --avatar-size: 4.5em;
+
+    border: 1px solid #e7e7e7;
+    border-radius: var(--border-radius);
+    line-height: calc(var(--avatar-size) / 3);
+    padding: var(--margin);
+
+    display: grid;
+    gap: var(--margin);
+    grid-template-columns: auto 1fr;
+
+    &__image {
+      border-radius: 50%;
+      object-fit: cover;
+
+      width: var(--avatar-size);
+      height: var(--avatar-size);
+    }
+
+    &__nickname {
+      color: #a0a0a0;
+    }
+
+    &__links {
+      a {
+        --size: 1.2em;
+
+        color: #a0a0a0;
+        display: inline-block;
+        font-size: var(--size);
+        text-align: center;
+
+        width: var(--size);
+
+        &:hover {
+          color: var(--primary-color);
+        }
+      }
+    }
+
+    &__link--discord {
+      color: #808080;
+    }
+  }
+</style>

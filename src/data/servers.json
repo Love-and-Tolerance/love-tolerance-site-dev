@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Survival",
+    "hostname": "mc.love-tolerance.com",
+    "mcVersion": "Java Edition"
+  },
+  {
+    "name": "Creative",
+    "hostname": "ponk.love-tolerance.com",
+    "mcVersion": "Java Edition"
+  }
+]

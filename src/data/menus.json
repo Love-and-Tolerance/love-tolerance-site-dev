@@ -1,0 +1,7 @@
+{
+  "main": [
+    { "title": "Home", "path": "/" },
+    { "title": "Downloads", "path": "/downloads/" },
+    { "title": "Team", "path": "/team/" }
+  ]
+}

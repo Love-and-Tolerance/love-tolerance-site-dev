@@ -1,0 +1,210 @@
+---
+import Cards from '../components/Cards.astro';
+import { NormalCardsInfo } from '../components/cards/types';
+import Server from '../components/Server.svelte';
+import Swiper from '../components/Swiper.svelte';
+import YouTube from '../components/YouTube.astro';
+import Features from '../data/cards/features.json';
+import Links from '../data/links.json';
+import Servers from '../data/servers.json';
+import Layout from '../layouts/Layout.astro';
+
+const globs = await Astro.glob('../../public/home/screenshots/*')
+const images = globs.map((glob) => glob['default'] as string)
+
+function link(name: keyof typeof Links, path?: string): URL {
+  const url = new URL(Links[name])
+
+  if (path !== undefined) {
+    return new URL(path, url)
+  }
+
+  return url
+}
+---
+
+<Layout title="Home" menuEntry="Home">
+  <div class="hero">
+    <div class="hero__content">
+      <div class="hero__section">
+        <img class="hero__logo" src="/logo.svg" alt="Love & Tolerance logo" />
+        <h3>A My Little Pony: Friendship is Magic Inspired Resource Pack!</h3>
+        <p>However, this is only in the sense that it's brightly colored and features some mild pony references, meaning
+          it's not overtly pony-themed and won't make your world look totally different.</p>
+      </div>
+
+      <div class="hero__section">
+        <a href="/downloads" class="hero__download">Download</a>
+
+        <div class="hero__servers">
+          <h5 class="hero__servers-title">Our Minecraft servers</h5>
+
+          {Servers.map((server) => (
+          <Server server={server} client:load />
+          ))}
+        </div>
+
+        <div class="links">
+          <div class="links__common">
+            <a class="link" href={ link('githubRepo') }>GitHub</a>
+            <a class="link" href={ link('githubRepo', './issues' ) }>Issues</a>
+            <a class="link" href={ link('googleArchive') }>Archive</a>
+          </div>
+
+          <a class="link link--discord" href={ link('discordInvite') } title="Join our Discord server!">
+            <img src="/discord-logo.svg" alt="Discord logo" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="home-content">
+    <Cards cards={ Features as NormalCardsInfo } />
+
+    <h2>Showcase</h2>
+    <Swiper images={ images } client:load />
+  </div>
+
+  <div class="did-you-know">
+    <h2>Did you know?</h2>
+    <p>This pack's style is used in Jan Animation Studios' popular animation "Don't Mine at Night"</p>
+    <YouTube video="X_TMtgjQuZI" />
+  </div>
+</Layout>
+
+<style lang="scss">
+  :root {
+    --cards-overlap: calc(var(--gutter) * 2);
+  }
+
+  :global(.body-content__main) {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .home-content {
+    padding: var(--gutter);
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--margin);
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      text-align: center;
+    }
+  }
+
+  .hero {
+    background: url("/home/hero.png") no-repeat center / cover, rgba(black, 0.5);
+    background-blend-mode: multiply;
+    color: white;
+    padding-top: var(--header-height);
+    padding-bottom: calc(var(--cards-overlap) - var(--gutter));
+
+    &__content {
+      padding: var(--gutter);
+    }
+
+    &__content,
+    &__section {
+      display: flex;
+      flex-direction: column;
+      gap: var(--margin);
+    }
+
+    &__logo {
+      display: block;
+      margin: 0 auto;
+
+      max-width: 512px;
+      width: 100%;
+    }
+
+    &__download {
+      background: var(--primary-color);
+      border-radius: var(--border-radius);
+      color: white;
+      display: block;
+      font-size: 1.25em;
+      font-weight: bold;
+      padding: calc(var(--gutter) / 2) var(--gutter);
+      text-align: center;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    &__servers {
+      display: flex;
+      flex-direction: column;
+      gap: calc(var(--margin) / 2);
+
+      &-title {
+        text-align: center;
+      }
+    }
+
+    .links {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+      &__common {
+        display: flex;
+        gap: 0.5em;
+      }
+    }
+
+    .link {
+      color: inherit;
+      opacity: 0.75;
+      text-decoration: underline;
+      transition: opacity 100ms;
+
+      &:hover {
+        opacity: 1;
+      }
+
+      &--discord img {
+        display: block;
+        pointer-events: none;
+
+        height: 3em;
+      }
+    }
+  }
+
+  .home-content :global(.cards:first-child) {
+    margin-top: calc(-1 * var(--cards-overlap) - var(--gutter));
+  }
+
+  .did-you-know {
+    background: #404040;
+    color: #efefef;
+    padding: var(--gutter);
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--margin);
+  }
+
+  @media (min-width: 800px) {
+    .hero {
+      &__content {
+        display: grid;
+        gap: var(--gutter);
+        grid-template-columns: 1fr 350px;
+      }
+    }
+  }
+</style>

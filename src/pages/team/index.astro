@@ -1,0 +1,19 @@
+---
+import Cards from '../../components/Cards.astro';
+import { ContactCardsInfo } from '../../components/cards/types';
+import Team from '../../data/cards/team.json';
+import Layout from '../../layouts/Layout.astro';
+import { Content as Credits } from './_credits.md';
+
+const title = 'Team'
+const description = 'Team of the resource pack development and credits to other contributors and used resources'
+const menuEntry = 'Team'
+---
+
+<Layout title={ title } description={ description } menuEntry={ menuEntry }>
+  <h2>The Development team</h2>
+
+  <Cards cards={ Team as ContactCardsInfo } />
+
+  <Credits />
+</Layout>

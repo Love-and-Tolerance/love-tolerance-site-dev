@@ -1,0 +1,40 @@
+---
+import { NormalCard } from './types'
+
+export interface Props extends NormalCard {
+  namespace: string
+}
+
+const Props = Astro.props as Props
+const path = `/cards/${Props.namespace}/${Props.image}`
+const content = await (Astro as any).__renderMarkdown(Props.content, { mode: 'md' })
+---
+
+<div class="card">
+  <img class="card__image" src={ path } alt={ Props.title } />
+
+  <div class="card__body">
+    <h5 class="card__title">{ Props.title }</h5>
+    <div class="card__content" set:html={ content }></div>
+  </div>
+</div>
+
+<style lang="scss">
+  .card {
+    box-shadow: var(--drop-shadow);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    text-align: center;
+
+    &__image {
+      box-shadow: var(--drop-shadow);
+      display: block; // Remove annoying margin showing up because of spaces
+
+      width: 100%;
+    }
+
+    &__body {
+      padding: var(--margin) var(--gutter);
+    }
+  }
+</style>

@@ -1,0 +1,21 @@
+---
+import iconsRaw from '@fortawesome/fontawesome-free/metadata/icons.yml'
+import { createJsonElement } from '@keupoz/tson'
+
+export interface Props {
+  icon: string
+}
+
+const Props = Astro.props as Props
+const icons = createJsonElement(iconsRaw).getAsObject()
+
+const icon = icons.getObject(Props.icon)
+const style = icon.getArray('styles').get(0).getAsString()
+const unicode = icon.getPrimitive('unicode').getAsString()
+---
+
+<i class:list={["fa", `fa-${style}`]} set:html={ `&#x${unicode};` }></i>
+
+<style>
+  @import url("https://use.fontawesome.com/releases/v6.1.1/css/all.css");
+</style>

@@ -1,0 +1,108 @@
+{
+  "name": "team",
+  "type": "contact",
+  "cards": [
+    {
+      "name": "Velvet Remedy",
+      "role": "Project Lead / Primary Texture Artist",
+      "nickname": "Velvet_Remedy_",
+      "avatar": "velvet-remedy.png",
+      "social": {
+        "discord": "Velvet Remedy#8880",
+        "email": "velvetremedy@love-tolerance.com",
+        "github": "VelvetRemedy"
+      }
+    },
+    {
+      "name": "Autumn Meadow",
+      "role": "Website Maintenance / General Texture Artist",
+      "nickname": "autumnblazey",
+      "avatar": "pcelestia.png",
+      "social": {
+        "discord": "Autumn Meadow#2864",
+        "email": "blazeykirin@gmail.com",
+        "github": "autumnblazey",
+        "twitter": "autumnblazey"
+      }
+    },
+    {
+      "name": "ZeldaLink / SolisLink",
+      "role": "Models / Texture Artist",
+      "avatar": "solislink.png",
+      "social": {
+        "discord": "SolisLink#7918",
+        "email": "zeldalinkaaron@gmail.com"
+      }
+    },
+    {
+      "name": "Bronydog",
+      "role": "Models / Texture Artist",
+      "avatar": "bronydog.png",
+      "social": {
+        "discord": "bronydog#1620",
+        "email": "bronydog@love-tolerance.com"
+      }
+    },
+    {
+      "name": "Vivian",
+      "role": "CTM Manager / Pack Maintenance",
+      "avatar": "vivian.png",
+      "social": {
+        "discord": "Vivian Iolani#1337",
+        "email": "vivian@love-tolerance.com"
+      }
+    },
+    {
+      "name": "Thunder Kick",
+      "role": "Texture Artist",
+      "avatar": "thunder-kick.png",
+      "social": {
+        "discord": "Thunder_Kick#0195"
+      }
+    },
+    {
+      "name": "Sollace",
+      "role": "GitHub Manager / Pack Maintenance",
+      "nickname": "Sollace",
+      "avatar": "sollace.png",
+      "social": {
+        "discord": "Sollace#3780",
+        "github": "Sollace",
+        "twitter": "SollaceTheBeard"
+      }
+    },
+    {
+      "name": "SkyArrow",
+      "role": "Website Maintenance",
+      "nickname": "__SkyArrow__",
+      "avatar": "skyarrow.png",
+      "social": {
+        "discord": "SkyArrow#9143",
+        "email": "skyarrow25@gmail.com"
+      }
+    },
+    {
+      "name": "Vayandas",
+      "role": "Texture Artist",
+      "nickname": "Vayandas",
+      "avatar": "vayandas.png",
+      "social": {
+        "discord": "Vayandas#4275",
+        "github": "vayandas",
+        "twitter": "vayandas"
+      }
+    },
+    {
+      "name": "Ivan Sokolov",
+      "role": "Website Maintenance",
+      "nickname": "Keupoz",
+      "avatar": "keupoz.jpeg",
+      "social": {
+        "discord": "Keupoz#9578",
+        "github": "keupoz",
+        "twitter": "keupoz",
+        "vk": "keupoz"
+      }
+    }
+  ]
+}

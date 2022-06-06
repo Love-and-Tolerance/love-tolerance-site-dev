@@ -1,33 +1,31 @@
 {
-    "name": "love-tolerance",
-    "version": "1.1.2",
-    "description": "Love & Tolerance resource pack website",
-    "private": true,
-    "scripts": {
-        "build": "gulp build",
-        "dev": "gulp dev"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/Love-and-Tolerance/love-and-tolerance.github.io.git"
-    },
-    "author": "keupoz",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/Love-and-Tolerance/love-and-tolerance.github.io/issues"
-    },
-    "homepage": "https://github.com/Love-and-Tolerance/love-and-tolerance.github.io#readme",
-    "dependencies": {
-        "@fortawesome/fontawesome-free": "^5.15.4",
-        "@keupoz/strict-queryselector": "^1.1.0",
-        "@mojotech/json-type-validation": "^3.1.0",
-        "clipboard": "^2.0.8",
-        "swiper": "^7.0.5"
-    },
-    "devDependencies": {
-        "@keupoz/gulp-static": "^1.2.0",
-        "@keupoz/typescript-config": "^1.4.0",
-        "tslint": "^6.1.3",
-        "typescript": "^4.4.3"
-    }
+  "name": "@love-tolerance/website",
+  "version": "1.0.0",
+  "description": "Source code of Love & Tolerance Minecraft resource pack website",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.1.1",
+    "@keupoz/tson": "^1.0.0",
+    "clipboard": "^2.0.11",
+    "git-url-parse": "^11.6.0",
+    "swiper": "^8.1.6"
+  },
+  "devDependencies": {
+    "@astrojs/svelte": "^0.1.3",
+    "@keupoz/typescript-config": "^1.5.0",
+    "@rollup/plugin-yaml": "^3.1.0",
+    "@types/git-url-parse": "^9.0.1",
+    "astro": "^1.0.0-beta.36",
+    "sass": "^1.52.1",
+    "svelte": "^3.46.4",
+    "ts-standard": "^11.0.0",
+    "typescript": "^4.7.2",
+    "yaml": "^2.1.1"
+  }
 }
