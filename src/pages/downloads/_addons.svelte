@@ -37,6 +37,8 @@
     mcVersion = base.getPrimitive("mc_versions").getAsString();
     packVersion = base.getPrimitive("version").getAsString();
 
+    filenameTemplate = `https://github.com/${url.owner}/${url.name}/releases/download/${packVersion}/${filenameTemplate}`;
+
     addonsList = Array.from(addons.iterator());
   });
 
@@ -64,7 +66,7 @@
 <div class="controls">
   <button class="control" on:click={reset}>Reset</button>
   <button class="control" on:click={resetDefaults}>Select defaults</button>
-  <a class="control" href={`#${filename}`}>Download</a>
+  <a class="control" href={filename}>Download</a>
 </div>
 
 <div class="addons">
