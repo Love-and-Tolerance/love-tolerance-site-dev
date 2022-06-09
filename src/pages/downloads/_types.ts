@@ -1,6 +1,6 @@
 export interface VariantInfo {
   id: string
-  repo: string | null
+  url: string | null
   description: string | null
   image: string | null
 }

@@ -19,7 +19,7 @@
   let currentVariantID = defaultVariantID;
   let description = defaultDescription;
   let currentImage = defaultImage;
-  let repo: string | null = null;
+  let url: string | null = null;
 
   function selectVariant(id: string): void {
     currentVariantID = id;
@@ -27,7 +27,7 @@
   }
 
   function updateInfo(info: VariantInfo): void {
-    repo = info.repo;
+    url = info.url;
     description = info.description ?? defaultDescription;
     currentImage = info.image ?? defaultImage;
   }
@@ -77,8 +77,8 @@
 
     <div class="addon__description">
       {description}
-      {#if repo !== null}
-        (<a href={repo}>GitHub</a>)
+      {#if url !== null}
+        (<a href={url}>GitHub</a>)
       {/if}
     </div>
   </div>
