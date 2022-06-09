@@ -114,6 +114,7 @@
 
     &__variants {
       display: flex;
+      flex-wrap: wrap;
       gap: 0.5em;
     }
   }

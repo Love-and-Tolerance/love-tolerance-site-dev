@@ -83,6 +83,7 @@
 <style lang="scss">
   .controls {
     display: flex;
+    flex-wrap: wrap;
     gap: 0.5em;
   }
 
