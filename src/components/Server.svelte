@@ -70,6 +70,7 @@
 
 <style lang="scss">
   .mc-server {
+    -webkit-backdrop-filter: blur(16px);
     backdrop-filter: blur(16px);
     background: rgba(white, 0.125);
     border-radius: var(--border-radius);
