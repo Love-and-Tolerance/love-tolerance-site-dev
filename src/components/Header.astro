@@ -18,8 +18,11 @@ const isCurrentMenuEntry = (title: string) => title === Props.menuEntry
     </a>
   </div>
 
-  <label class="header__bars">
+  <input id="nav-state" type="checkbox" />
+
+  <label class="header__bars" for="nav-state">
     <Icon icon="bars" />
+    <Icon icon="xmark" />
   </label>
 
   <nav class="header__nav nav">
@@ -91,6 +94,20 @@ const isCurrentMenuEntry = (title: string) => title === Props.menuEntry
       &:hover {
         color: var(--primary-color);
       }
+
+      & :global(.fa:last-child) {
+        display: none;
+      }
+
+      #nav-state:checked+& :global(.fa) {
+        &:first-child {
+          display: none;
+        }
+
+        &:last-child {
+          display: block;
+        }
+      }
     }
 
     &__nav {
@@ -129,8 +146,11 @@ const isCurrentMenuEntry = (title: string) => title === Props.menuEntry
       }
     }
 
-    &__bars:hover+&__nav,
-    &__nav:hover {
+    #nav-state {
+      display: none;
+    }
+
+    #nav-state:checked~&__nav {
       opacity: 1;
       pointer-events: unset;
     }
