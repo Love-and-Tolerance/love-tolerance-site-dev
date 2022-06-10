@@ -1,8 +1,13 @@
 <script lang="ts">
   import { JsonObject } from "@keupoz/tson";
-  import parseGitUrl, { GitUrl } from "git-url-parse";
   import { createEventDispatcher, onMount } from "svelte";
   import { VariantEvents } from "./_types";
+  import {
+    GitHubRepo,
+    parseGitHubUrl,
+    rawContent,
+    stringifyGitHubUrl,
+  } from "./_utils";
 
   export let json: JsonObject;
   export let currentVariantID: string;
@@ -18,8 +23,8 @@
   })();
 
   let selected = false;
-  let repo: string | null = null;
-  let gitUrl: GitUrl | null = null;
+  let url: string | null = null;
+  let repo: GitHubRepo | null = null;
   let description: string | null = null;
   let image: string | null = null;
 
@@ -27,33 +32,21 @@
 
   $: {
     selected = currentVariantID === id;
-    dispatch("info", { id, repo, description, image });
-  }
-
-  $: {
-    if (gitUrl === null) {
-      repo = null;
-    } else {
-      repo = gitUrl.toString("https");
-
-      if (branch !== null) {
-        repo = `${repo}/tree/${branch}`;
-      }
-    }
+    dispatch("info", { id, url, description, image });
   }
 
   function onClick(): void {
-    dispatch("click", { id, repo, description, image });
+    dispatch("click", { id, url, description, image });
   }
 
   onMount(async () => {
-    const url = json.get("url");
+    const rawUrl = json.get("url");
 
-    if (url !== null) {
-      gitUrl = parseGitUrl(url.getAsString());
+    if (rawUrl !== null) {
+      repo = parseGitHubUrl(rawUrl.getAsString());
 
       const r = await fetch(
-        `https://api.github.com/repos/${gitUrl.owner}/${gitUrl.name}`,
+        `https://api.github.com/repos/${repo.owner}/${repo.name}`,
         {
           headers: {
             Accept: "application/vnd.github.v3+json",
@@ -61,16 +54,15 @@
         }
       );
 
-      const repoJson = await r.json();
+      url = stringifyGitHubUrl(repo, "tree", branch);
+      image = rawContent(repo, branch, "pack.png");
 
+      const repoJson = await r.json();
       description = repoJson["description"];
-      image = `https://raw.githubusercontent.com/${gitUrl.owner}/${
-        gitUrl.name
-      }/${branch ?? "HEAD"}/pack.png`;
     }
 
     if (selected) {
-      dispatch("info", { id, repo, description, image });
+      dispatch("info", { id, url, description, image });
     }
   });
 </script>

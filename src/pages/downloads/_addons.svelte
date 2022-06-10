@@ -1,9 +1,9 @@
 <script lang="ts">
   import { createJsonElement, JsonElement } from "@keupoz/tson";
-  import parseGitUrl from "git-url-parse";
   import { onMount } from "svelte";
   import Addon from "./_addon.svelte";
   import { AddonEvents } from "./_types";
+  import { parseGitHubUrl, rawContent } from "./_utils";
 
   let defaultImage = "";
   let filenameTemplate = "";
@@ -29,15 +29,15 @@
     const base = repos.getObject("base");
     const addons = repos.getArray("addons");
 
-    const url = parseGitUrl(base.getPrimitive("url").getAsString());
+    const repo = parseGitHubUrl(base.getPrimitive("url").getAsString());
 
-    defaultImage = `https://raw.githubusercontent.com/${url.owner}/${url.name}/HEAD/pack.png`;
+    defaultImage = rawContent(repo, null, "pack.png");
 
     filenameTemplate = base.getPrimitive("filename").getAsString();
     mcVersion = base.getPrimitive("mc_versions").getAsString();
     packVersion = base.getPrimitive("version").getAsString();
 
-    filenameTemplate = `https://github.com/${url.owner}/${url.name}/releases/download/${packVersion}/${filenameTemplate}`;
+    filenameTemplate = `https://github.com/${repo.owner}/${repo.name}/releases/download/${packVersion}/${filenameTemplate}`;
 
     addonsList = Array.from(addons.iterator());
   });
