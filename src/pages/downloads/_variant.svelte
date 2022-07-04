@@ -41,6 +41,11 @@
 
   onMount(async () => {
     const rawUrl = json.get("url");
+    const packPngUrl = json.get("pack.png");
+
+    if (packPngUrl !== null) {
+      image = packPngUrl.getAsString();
+    }
 
     if (rawUrl !== null) {
       repo = parseGitHubUrl(rawUrl.getAsString());
@@ -55,7 +60,10 @@
       );
 
       url = stringifyGitHubUrl(repo, "tree", branch);
-      image = rawContent(repo, branch, "pack.png");
+
+      if (image === null) {
+        image = rawContent(repo, branch, "pack.png");
+      }
 
       const repoJson = await r.json();
       description = repoJson["description"];
