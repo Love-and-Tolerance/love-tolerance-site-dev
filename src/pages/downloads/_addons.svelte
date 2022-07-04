@@ -19,7 +19,7 @@
     .replace("{ids}", ids.join(""));
 
   const ASSETS_JSON =
-    "https://raw.githubusercontent.com/VelvetRemedy/pack-release-builder/mane/assets.json";
+    "https://raw.githubusercontent.com/Love-and-Tolerance/pack-release-builder/mane/assets.json";
 
   onMount(async () => {
     const r = await fetch(ASSETS_JSON);
