@@ -42,31 +42,37 @@
   onMount(async () => {
     const rawUrl = json.get("url");
     const packPngUrl = json.get("pack.png");
+    const rawDescription = json.get("description");
 
     if (packPngUrl !== null) {
       image = packPngUrl.getAsString();
     }
 
+    if (rawDescription !== null) {
+      description = rawDescription.getAsString();
+    }
+
     if (rawUrl !== null) {
       repo = parseGitHubUrl(rawUrl.getAsString());
-
-      const r = await fetch(
-        `https://api.github.com/repos/${repo.owner}/${repo.name}`,
-        {
-          headers: {
-            Accept: "application/vnd.github.v3+json",
-          },
-        }
-      );
-
       url = stringifyGitHubUrl(repo, "tree", branch);
 
       if (image === null) {
         image = rawContent(repo, branch, "pack.png");
       }
 
-      const repoJson = await r.json();
-      description = repoJson["description"];
+      if (description === null) {
+        const r = await fetch(
+          `https://api.github.com/repos/${repo.owner}/${repo.name}`,
+          {
+            headers: {
+              Accept: "application/vnd.github.v3+json",
+            },
+          }
+        );
+
+        const repoJson = await r.json();
+        description = repoJson["description"];
+      }
     }
 
     if (selected) {
