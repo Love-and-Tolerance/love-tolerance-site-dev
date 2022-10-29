@@ -1,23 +1,26 @@
 ---
-import Downloads from '../../data/downloads.json';
-import Layout from '../../layouts/Layout.astro';
-import Addons from './_addons.svelte';
-import { Content as Installation } from './_install.md';
+import Downloads from "../../data/downloads.json";
+import Layout from "../../layouts/Layout.astro";
+import Addons from "./_addons.svelte";
+import { Content as Installation } from "./_install.md";
 
-const title = 'Downloads'
-const description = 'Download Love & Tolerance resource pack for Minecraft Java and Bedrock editions'
-const menuEntry = 'Downloads'
+const title = "Downloads";
+const description =
+  "Download Love & Tolerance resource pack for Minecraft Java and Bedrock editions";
+const menuEntry = "Downloads";
 ---
 
-<Layout title={ title } description={ description } menuEntry={ menuEntry }>
+<Layout title={title} description={description} menuEntry={menuEntry}>
   <Addons client:only="svelte" />
 
   <h2>Old Java Edition releases</h2>
 
   <div class="java-releases">
-    {Object.entries(Downloads.java).map(([version, url]) =>
-    <a href={url}>{version}</a>
-    )}
+    {
+      Object.entries(Downloads.java).map(([version, url]) => (
+        <a href={url}>{version}</a>
+      ))
+    }
   </div>
 
   <Installation />
