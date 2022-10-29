@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { JsonObject } from "@keupoz/tson";
   import { createEventDispatcher, onMount } from "svelte";
+  import { JavaAssetsAddonVariant } from "./_schemas";
   import { VariantEvents } from "./_types";
   import {
     GitHubRepo,
@@ -9,24 +9,16 @@
     stringifyGitHubUrl,
   } from "./_utils";
 
-  export let json: JsonObject;
+  export let json: JavaAssetsAddonVariant;
   export let currentVariantID: string;
 
-  const name = json.getPrimitive("name").getAsString();
-  const id = json.getPrimitive("id").getAsString();
-  const branch = (() => {
-    const branch = json.get("branch");
-
-    if (branch === null) return null;
-
-    return branch.getAsString();
-  })();
+  const { name, id, branch } = json;
 
   let selected = false;
-  let url: string | null = null;
-  let repo: GitHubRepo | null = null;
-  let description: string | null = null;
-  let image: string | null = null;
+  let url: string | undefined = undefined;
+  let repo: GitHubRepo | undefined = undefined;
+  let description = json.description;
+  let image = json["pack.png"];
 
   const dispatch = createEventDispatcher<VariantEvents>();
 
@@ -40,27 +32,15 @@
   }
 
   onMount(async () => {
-    const rawUrl = json.get("url");
-    const packPngUrl = json.get("pack.png");
-    const rawDescription = json.get("description");
-
-    if (packPngUrl !== null) {
-      image = packPngUrl.getAsString();
-    }
-
-    if (rawDescription !== null) {
-      description = rawDescription.getAsString();
-    }
-
-    if (rawUrl !== null) {
-      repo = parseGitHubUrl(rawUrl.getAsString());
+    if (json.url !== undefined) {
+      repo = parseGitHubUrl(json.url);
       url = stringifyGitHubUrl(repo, "tree", branch);
 
-      if (image === null) {
+      if (image === undefined) {
         image = rawContent(repo, branch, "pack.png");
       }
 
-      if (description === null) {
+      if (description === undefined) {
         const r = await fetch(
           `https://api.github.com/repos/${repo.owner}/${repo.name}`,
           {

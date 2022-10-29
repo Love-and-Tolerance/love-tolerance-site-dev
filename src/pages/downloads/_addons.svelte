@@ -1,7 +1,8 @@
 <script lang="ts">
-  import { createJsonElement, JsonElement } from "@keupoz/tson";
   import { onMount } from "svelte";
+  import { fromZodError, ValidationError } from "zod-validation-error";
   import Addon from "./_addon.svelte";
+  import { JavaAssetsAddon, JavaAssetsSchema } from "./_schemas";
   import { AddonEvents } from "./_types";
   import { parseGitHubUrl, rawContent } from "./_utils";
 
@@ -9,8 +10,10 @@
   let filenameTemplate = "";
   let mcVersion = "N/A";
   let packVersion = "N/A";
-  let addonsList: Array<JsonElement> = [];
+  let addonsList: Array<JavaAssetsAddon> = [];
   let ids: string[] = [];
+
+  let error: ValidationError | undefined;
 
   const addonInstances: Array<Addon> = [];
 
@@ -23,23 +26,25 @@
 
   onMount(async () => {
     const r = await fetch(ASSETS_JSON);
-    const json = createJsonElement(await r.json()).getAsObject();
+    const parseResult = JavaAssetsSchema.safeParse(await r.json());
 
-    const repos = json.getObject("repos");
-    const base = repos.getObject("base");
-    const addons = repos.getArray("addons");
+    if (!parseResult.success) {
+      error = fromZodError(parseResult.error);
+      return;
+    }
 
-    const repo = parseGitHubUrl(base.getPrimitive("url").getAsString());
+    const json = parseResult.data;
+    const repo = parseGitHubUrl(json.repos.base.url);
 
-    defaultImage = rawContent(repo, null, "pack.png");
+    defaultImage = rawContent(repo, undefined, "pack.png");
 
-    filenameTemplate = base.getPrimitive("filename").getAsString();
-    mcVersion = base.getPrimitive("mc_versions").getAsString();
-    packVersion = base.getPrimitive("version").getAsString();
+    filenameTemplate = json.repos.base.filename;
+    mcVersion = `${json.repos.base.mc_versions}`;
+    packVersion = json.repos.base.version;
 
     filenameTemplate = `https://github.com/${repo.owner}/${repo.name}/releases/download/${packVersion}/${filenameTemplate}`;
 
-    addonsList = Array.from(addons.iterator());
+    addonsList = json.repos.addons;
   });
 
   function onVariantSelect(event: CustomEvent<AddonEvents["variant"]>): void {
@@ -61,24 +66,28 @@
 
 <h2>Custom downloads</h2>
 
-<h3>Minecraft version: {mcVersion}</h3>
+{#if error !== undefined}
+  <div class="error">{error.message}</div>
+{:else}
+  <h3>Minecraft version: {mcVersion}</h3>
 
-<div class="controls">
-  <button class="control" on:click={reset}>Reset</button>
-  <button class="control" on:click={resetDefaults}>Select defaults</button>
-  <a class="control" href={filename}>Download</a>
-</div>
+  <div class="controls">
+    <button class="control" on:click={reset}>Reset</button>
+    <button class="control" on:click={resetDefaults}>Select defaults</button>
+    <a class="control" href={filename}>Download</a>
+  </div>
 
-<div class="addons">
-  {#each addonsList as addon, index}
-    <Addon
-      {defaultImage}
-      json={addon.getAsObject()}
-      on:variant={onVariantSelect}
-      bind:this={addonInstances[index]}
-    />
-  {/each}
-</div>
+  <div class="addons">
+    {#each addonsList as addon, index}
+      <Addon
+        {defaultImage}
+        json={addon}
+        on:variant={onVariantSelect}
+        bind:this={addonInstances[index]}
+      />
+    {/each}
+  </div>
+{/if}
 
 <style lang="scss">
   .controls {

@@ -1,8 +1,8 @@
 export interface VariantInfo {
   id: string
-  url: string | null
-  description: string | null
-  image: string | null
+  url: string | undefined
+  description: string | undefined
+  image: string | undefined
 }
 
 export interface AddonInfo {

@@ -1,25 +1,24 @@
 <script lang="ts">
-  import { JsonObject } from "@keupoz/tson";
   import { createEventDispatcher } from "svelte";
+  import { JavaAssetsAddon } from "./_schemas";
   import { AddonEvents, VariantEvents, VariantInfo } from "./_types";
   import Variant from "./_variant.svelte";
 
   export let defaultImage: string;
-  export let json: JsonObject;
+  export let json: JavaAssetsAddon;
 
   const dispatch = createEventDispatcher<AddonEvents>();
 
-  const defaultDescription = "No description";
-  const defaultVariantID = json.getPrimitive("default").getAsString();
-  const name = json.getPrimitive("name").getAsString();
-  const pos = json.getPrimitive("id_pos").getAsInteger() - 1;
+  const { name, variants } = json;
 
-  const variants = Array.from(json.getArray("variants").iterator());
+  const defaultDescription = "No description";
+  const defaultVariantID = json.default;
+  const pos = json.id_pos - 1;
 
   let currentVariantID = defaultVariantID;
   let description = defaultDescription;
   let currentImage = defaultImage;
-  let url: string | null = null;
+  let url: string | undefined = undefined;
 
   function selectVariant(id: string): void {
     currentVariantID = id;
@@ -68,7 +67,7 @@
       {#each variants as variant}
         <Variant
           {currentVariantID}
-          json={variant.getAsObject()}
+          json={variant}
           on:click={onVariantClick}
           on:info={onVariantInfo}
         />
@@ -77,7 +76,7 @@
 
     <div class="addon__description">
       {description}
-      {#if url !== null}
+      {#if url !== undefined}
         (<a href={url}>GitHub</a>)
       {/if}
     </div>

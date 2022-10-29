@@ -3,10 +3,6 @@ export interface GitHubRepo {
   name: string
 }
 
-function isNonNullable<T> (value: T | null | undefined): value is NonNullable<T> {
-  return value !== null && value !== undefined
-}
-
 function isEmpty (value: string | undefined): value is undefined {
   return value === undefined || value === ''
 }
@@ -40,16 +36,16 @@ export function parseGitHubUrl (url: string): GitHubRepo {
   }
 }
 
-export function rawContent (url: GitHubRepo, branch: string | null, path: string): string {
+export function rawContent (url: GitHubRepo, branch: string | undefined, path: string): string {
   branch ??= 'HEAD'
 
   return `https://raw.githubusercontent.com/${url.owner}/${url.name}/${branch}/${path}`
 }
 
-export function stringifyGitHubUrl (url: GitHubRepo, type?: string, branch?: string | null, path?: string): string {
+export function stringifyGitHubUrl (url: GitHubRepo, type?: string, branch?: string, path?: string): string {
   let result = `https://github.com/${url.owner}/${url.name}/`
 
-  if (isNonNullable(branch)) {
+  if (branch !== undefined) {
     type ??= 'tree'
 
     result += `${type}/${branch}/`
