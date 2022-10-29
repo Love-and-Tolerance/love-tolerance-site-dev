@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { createJsonElement } from "@keupoz/tson";
   import { copy } from "clipboard";
   import { onMount } from "svelte";
+  import { PingResultSchema } from "./ServerSchemas";
 
   interface ServerInfo {
     name: string;
@@ -18,17 +18,11 @@
 
   async function ping(): Promise<void> {
     const r = await fetch(pingUrl);
-    const json = createJsonElement(await r.json()).getAsObject();
-    const isOnline = json.getPrimitive("online").getAsBoolean();
+    const json = PingResultSchema.parse(await r.json());
 
-    if (isOnline) {
-      const version = json.getPrimitive("version").getAsString();
-      const players = json.getObject("players");
-      const playersOnline = players.getPrimitive("online").getAsString();
-      const playersMax = players.getPrimitive("max").getAsString();
-
-      server.mcVersion = `Java ${version}`;
-      online = `${playersOnline}/${playersMax}`;
+    if (json.online) {
+      server.mcVersion = `Java ${json.version}`;
+      online = `${json.players.online}/${json.players.max}`;
     } else {
       online = "Offline";
     }
