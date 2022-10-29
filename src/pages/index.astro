@@ -1,25 +1,27 @@
 ---
-import Cards from '../components/Cards.astro';
-import { NormalCardsInfo } from '../components/cards/types';
-import Server from '../components/Server.svelte';
-import Swiper from '../components/Swiper.svelte';
-import YouTube from '../components/YouTube.astro';
-import Features from '../data/cards/features.json';
-import Links from '../data/links.json';
-import Servers from '../data/servers.json';
-import Layout from '../layouts/Layout.astro';
+import Cards from "../components/Cards.astro";
+import { NormalCardsInfo } from "../components/cards/types";
+import Server from "../components/Server.svelte";
+import Swiper from "../components/Swiper.svelte";
+import YouTube from "../components/YouTube.astro";
+import Features from "../data/cards/features.json";
+import Links from "../data/links.json";
+import Servers from "../data/servers.json";
+import Layout from "../layouts/Layout.astro";
 
-const globs = await Astro.glob('../../public/home/screenshots/*')
-const images = globs.map((glob) => (glob['default'] as string).replace('/public', ''))
+const globs = await Astro.glob("../../public/home/screenshots/*");
+const images = globs.map((glob) =>
+  (glob["default"] as string).replace("/public", "")
+);
 
 function link(name: keyof typeof Links, path?: string): URL {
-  const url = new URL(Links[name])
+  const url = new URL(Links[name]);
 
   if (path !== undefined) {
-    return new URL(path, url)
+    return new URL(path, url);
   }
 
-  return url
+  return url;
 }
 ---
 
@@ -29,8 +31,11 @@ function link(name: keyof typeof Links, path?: string): URL {
       <div class="hero__section">
         <img class="hero__logo" src="/logo.svg" alt="Love & Tolerance logo" />
         <h3>A My Little Pony: Friendship is Magic Inspired Resource Pack!</h3>
-        <p>However, this is only in the sense that it's brightly colored and features some mild pony references, meaning
-          it's not overtly pony-themed and won't make your world look totally different.</p>
+        <p>
+          However, this is only in the sense that it's brightly colored and
+          features some mild pony references, meaning it's not overtly
+          pony-themed and won't make your world look totally different.
+        </p>
       </div>
 
       <div class="hero__section">
@@ -39,19 +44,21 @@ function link(name: keyof typeof Links, path?: string): URL {
         <div class="hero__servers">
           <h5 class="hero__servers-title">Our Minecraft servers</h5>
 
-          {Servers.map((server) => (
-          <Server server={server} client:load />
-          ))}
+          {Servers.map((server) => <Server server={server} client:load />)}
         </div>
 
         <div class="links">
           <div class="links__common">
-            <a class="link" href={ link('githubRepo') }>GitHub</a>
-            <a class="link" href={ link('githubRepo', './issues' ) }>Issues</a>
-            <a class="link" href={ link('googleArchive') }>Archive</a>
+            <a class="link" href={link("githubRepo")}>GitHub</a>
+            <a class="link" href={link("githubRepo", "./issues")}>Issues</a>
+            <a class="link" href={link("googleArchive")}>Archive</a>
           </div>
 
-          <a class="link link--discord" href={ link('discordInvite') } title="Join our Discord server!">
+          <a
+            class="link link--discord"
+            href={link("discordInvite")}
+            title="Join our Discord server!"
+          >
             <img src="/discord-logo.svg" alt="Discord logo" />
           </a>
         </div>
@@ -60,15 +67,18 @@ function link(name: keyof typeof Links, path?: string): URL {
   </div>
 
   <div class="home-content">
-    <Cards cards={ Features as NormalCardsInfo } />
+    <Cards cards={Features as NormalCardsInfo} />
 
     <h2>Showcase</h2>
-    <Swiper images={ images } client:load />
+    <Swiper images={images} client:load />
   </div>
 
   <div class="did-you-know">
     <h2>Did you know?</h2>
-    <p>This pack's style is used in Jan Animation Studios' popular animation "Don't Mine at Night"</p>
+    <p>
+      This pack's style is used in Jan Animation Studios' popular animation
+      "Don't Mine at Night"
+    </p>
     <YouTube video="X_TMtgjQuZI" />
   </div>
 </Layout>
