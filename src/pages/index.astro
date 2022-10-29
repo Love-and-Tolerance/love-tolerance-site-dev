@@ -47,6 +47,11 @@ function link(name: keyof typeof Links, path?: string): URL {
           {Servers.map((server) => <Server server={server} client:load />)}
         </div>
 
+        <a class="hero__kofi" href={link("kofi")}>
+          <img src="/Kofi_pixel_logo.png" alt="Ko-fi logo" />
+          Support us on Ko-fi
+        </a>
+
         <div class="links">
           <div class="links__common">
             <a class="link" href={link("githubRepo")}>GitHub</a>
@@ -159,6 +164,27 @@ function link(name: keyof typeof Links, path?: string): URL {
 
       &-title {
         text-align: center;
+      }
+    }
+
+    &__kofi {
+      background: #13c3ff;
+      border-radius: var(--border-radius);
+      color: white;
+      font-weight: 700;
+      opacity: 1;
+      padding: calc(var(--margin) / 2);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--margin);
+
+      img {
+        image-rendering: crisp-edges;
+        image-rendering: pixelated;
+
+        height: 1.5em;
       }
     }
 
