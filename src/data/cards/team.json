@@ -3,14 +3,14 @@
   "type": "contact",
   "cards": [
     {
-      "name": "Velvet Remedy",
+      "name": "Silk Rose",
       "role": "Project Lead / Primary Texture Artist",
-      "nickname": "Velvet_Remedy_",
-      "avatar": "velvet-remedy.png",
+      "nickname": "Silk_Rose",
+      "avatar": "silk-rose.png",
       "social": {
-        "discord": "Velvet Remedy#8880",
-        "email": "velvetremedy@love-tolerance.com",
-        "github": "VelvetRemedy"
+        "discord": "Silk Rose#8880",
+        "email": "silkrose@love-tolerance.com",
+        "github": "SilkRose"
       }
     },
     {
