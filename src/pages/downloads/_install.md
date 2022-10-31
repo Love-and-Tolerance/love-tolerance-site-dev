@@ -1,23 +1,27 @@
 ## Installation
 
-First, you need to get a zip file which you can download from above. Note that latest version directs you to our GitHub repository. Read further or skip next step if you're downloading an old version from archive.
+### Java Edition
 
-### Downloading from GitHub
-
-If you're downloading the resource pack from GitHub repository, follow next instructions:
-
-- Click the green button "Clone or download"
-- Click "Download ZIP" in the appeared popup
-- Extract the folder from the downloaded zip file to resource packs folder (see next steps)
-
-![Downloading from GitHub](/downloads/github-download.png)
-
-### Installing the resource pack
-
-After you've downloaded a zip file (or you're extracting from the repo zip) you need to put it in `resourcepacks` folder:
+After downloading the zip file, simply put it in `resourcepacks` folder:
 
 - `%APPDATA%\.minecraft\resourcepacks` on Windows
 - `~/Library/Application Support/minecraft/resourcepacks` on macOS
 - `~/.minecraft/resourcepacks` on Linux
 
 Finally, open Minecraft resourcepacks settings and choose just installed resource pack.
+
+### Bedrock Edition
+
+- Download the `Love-and-Tolerance.mcpack` and any other additional packs from the section above.
+- Double click on the downloaded packs to install them.
+- Please order the packs like this by clicking on the pack and using the arrows to move it.
+
+  ![Resourcepacks order](/downloads/bedrock_install/image_1.jpg)
+
+- For changing selected Subpack click on the desired pack and select the gear icon. (**Note!** The seasons pack defaults to Spring, the music pack defaults to music A, and the holiday pack defaults to Hearts & Hooves.)
+
+  ![Selected resourcepacks](/downloads/bedrock_install/image_2.jpg)
+
+- Use the slider to pick the desired variation of the pack.
+
+  ![Resourcepack settings](/downloads/bedrock_install/image_3.jpg)

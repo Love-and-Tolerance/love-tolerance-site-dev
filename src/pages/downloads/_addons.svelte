@@ -7,7 +7,7 @@
   import { parseGitHubUrl, rawContent } from "./_utils";
 
   let defaultImage = "";
-  let filenameTemplate = "";
+  let releaseUrl = "";
   let mcVersion = "N/A";
   let packVersion = "N/A";
   let addonsList: Array<JavaAssetsAddon> = [];
@@ -17,12 +17,12 @@
 
   const addonInstances: Array<Addon> = [];
 
-  $: filename = filenameTemplate
+  $: filename = releaseUrl
     .replace("{version}", packVersion)
     .replace("{ids}", ids.join(""));
 
   const ASSETS_JSON =
-    "https://raw.githubusercontent.com/Love-and-Tolerance/pack-release-builder/mane/assets.json";
+    "https://raw.githubusercontent.com/Love-and-Tolerance/pack-release-builder/mane/assets/java.json";
 
   onMount(async () => {
     const r = await fetch(ASSETS_JSON);
@@ -33,18 +33,20 @@
       return;
     }
 
-    const json = parseResult.data;
-    const repo = parseGitHubUrl(json.repos.base.url);
+    const repos = parseResult.data.repos;
+    const base = repos.base;
 
+    const repo = parseGitHubUrl(repos.base.url);
     defaultImage = rawContent(repo, undefined, "pack.png");
 
-    filenameTemplate = json.repos.base.filename;
-    mcVersion = `${json.repos.base.mc_versions}`;
-    packVersion = json.repos.base.version;
+    mcVersion = base.mc_versions;
+    packVersion = base.version;
 
-    filenameTemplate = `https://github.com/${repo.owner}/${repo.name}/releases/download/${packVersion}/${filenameTemplate}`;
+    releaseUrl = base.release_url
+      .replace("{tag}", base.tag)
+      .replace("{filename}", base.filename);
 
-    addonsList = json.repos.addons;
+    addonsList = repos.addons;
   });
 
   function onVariantSelect(event: CustomEvent<AddonEvents["variant"]>): void {
@@ -64,7 +66,7 @@
   }
 </script>
 
-<h2>Custom downloads</h2>
+<h2>Custom Java downloads</h2>
 
 {#if error !== undefined}
   <div class="error">{error.message}</div>

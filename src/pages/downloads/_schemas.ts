@@ -1,13 +1,18 @@
 import { z } from 'zod'
 
-export type JavaAssetsBaseRepo = z.infer<typeof JavaAssetsBaseRepoSchema>
+export type AssetsBaseRepo = z.infer<typeof AssetsBaseRepoSchema>
 export type JavaAssetsAddonVariant = z.infer<typeof JavaAssetsAddonVariantSchema>
 export type JavaAssetsAddon = z.infer<typeof JavaAssetsAddonSchema>
 export type JavaAssets = z.infer<typeof JavaAssetsSchema>
 
-export const JavaAssetsBaseRepoSchema = z.object({
-  mc_versions: z.number(),
-  pack_format: z.number(),
+export type BedrockAssetsAddon = z.infer<typeof BedrockAssetsAddonSchema>
+export type BedrockAssets = z.infer<typeof BedrockAssetsSchema>
+
+export const AssetsBaseRepoSchema = z.object({
+  mc_versions: z.string(),
+  pack_format: z.string(),
+  tag: z.string(),
+  release_url: z.string(),
   version: z.string(),
   filename: z.string(),
   url: z.string()
@@ -31,7 +36,20 @@ export const JavaAssetsAddonSchema = z.object({
 
 export const JavaAssetsSchema = z.object({
   repos: z.object({
-    base: JavaAssetsBaseRepoSchema,
+    base: AssetsBaseRepoSchema,
     addons: z.array(JavaAssetsAddonSchema)
+  })
+})
+
+export const BedrockAssetsAddonSchema = z.object({
+  name: z.string(),
+  filename: z.string(),
+  url: z.string()
+})
+
+export const BedrockAssetsSchema = z.object({
+  repos: z.object({
+    base: AssetsBaseRepoSchema,
+    addons: z.array(BedrockAssetsAddonSchema)
   })
 })
