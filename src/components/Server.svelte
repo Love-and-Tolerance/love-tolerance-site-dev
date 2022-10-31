@@ -57,9 +57,9 @@
     <div class="mc-server__online">{online}</div>
   </div>
 
-  <div class="mc-server__hostname" data-copy={copyStatus} on:click={doCopy}>
+  <button class="mc-server__hostname" data-copy={copyStatus} on:click={doCopy}>
     {server.hostname}
-  </div>
+  </button>
 </div>
 
 <style lang="scss">
@@ -91,9 +91,14 @@
     }
 
     &__hostname {
+      background: none;
+      color: inherit;
+      display: block;
       font-family: monospace;
       font-size: 1.5em;
       text-align: center;
+
+      width: 100%;
 
       position: relative;
 

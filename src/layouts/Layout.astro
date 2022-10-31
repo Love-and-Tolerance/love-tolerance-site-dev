@@ -10,6 +10,7 @@ export interface Props {
 }
 
 const Props = Astro.props as Props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const primaryColorRGB = (() => {
   const n = parseInt(Site.primaryColor.replace(/^#/, ""), 16);
@@ -39,7 +40,7 @@ const primaryColorRGB = (() => {
       property="og:description"
       content={Props.description ?? Site.description}
     />
-    <link rel="canonical" href={Astro.canonicalURL.href} />
+    <link rel="canonical" href={canonicalURL} />
     <meta property="og:url" content={Astro.site} />
     <meta property="og:site_name" content={Site.name} />
 
