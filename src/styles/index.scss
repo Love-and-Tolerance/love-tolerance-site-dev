@@ -1,0 +1,123 @@
+@use "variables";
+
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap");
+
+:root {
+  --color-primary: #{variables.$color-primary};
+  --color-primary-hover: #{variables.$color-primary-hover};
+  --color-primary-active: #{variables.$color-primary-active};
+  --color-primary-border: #{variables.$color-primary-border};
+
+  --color-kofi: #{variables.$color-kofi};
+  --color-kofi-hover: #{variables.$color-kofi-hover};
+  --color-kofi-active: #{variables.$color-kofi-active};
+  --color-kofi-border: #{variables.$color-kofi-border};
+
+  --color-light: #{variables.$color-light};
+  --color-light-hover: #{variables.$color-light-hover};
+  --color-light-active: #{variables.$color-light-active};
+  --color-light-border: #{variables.$color-light-border};
+
+  --color-white: #{variables.$color-white};
+  --color-gray-100: #{variables.$color-gray-100};
+  --color-gray-200: #{variables.$color-gray-200};
+  --color-gray-300: #{variables.$color-gray-300};
+  --color-gray-400: #{variables.$color-gray-400};
+  --color-gray-500: #{variables.$color-gray-500};
+  --color-gray-600: #{variables.$color-gray-600};
+  --color-gray-700: #{variables.$color-gray-700};
+  --color-gray-800: #{variables.$color-gray-800};
+  --color-gray-900: #{variables.$color-gray-900};
+  --color-black: #{variables.$color-black};
+
+  --color-primary-transparent: #{variables.$color-primary-transparent};
+  --color-white-transparent: #{variables.$color-white-transparent};
+  --color-shadow: #{variables.$color-shadow};
+
+  --box-shadow: 0 0 1rem var(--color-shadow);
+  --drop-shadow: 0 0.25rem 0.5rem var(--color-shadow);
+
+  --max-content-width: #{variables.$max-content-width};
+
+  --gutter: #{variables.$gutter};
+  --margin: #{variables.$margin};
+
+  --border-radius: #{variables.$border-radius};
+
+  --header-height: #{variables.$header-height};
+
+  @media (max-width: 384px) {
+    --gutter: var(--margin);
+  }
+}
+
+* {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  outline: none;
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: 2.5em;
+}
+
+h2 {
+  font-size: 2em;
+}
+
+h3 {
+  font-size: 1.75em;
+}
+
+h4 {
+  font-size: 1.5em;
+}
+
+h5 {
+  font-size: 1.25em;
+}
+
+h6 {
+  font-size: 1em;
+}
+
+.body-content__main {
+  a {
+    color: var(--color-primary);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--color-primary-hover);
+      text-decoration: underline;
+    }
+
+    &:active {
+      color: var(--color-primary-active);
+    }
+  }
+}
+
+ul,
+ol {
+  margin-left: 1.5em;
+}
+
+code {
+  background: var(--color-light);
+  border: 1px solid var(--color-light-border);
+  border-radius: 0.25em;
+  padding: 0.25em;
+}
+
+p img {
+  display: block;
+  margin: 0 auto;
+
+  max-width: 100%;
+}
+
+ul img {
+  margin: var(--margin) auto;
+}

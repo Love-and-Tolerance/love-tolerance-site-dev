@@ -18,16 +18,12 @@ const Props = Astro.props as Props;
     display: grid;
     grid-template-columns: repeat(var(--columns), 1fr);
     gap: var(--margin);
-  }
 
-  @media (min-width: 700px) {
-    .cards {
+    @media (min-width: 700px) {
       --columns: 2;
     }
-  }
 
-  @media (min-width: 900px) {
-    .cards {
+    @media (min-width: 900px) {
       --columns: 3;
     }
   }

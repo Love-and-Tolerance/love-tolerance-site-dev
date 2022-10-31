@@ -63,10 +63,8 @@
     display: grid;
     grid-template-columns: repeat(var(--columns), 1fr);
     gap: var(--margin);
-  }
 
-  @media (min-width: 900px) {
-    .addons {
+    @media (min-width: 900px) {
       --columns: 2;
     }
   }

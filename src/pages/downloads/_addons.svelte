@@ -99,9 +99,9 @@
   }
 
   .control {
-    background: var(--primary-color);
+    background: var(--color-primary);
     border-radius: var(--border-radius);
-    color: white;
+    color: var(--color-white) !important;
     display: block;
     padding: 0.5em 1em;
     font: inherit;
@@ -122,10 +122,8 @@
     display: grid;
     grid-template-columns: repeat(var(--columns), 1fr);
     gap: var(--margin);
-  }
 
-  @media (min-width: 900px) {
-    .addons {
+    @media (min-width: 900px) {
       --columns: 2;
     }
   }

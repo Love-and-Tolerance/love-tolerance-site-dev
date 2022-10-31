@@ -3,6 +3,8 @@ import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import Site from "../data/site.json";
 
+import "../styles/index.scss";
+
 export interface Props {
   title?: string;
   description?: string;
@@ -11,15 +13,6 @@ export interface Props {
 
 const Props = Astro.props as Props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-
-const primaryColorRGB = (() => {
-  const n = parseInt(Site.primaryColor.replace(/^#/, ""), 16);
-  const r = (n >> 16) & 0xff;
-  const g = (n >> 8) & 0xff;
-  const b = n & 0xff;
-
-  return [r, g, b];
-})();
 ---
 
 <!DOCTYPE html>
@@ -63,113 +56,16 @@ const primaryColorRGB = (() => {
         <Footer />
       </div>
     </div>
-    <style
-      lang="scss"
-      is:global
-      define:vars={{ "primary-color-rgb": primaryColorRGB }}
-    >
-      @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap");
-
-      :root {
-        --max-content-width: 1080px;
-        --header-height: 4rem;
-        --gutter: 24px;
-        --margin: 1rem;
-        --border-radius: 8px;
-
-        --primary-color: rgb(var(--primary-color-rgb));
-
-        --shadow-color: #{rgba(black, 0.125)};
-        --box-shadow: 0 0 16px var(--shadow-color);
-        --drop-shadow: 0 4px 8px var(--shadow-color);
-      }
-
-      @media (max-width: 386px) {
-        :root {
-          --gutter: var(--margin);
-        }
-      }
-
-      * {
-        margin: 0;
-        border: 0;
-        padding: 0;
-        outline: none;
-        box-sizing: border-box;
-      }
-
-      h1 {
-        font-size: 2.5rem;
-      }
-
-      h2 {
-        font-size: 2rem;
-      }
-
-      h3 {
-        font-size: 1.75rem;
-      }
-
-      h4 {
-        font-size: 1.5rem;
-      }
-
-      h5 {
-        font-size: 1.25rem;
-      }
-
-      h6 {
-        font-size: 1rem;
-      }
-
-      .body-content__main {
-        display: flex;
-        flex-direction: column;
-        gap: var(--margin);
-
-        a {
-          color: var(--primary-color);
-          text-decoration: none;
-
-          &:hover {
-            text-decoration: underline;
-          }
-        }
-      }
-
-      ul,
-      ol {
-        margin-left: 1.5em;
-      }
-
-      code {
-        background: whitesmoke;
-        border: 1px solid rgba(black, 0.1);
-        border-radius: 0.25em;
-        padding: 0.25em;
-      }
-
-      p img {
-        display: block;
-        margin: 0 auto;
-
-        max-width: 100%;
-      }
-
-      ul img {
-        margin: var(--margin) auto;
-      }
-    </style>
 
     <style lang="scss">
       body {
-        background: whitesmoke;
+        background: var(--color-light);
         font-family: "Open Sans";
         line-height: 1.5;
       }
 
       .body-content {
-        background: white;
+        background: var(--color-white);
         box-shadow: var(--box-shadow);
         margin: 0 auto;
 
@@ -192,6 +88,10 @@ const primaryColorRGB = (() => {
         &__main {
           margin-top: var(--header-height);
           padding: var(--gutter);
+
+          display: flex;
+          flex-direction: column;
+          gap: var(--margin);
         }
       }
     </style>

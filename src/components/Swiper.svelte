@@ -56,11 +56,11 @@
   @import "swiper/css/navigation";
 
   :root {
-    --swiper-theme-color: white !important;
+    --swiper-theme-color: var(--color-white) !important;
   }
 
   :global(.gallery) {
-    background: #303030;
+    background: var(--color-gray-200);
     box-shadow: var(--drop-shadow);
     user-select: none;
   }

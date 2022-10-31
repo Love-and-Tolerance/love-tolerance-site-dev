@@ -61,14 +61,15 @@
   });
 </script>
 
-<div class="variant" class:selected on:click={onClick}>{name}</div>
+<button class="variant" class:selected on:click={onClick}>{name}</button>
 
 <style lang="scss">
   .variant {
-    background: var(--primary-color);
+    background: var(--color-primary);
     border-radius: var(--border-radius);
-    color: white;
+    color: var(--color-white);
     display: block;
+    font: inherit;
     padding: 0.125em 0.5em;
     opacity: 0.5;
     user-select: none;

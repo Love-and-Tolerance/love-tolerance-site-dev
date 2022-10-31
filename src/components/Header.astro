@@ -13,7 +13,7 @@ const isCurrentMenuEntry = (title: string) => title === Props.menuEntry;
 
 <header class="header">
   <div class="header__logo logo">
-    <a href={Astro.site.pathname}>
+    <a href={Astro.site?.pathname}>
       <img class="logo__image" src="/lt.svg" alt="Love & Tolerance logo" />
     </a>
   </div>
@@ -44,7 +44,7 @@ const isCurrentMenuEntry = (title: string) => title === Props.menuEntry;
 
 <style lang="scss">
   .header {
-    background: rgba(white, 0.9);
+    background: var(--color-white-transparent);
     -webkit-backdrop-filter: blur(16px);
     backdrop-filter: blur(16px);
     user-select: none;
@@ -65,11 +65,11 @@ const isCurrentMenuEntry = (title: string) => title === Props.menuEntry;
     &::after {
       content: "";
 
-      background: linear-gradient(rgba(black, 0.1), transparent);
+      background: linear-gradient(var(--color-shadow), transparent);
       pointer-events: none;
 
       width: 100%;
-      height: 16px;
+      height: 1rem;
 
       position: absolute;
       left: 0;
@@ -87,20 +87,20 @@ const isCurrentMenuEntry = (title: string) => title === Props.menuEntry;
     }
 
     &__bars {
-      color: #323232;
+      color: var(--color-gray-200);
       cursor: default;
       font-size: 1.5rem;
       transition: color 100ms;
 
-      width: 4rem;
-      height: 4rem;
+      width: var(--header-height);
+      height: var(--header-height);
 
       display: flex;
       align-items: center;
       justify-content: center;
 
       &:hover {
-        color: var(--primary-color);
+        color: var(--color-primary);
       }
 
       & :global(.fa:last-child) {
@@ -136,19 +136,19 @@ const isCurrentMenuEntry = (title: string) => title === Props.menuEntry;
       flex-direction: column;
 
       .nav__link {
-        color: #323232;
+        color: var(--color-gray-200);
         display: block;
         padding: var(--margin) var(--gutter);
         text-decoration: none;
         transition: background-color 100ms, color 100ms;
 
         &:hover {
-          background: rgba(var(--primary-color-rgb), 0.75);
+          background: var(--color-primary-transparent);
           color: white;
         }
 
         &--current {
-          background: var(--primary-color);
+          background: var(--color-primary);
           color: white;
         }
       }
@@ -162,10 +162,8 @@ const isCurrentMenuEntry = (title: string) => title === Props.menuEntry;
       opacity: 1;
       pointer-events: unset;
     }
-  }
 
-  @media (min-width: 600px) {
-    .header {
+    @media (min-width: 600px) {
       &__bars {
         display: none;
       }

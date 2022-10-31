@@ -118,7 +118,7 @@ function link(name: keyof typeof Links, path?: string): URL {
   .hero {
     background: url("/home/hero.png") no-repeat center / cover, rgba(black, 0.5);
     background-blend-mode: multiply;
-    color: white;
+    color: var(--color-white);
     padding-top: var(--header-height);
     padding-bottom: calc(var(--cards-overlap) - var(--gutter));
 
@@ -137,14 +137,14 @@ function link(name: keyof typeof Links, path?: string): URL {
       display: block;
       margin: 0 auto;
 
-      max-width: 512px;
+      max-width: 32rem;
       width: 100%;
     }
 
     &__download {
-      background: var(--primary-color);
+      background: var(--color-primary);
       border-radius: var(--border-radius);
-      color: white;
+      color: var(--color-white) !important;
       display: block;
       font-size: 1.25em;
       font-weight: bold;
@@ -168,9 +168,9 @@ function link(name: keyof typeof Links, path?: string): URL {
     }
 
     &__kofi {
-      background: #13c3ff;
+      background: var(--color-kofi);
       border-radius: var(--border-radius);
-      color: white;
+      color: var(--color-white) !important;
       font-weight: 700;
       opacity: 1;
       padding: calc(var(--margin) / 2);
@@ -201,7 +201,7 @@ function link(name: keyof typeof Links, path?: string): URL {
     }
 
     .link {
-      color: inherit;
+      color: inherit !important;
       opacity: 0.75;
       text-decoration: underline;
       transition: opacity 100ms;
@@ -224,8 +224,8 @@ function link(name: keyof typeof Links, path?: string): URL {
   }
 
   .did-you-know {
-    background: #404040;
-    color: #efefef;
+    background: var(--color-gray-200);
+    color: var(--color-gray-900);
     padding: var(--gutter);
     text-align: center;
 

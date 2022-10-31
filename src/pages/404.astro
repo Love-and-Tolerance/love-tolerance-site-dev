@@ -28,7 +28,7 @@ const description =
   }
 
   .number {
-    color: adjust-color(#fe1bab, $saturation: -30%, $lightness: -0%);
+    color: var(--color-primary);
     font-size: 10em;
     font-weight: bold;
   }
@@ -43,9 +43,9 @@ const description =
   }
 
   .actions a {
-    background: var(--primary-color);
+    background: var(--color-primary);
     border-radius: var(--border-radius);
-    color: white;
+    color: var(--color-white) !important;
     display: inline-block;
     font-size: 1.25em;
     padding: 0.5em 1em;

@@ -1,0 +1,47 @@
+@use "sass:color";
+@use "functions";
+
+$shade-percentage-hover: 10%;
+$shade-percentage-active: 20%;
+$shade-percentage-border: 10%;
+
+$color-primary: #fe1bab;
+$color-primary-hover: functions.shift-color($color-primary, $shade-percentage-hover);
+$color-primary-active: functions.shift-color($color-primary, $shade-percentage-active);
+$color-primary-border: functions.shift-color($color-primary, $shade-percentage-border);
+
+$color-kofi: #13c3ff;
+$color-kofi-hover: functions.shift-color($color-kofi, $shade-percentage-hover);
+$color-kofi-active: functions.shift-color($color-kofi, $shade-percentage-active);
+$color-kofi-border: functions.shift-color($color-kofi, $shade-percentage-border);
+
+$color-light: whitesmoke;
+$color-light-hover: functions.shift-color($color-light, $shade-percentage-hover);
+$color-light-active: functions.shift-color($color-light, $shade-percentage-active);
+$color-light-border: functions.shift-color($color-light, $shade-percentage-border);
+
+$color-white: white;
+$color-black: black;
+
+$color-gray-100: color.mix($color-white, $color-black, 10%);
+$color-gray-200: color.mix($color-white, $color-black, 20%);
+$color-gray-300: color.mix($color-white, $color-black, 30%);
+$color-gray-400: color.mix($color-white, $color-black, 40%);
+$color-gray-500: color.mix($color-white, $color-black, 50%);
+$color-gray-600: color.mix($color-white, $color-black, 60%);
+$color-gray-700: color.mix($color-white, $color-black, 70%);
+$color-gray-800: color.mix($color-white, $color-black, 80%);
+$color-gray-900: color.mix($color-white, $color-black, 90%);
+
+$color-primary-transparent: rgba($color-primary, 0.75);
+$color-white-transparent: rgba($color-white, 0.9);
+$color-shadow: rgba($color-black, 0.125);
+
+$max-content-width: 1120px;
+
+$gutter: 1.5rem;
+$margin: 1rem;
+
+$border-radius: 0.5rem;
+
+$header-height: 4rem;

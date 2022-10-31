@@ -76,7 +76,7 @@ const path = `/cards/${Props.namespace}/${Props.avatar}`;
   .contact-card {
     --avatar-size: 4.5em;
 
-    border: 1px solid #e7e7e7;
+    border: 1px solid var(--color-gray-900);
     border-radius: var(--border-radius);
     line-height: calc(var(--avatar-size) / 3);
     padding: var(--margin);
@@ -94,14 +94,14 @@ const path = `/cards/${Props.namespace}/${Props.avatar}`;
     }
 
     &__nickname {
-      color: #a0a0a0;
+      color: var(--color-gray-600);
     }
 
     &__links {
       a {
         --size: 1.2em;
 
-        color: #a0a0a0;
+        color: var(--color-gray-600) !important;
         display: inline-block;
         font-size: var(--size);
         text-align: center;
@@ -109,13 +109,13 @@ const path = `/cards/${Props.namespace}/${Props.avatar}`;
         width: var(--size);
 
         &:hover {
-          color: var(--primary-color);
+          color: var(--color-primary) !important;
         }
       }
     }
 
     &__link--discord {
-      color: #808080;
+      color: var(--color-gray-500);
       white-space: nowrap;
     }
   }

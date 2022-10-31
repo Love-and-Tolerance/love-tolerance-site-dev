@@ -77,9 +77,9 @@
     }
 
     &__download {
-      background: var(--primary-color);
+      background: var(--color-primary);
       border-radius: var(--border-radius);
-      color: white;
+      color: var(--color-white) !important;
       display: block;
       padding: 0.125em 0.5em;
       user-select: none;
