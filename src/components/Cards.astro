@@ -1,15 +1,19 @@
 ---
-import ContactCards from './cards/ContactWrapper.astro';
-import NormalCards from './cards/NormalWrapper.astro';
-import { ContactCardsInfo, NormalCardsInfo } from './cards/types';
+import ContactCards from "./cards/ContactWrapper.astro";
+import NormalCards from "./cards/NormalWrapper.astro";
+import { ContactCardsInfo, NormalCardsInfo } from "./cards/types";
 
 export interface Props {
-  cards: NormalCardsInfo | ContactCardsInfo
+  cards: NormalCardsInfo | ContactCardsInfo;
 }
 
-const Props = Astro.props as Props
+const Props = Astro.props as Props;
 ---
 
-{ Props.cards.type === 'normal' ?
-<NormalCards { ...Props.cards } /> :
-<ContactCards { ...Props.cards } /> }
+{
+  Props.cards.type === "normal" ? (
+    <NormalCards {...Props.cards} />
+  ) : (
+    <ContactCards {...Props.cards} />
+  )
+}

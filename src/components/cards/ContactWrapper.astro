@@ -1,16 +1,14 @@
 ---
-import Card from './Contact.astro';
-import { ContactCardsInfo } from './types';
+import Card from "./Contact.astro";
+import { ContactCardsInfo } from "./types";
 
-export type Props = ContactCardsInfo
+export type Props = ContactCardsInfo;
 
-const Props = Astro.props as Props
+const Props = Astro.props as Props;
 ---
 
 <div class="contact-cards">
-  {Props.cards.map((card) => (
-  <Card { ...card } namespace={ Props.name } />
-  ))}
+  {Props.cards.map((card) => <Card {...card} namespace={Props.name} />)}
 </div>
 
 <style lang="scss">

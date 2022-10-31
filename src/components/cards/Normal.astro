@@ -1,21 +1,23 @@
 ---
-import { NormalCard } from './types'
+import { NormalCard } from "./types";
 
 export interface Props extends NormalCard {
-  namespace: string
+  namespace: string;
 }
 
-const Props = Astro.props as Props
-const path = `/cards/${Props.namespace}/${Props.image}`
-const content = await (Astro as any).__renderMarkdown(Props.content, { mode: 'md' })
+const Props = Astro.props as Props;
+const path = `/cards/${Props.namespace}/${Props.image}`;
+const content = await (Astro as any).__renderMarkdown(Props.content, {
+  mode: "md",
+});
 ---
 
 <div class="card">
-  <img class="card__image" src={ path } alt={ Props.title } />
+  <img class="card__image" src={path} alt={Props.title} />
 
   <div class="card__body">
-    <h5 class="card__title">{ Props.title }</h5>
-    <div class="card__content" set:html={ content }></div>
+    <h5 class="card__title">{Props.title}</h5>
+    <div class="card__content" set:html={content} />
   </div>
 </div>
 

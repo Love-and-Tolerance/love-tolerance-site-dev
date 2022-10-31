@@ -1,13 +1,18 @@
 ---
 export interface Props {
-  video: string
+  video: string;
 }
 
-const Props = Astro.props as Props
+const Props = Astro.props as Props;
 ---
 
-<iframe width="560" height="315" src={`https://www.youtube.com/embed/${Props.video}`} title="YouTube video player"
-  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+<iframe
+  width="560"
+  height="315"
+  src={`https://www.youtube.com/embed/${Props.video}`}
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
   allowfullscreen></iframe>
 
 <style lang="scss">

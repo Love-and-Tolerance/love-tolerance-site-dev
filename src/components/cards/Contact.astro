@@ -1,64 +1,74 @@
 ---
-import Icon from '../Icon.astro'
-import { ContactCard } from './types'
+import Icon from "../Icon.astro";
+import { ContactCard } from "./types";
 
 export interface Props extends ContactCard {
-  namespace: string
+  namespace: string;
 }
 
-const Props = Astro.props as Props
-const path = `/cards/${Props.namespace}/${Props.avatar}`
+const Props = Astro.props as Props;
+const path = `/cards/${Props.namespace}/${Props.avatar}`;
 ---
 
 <div class="contact-card">
-  <img class="contact-card__image" src={ path } alt={ Props.name } />
+  <img class="contact-card__image" src={path} alt={Props.name} />
 
   <div class="contact-card__body">
     <h5 class="contact-card__title">
-      { Props.name }
+      {Props.name}
 
-      { Props.nickname ?
-      <span class="contact-card__nickname" title="Minecraft nickname">
-        { Props.nickname }
-      </span>
-      : null }
+      {
+        Props.nickname ? (
+          <span class="contact-card__nickname" title="Minecraft nickname">
+            {Props.nickname}
+          </span>
+        ) : null
+      }
     </h5>
 
-    { !Props.social ||
-    <div class="contact-card__links">
-      { Props.social.email ?
-      <a href={ `mailto:${Props.social.email}` } title="E-Mail">
-        <Icon icon="envelope" />
-      </a>
-      : null }
+    {
+      !Props.social || (
+        <div class="contact-card__links">
+          {Props.social.email ? (
+            <a href={`mailto:${Props.social.email}`} title="E-Mail">
+              <Icon icon="envelope" />
+            </a>
+          ) : null}
 
-      { Props.social.github ?
-      <a href={ `https://github.com/${Props.social.github}` } title="GitHub">
-        <Icon icon="github" />
-      </a>
-      : null }
+          {Props.social.github ? (
+            <a
+              href={`https://github.com/${Props.social.github}`}
+              title="GitHub"
+            >
+              <Icon icon="github" />
+            </a>
+          ) : null}
 
-      { Props.social.twitter ?
-      <a href={ `https://twitter.com/${Props.social.twitter}` } title="Twitter">
-        <Icon icon="twitter" />
-      </a>
-      : null }
+          {Props.social.twitter ? (
+            <a
+              href={`https://twitter.com/${Props.social.twitter}`}
+              title="Twitter"
+            >
+              <Icon icon="twitter" />
+            </a>
+          ) : null}
 
-      { Props.social.vk ?
-      <a href={ `https://vk.com/${Props.social.vk}` } title="VK">
-        <Icon icon="vk" />
-      </a>
-      : null }
+          {Props.social.vk ? (
+            <a href={`https://vk.com/${Props.social.vk}`} title="VK">
+              <Icon icon="vk" />
+            </a>
+          ) : null}
 
-      { Props.social.discord ?
-      <span class="contact-card__link--discord">
-        <Icon icon="discord" /> { Props.social.discord }
-      </span>
-      : null }
-    </div>
+          {Props.social.discord ? (
+            <span class="contact-card__link--discord">
+              <Icon icon="discord" /> {Props.social.discord}
+            </span>
+          ) : null}
+        </div>
+      )
     }
 
-    <div class="contact-card__content">{ Props.role }</div>
+    <div class="contact-card__content">{Props.role}</div>
   </div>
 </div>
 

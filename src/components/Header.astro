@@ -1,20 +1,20 @@
 ---
-import Menus from '../data/menus.json';
-import Icon from './Icon.astro';
+import Menus from "../data/menus.json";
+import Icon from "./Icon.astro";
 
 export interface Props {
-  menuEntry?: string | undefined
+  menuEntry?: string | undefined;
 }
 
-const Props = Astro.props as Props
+const Props = Astro.props as Props;
 
-const isCurrentMenuEntry = (title: string) => title === Props.menuEntry
+const isCurrentMenuEntry = (title: string) => title === Props.menuEntry;
 ---
 
 <header class="header">
   <div class="header__logo logo">
-    <a href={ Astro.site.pathname }>
-      <img class="logo__image" src="/lt.svg" alt="Love & Tolerance logo">
+    <a href={Astro.site.pathname}>
+      <img class="logo__image" src="/lt.svg" alt="Love & Tolerance logo" />
     </a>
   </div>
 
@@ -26,11 +26,19 @@ const isCurrentMenuEntry = (title: string) => title === Props.menuEntry
   </label>
 
   <nav class="header__nav nav">
-    {Menus.main.map(({ title, path }) => (
-    <a class:list={ ['nav__link', { 'nav__link--current' : isCurrentMenuEntry(title) }] } href={ path }>
-      { title }
-    </a>
-    ))}
+    {
+      Menus.main.map(({ title, path }) => (
+        <a
+          class:list={[
+            "nav__link",
+            { "nav__link--current": isCurrentMenuEntry(title) },
+          ]}
+          href={path}
+        >
+          {title}
+        </a>
+      ))
+    }
   </nav>
 </header>
 
@@ -99,7 +107,7 @@ const isCurrentMenuEntry = (title: string) => title === Props.menuEntry
         display: none;
       }
 
-      #nav-state:checked+& :global(.fa) {
+      #nav-state:checked + & :global(.fa) {
         &:first-child {
           display: none;
         }
@@ -150,7 +158,7 @@ const isCurrentMenuEntry = (title: string) => title === Props.menuEntry
       display: none;
     }
 
-    #nav-state:checked~&__nav {
+    #nav-state:checked ~ &__nav {
       opacity: 1;
       pointer-events: unset;
     }
