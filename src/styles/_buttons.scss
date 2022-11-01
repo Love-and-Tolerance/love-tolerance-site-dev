@@ -1,0 +1,123 @@
+.btn {
+  &--primary {
+    --button-background: var(--color-primary);
+    --button-background-hover: var(--color-primary-hover);
+    --button-background-active: var(--color-primary-active);
+    --button-border: transparent;
+    --button-color: var(--color-white);
+  }
+
+  &--kofi {
+    --button-background: var(--color-kofi);
+    --button-background-hover: var(--color-kofi-hover);
+    --button-background-active: var(--color-kofi-active);
+    --button-border: transparent;
+    --button-color: var(--color-white);
+  }
+
+  &--light {
+    --button-background: var(--color-light);
+    --button-background-hover: var(--color-light-hover);
+    --button-background-active: var(--color-light-active);
+    --button-border: var(--color-light-border);
+    --button-color: var(--color-black);
+  }
+
+  &--medium {
+    --button-padding-x: var(--margin);
+    --button-padding-y: calc(var(--margin) / 2);
+    --button-font-weight: bold;
+  }
+
+  &--large {
+    --button-padding-x: calc(var(--margin) * 1.5);
+    --button-padding-y: calc(var(--margin) * 3 / 4);
+    --button-font-size: 1.25em;
+    --button-font-weight: bold;
+  }
+
+  --button-padding-x: calc(var(--margin) / 2);
+  --button-padding-y: calc(var(--margin) / 8);
+  --button-font-size: 1em;
+  --button-font-weight: normal;
+  --button-icon-size: 2em;
+
+  background: var(--button-background);
+  border-radius: var(--border-radius);
+  box-shadow: 0 0 0 1px var(--button-border) inset;
+  color: var(--button-color) !important;
+  font: inherit;
+  font-size: var(--button-font-size);
+  font-weight: var(--button-font-weight);
+  padding: var(--button-padding-y) var(--button-padding-x);
+
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--button-padding-x) / 2);
+  justify-content: center;
+
+  align-self: start;
+  flex-shrink: 1;
+
+  &:hover {
+    --button-background: var(--button-background-hover);
+  }
+
+  &:active {
+    --button-background: var(--button-background-active);
+  }
+
+  &--fill {
+    align-self: stretch;
+    flex-shrink: 0;
+  }
+
+  &--grid {
+    display: inline-grid;
+    grid-template-columns: 1fr auto 1fr;
+  }
+
+  &-label {
+    text-align: center;
+
+    grid-column: 2;
+
+    flex-grow: 1;
+  }
+
+  &-icon {
+    max-height: var(--button-icon-size);
+    max-width: var(--button-icon-size);
+
+    display: flex;
+    align-items: center;
+
+    flex-grow: 0;
+
+    &--left {
+      justify-self: start;
+      grid-column: 1;
+    }
+
+    &--right {
+      justify-self: end;
+      grid-column: 3;
+    }
+
+    img {
+      image-rendering: crisp-edges;
+      image-rendering: pixelated;
+
+      max-height: 100%;
+      max-width: 100%;
+    }
+  }
+}
+
+a.btn {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

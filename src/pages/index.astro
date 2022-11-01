@@ -39,7 +39,9 @@ function link(name: keyof typeof Links, path?: string): URL {
       </div>
 
       <div class="hero__section">
-        <a href="/downloads" class="hero__download">Download</a>
+        <a href="/downloads" class="btn btn--primary btn--large btn--fill">
+          Download
+        </a>
 
         <div class="hero__servers">
           <h5 class="hero__servers-title">Our Minecraft servers</h5>
@@ -47,9 +49,19 @@ function link(name: keyof typeof Links, path?: string): URL {
           {Servers.map((server) => <Server server={server} client:load />)}
         </div>
 
-        <a class="hero__kofi" href={link("kofi")}>
-          <img src="/Kofi_pixel_logo.png" alt="Ko-fi logo" />
-          Support us on Ko-fi
+        <a
+          class="btn btn--kofi btn--medium btn--grid btn--fill"
+          href={link("kofi")}
+        >
+          <span class="btn-icon btn-icon--left">
+            <img src="/Kofi_pixel_logo.png" alt="Ko-fi logo" />
+          </span>
+
+          <span class="btn-label">Support us on Ko-fi</span>
+
+          <span class="btn-icon btn-icon--right">
+            <i class="fas fa-arrow-up-right-from-square"></i>
+          </span>
         </a>
 
         <div class="links">
@@ -141,22 +153,6 @@ function link(name: keyof typeof Links, path?: string): URL {
       width: 100%;
     }
 
-    &__download {
-      background: var(--color-primary);
-      border-radius: var(--border-radius);
-      color: var(--color-white) !important;
-      display: block;
-      font-size: 1.25em;
-      font-weight: bold;
-      padding: calc(var(--gutter) / 2) var(--gutter);
-      text-align: center;
-      text-decoration: none;
-
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-
     &__servers {
       display: flex;
       flex-direction: column;
@@ -164,27 +160,6 @@ function link(name: keyof typeof Links, path?: string): URL {
 
       &-title {
         text-align: center;
-      }
-    }
-
-    &__kofi {
-      background: var(--color-kofi);
-      border-radius: var(--border-radius);
-      color: var(--color-white) !important;
-      font-weight: 700;
-      opacity: 1;
-      padding: calc(var(--margin) / 2);
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: var(--margin);
-
-      img {
-        image-rendering: crisp-edges;
-        image-rendering: pixelated;
-
-        height: 1.5em;
       }
     }
 

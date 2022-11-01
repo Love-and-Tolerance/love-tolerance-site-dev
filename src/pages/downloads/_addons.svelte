@@ -74,9 +74,25 @@
   <h3>Minecraft version: {mcVersion}</h3>
 
   <div class="controls">
-    <button class="control" on:click={reset}>Reset</button>
-    <button class="control" on:click={resetDefaults}>Select defaults</button>
-    <a class="control" href={filename}>Download</a>
+    <button class="btn btn--primary btn--medium" type="button" on:click={reset}>
+      Reset
+    </button>
+
+    <button
+      class="btn btn--primary btn--medium"
+      type="button"
+      on:click={resetDefaults}
+    >
+      Select defaults
+    </button>
+
+    <a class="btn btn--primary btn--medium" href={filename}>
+      <span class="btn-label">Download</span>
+
+      <span class="btn-icon btn-icon--right">
+        <i class="fas fa-arrow-up-right-from-square" />
+      </span>
+    </a>
   </div>
 
   <div class="addons">
@@ -96,24 +112,6 @@
     display: flex;
     flex-wrap: wrap;
     gap: 0.5em;
-  }
-
-  .control {
-    background: var(--color-primary);
-    border-radius: var(--border-radius);
-    color: var(--color-white) !important;
-    display: block;
-    padding: 0.5em 1em;
-    font: inherit;
-
-    &:hover {
-      text-decoration: none;
-      transform: translateY(-1px);
-    }
-
-    &:active {
-      transform: translateY(1px);
-    }
   }
 
   .addons {

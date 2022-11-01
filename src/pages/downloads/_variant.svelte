@@ -61,22 +61,10 @@
   });
 </script>
 
-<button class="variant" class:selected on:click={onClick}>{name}</button>
-
-<style lang="scss">
-  .variant {
-    background: var(--color-primary);
-    border-radius: var(--border-radius);
-    color: var(--color-white);
-    display: block;
-    font: inherit;
-    padding: 0.125em 0.5em;
-    opacity: 0.5;
-    user-select: none;
-
-    &.selected,
-    &:hover {
-      opacity: 1;
-    }
-  }
-</style>
+<button
+  class={`btn ${selected ? "btn--primary" : "btn--light"}`}
+  type="button"
+  on:click={onClick}
+>
+  {name}
+</button>

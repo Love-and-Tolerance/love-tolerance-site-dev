@@ -49,7 +49,13 @@
       (<a href={url}>GitHub</a>)
     </div>
 
-    <a href={downloadUrl} class="addon__download">Download</a>
+    <a class="btn btn--primary" href={downloadUrl}>
+      <span class="btn-label">Download</span>
+
+      <span class="btn-icon btn-icon--right">
+        <i class="fas fa-arrow-up-right-from-square" />
+      </span>
+    </a>
   </div>
 </div>
 
@@ -74,21 +80,6 @@
       display: flex;
       flex-direction: column;
       gap: 0.5em;
-    }
-
-    &__download {
-      background: var(--color-primary);
-      border-radius: var(--border-radius);
-      color: var(--color-white) !important;
-      display: block;
-      padding: 0.125em 0.5em;
-      user-select: none;
-
-      align-self: start;
-
-      &:hover {
-        opacity: 0.8;
-      }
     }
   }
 </style>
