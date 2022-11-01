@@ -63,7 +63,7 @@
   <div class="addon__content">
     <h5 class="addon__name">{name}</h5>
 
-    <div class="addon__variants">
+    <div class="addon__variants flex flex--row flex--small">
       {#each variants as variant}
         <Variant
           {currentVariantID}
@@ -108,12 +108,6 @@
     &__content {
       display: flex;
       flex-direction: column;
-      gap: 0.5em;
-    }
-
-    &__variants {
-      display: flex;
-      flex-wrap: wrap;
       gap: 0.5em;
     }
   }

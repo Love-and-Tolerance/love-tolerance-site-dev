@@ -27,8 +27,8 @@ function link(name: keyof typeof Links, path?: string): URL {
 
 <Layout title="Home" menuEntry="Home">
   <div class="hero">
-    <div class="hero__content">
-      <div class="hero__section">
+    <div class="hero__content flex">
+      <div class="hero__section flex">
         <img class="hero__logo" src="/logo.svg" alt="Love & Tolerance logo" />
         <h3>A My Little Pony: Friendship is Magic Inspired Resource Pack!</h3>
         <p>
@@ -38,12 +38,12 @@ function link(name: keyof typeof Links, path?: string): URL {
         </p>
       </div>
 
-      <div class="hero__section">
+      <div class="hero__section flex">
         <a href="/downloads" class="btn btn--primary btn--large btn--fill">
           Download
         </a>
 
-        <div class="hero__servers">
+        <div class="hero__servers flex flex--small">
           <h5 class="hero__servers-title">Our Minecraft servers</h5>
 
           {Servers.map((server) => <Server server={server} client:load />)}
@@ -65,7 +65,7 @@ function link(name: keyof typeof Links, path?: string): URL {
         </a>
 
         <div class="links">
-          <div class="links__common">
+          <div class="flex flex--small flex--row">
             <a class="link" href={link("githubRepo")}>GitHub</a>
             <a class="link" href={link("githubRepo", "./issues")}>Issues</a>
             <a class="link" href={link("googleArchive")}>Archive</a>
@@ -83,14 +83,14 @@ function link(name: keyof typeof Links, path?: string): URL {
     </div>
   </div>
 
-  <div class="home-content">
+  <div class="home-content flex">
     <Cards cards={Features as NormalCardsInfo} />
 
     <h2>Showcase</h2>
     <Swiper images={images} client:load />
   </div>
 
-  <div class="did-you-know">
+  <div class="did-you-know flex">
     <h2>Did you know?</h2>
     <p>
       This pack's style is used in Jan Animation Studios' popular animation
@@ -108,14 +108,12 @@ function link(name: keyof typeof Links, path?: string): URL {
   :global(.body-content__main) {
     margin: 0 !important;
     padding: 0 !important;
+
+    gap: 0;
   }
 
   .home-content {
     padding: var(--gutter);
-
-    display: flex;
-    flex-direction: column;
-    gap: var(--margin);
 
     h1,
     h2,
@@ -138,13 +136,6 @@ function link(name: keyof typeof Links, path?: string): URL {
       padding: var(--gutter);
     }
 
-    &__content,
-    &__section {
-      display: flex;
-      flex-direction: column;
-      gap: var(--margin);
-    }
-
     &__logo {
       display: block;
       margin: 0 auto;
@@ -154,10 +145,6 @@ function link(name: keyof typeof Links, path?: string): URL {
     }
 
     &__servers {
-      display: flex;
-      flex-direction: column;
-      gap: calc(var(--margin) / 2);
-
       &-title {
         text-align: center;
       }
@@ -168,11 +155,6 @@ function link(name: keyof typeof Links, path?: string): URL {
       align-items: center;
       flex-wrap: wrap;
       justify-content: space-between;
-
-      &__common {
-        display: flex;
-        gap: 0.5em;
-      }
     }
 
     .link {
@@ -203,10 +185,6 @@ function link(name: keyof typeof Links, path?: string): URL {
     color: var(--color-gray-900);
     padding: var(--gutter);
     text-align: center;
-
-    display: flex;
-    flex-direction: column;
-    gap: var(--margin);
   }
 
   @media (min-width: 800px) {

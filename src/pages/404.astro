@@ -7,11 +7,11 @@ const description =
 ---
 
 <Layout title={title} description={description}>
-  <div class="container">
+  <div class="flex">
     <div class="number">404</div>
     <div class="title">{title}</div>
     <div class="description">{description} Or use navigation at the top.</div>
-    <div class="actions">
+    <div class="flex flex--row">
       <a class="btn btn--primary btn--medium" href="/">Go home</a>
     </div>
   </div>
@@ -21,9 +21,6 @@ const description =
   .container {
     text-align: center;
 
-    display: flex;
-    gap: var(--margin);
-    flex-direction: column;
     justify-content: center;
   }
 

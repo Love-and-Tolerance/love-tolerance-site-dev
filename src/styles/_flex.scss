@@ -1,0 +1,14 @@
+.flex {
+  display: flex;
+  flex-direction: column;
+  gap: var(--margin);
+
+  &--small {
+    gap: calc(var(--margin) / 2);
+  }
+
+  &--row {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
