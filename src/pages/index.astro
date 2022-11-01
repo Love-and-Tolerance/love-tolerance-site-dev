@@ -102,7 +102,7 @@ function link(name: keyof typeof Links, path?: string): URL {
 
 <style lang="scss">
   :root {
-    --cards-overlap: calc(var(--gutter) * 2);
+    --cards-overlap: var(--gutter);
   }
 
   :global(.body-content__main) {
@@ -113,7 +113,7 @@ function link(name: keyof typeof Links, path?: string): URL {
   }
 
   .home-content {
-    padding: var(--gutter);
+    padding: 0 var(--gutter) var(--gutter);
 
     h1,
     h2,
@@ -130,7 +130,7 @@ function link(name: keyof typeof Links, path?: string): URL {
     background-blend-mode: multiply;
     color: var(--color-white);
     padding-top: var(--header-height);
-    padding-bottom: calc(var(--cards-overlap) - var(--gutter));
+    padding-bottom: var(--cards-overlap);
 
     &__content {
       padding: var(--gutter);
@@ -177,7 +177,7 @@ function link(name: keyof typeof Links, path?: string): URL {
   }
 
   .home-content :global(.cards:first-child) {
-    margin-top: calc(-1 * var(--cards-overlap) - var(--gutter));
+    margin-top: calc(-1 * var(--cards-overlap));
   }
 
   .did-you-know {
