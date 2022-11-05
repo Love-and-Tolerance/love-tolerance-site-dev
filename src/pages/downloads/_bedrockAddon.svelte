@@ -38,13 +38,15 @@
   });
 </script>
 
-<div class="addon">
-  <img class="addon__image" src={image} alt="Addon icon" />
+<div class="card card--row">
+  <div class="card__image">
+    <img class="img--pixelated" src={image} alt="Addon icon" />
+  </div>
 
-  <div class="addon__content">
-    <h5 class="addon__name">{name}</h5>
+  <div class="card__body flex flex--xsmall">
+    <h5 class="card__title">{name}</h5>
 
-    <div class="addon__description">
+    <div class="card__content">
       {description}
       (<a href={url}>GitHub</a>)
     </div>
@@ -58,28 +60,3 @@
     </a>
   </div>
 </div>
-
-<style lang="scss">
-  .addon {
-    border-radius: var(--border-radius);
-    box-shadow: var(--drop-shadow);
-    padding: 1em;
-
-    display: flex;
-    gap: 1em;
-
-    &__image {
-      image-rendering: pixelated;
-      object-fit: cover;
-
-      width: 6.125em;
-      height: 6.125em;
-    }
-
-    &__content {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5em;
-    }
-  }
-</style>

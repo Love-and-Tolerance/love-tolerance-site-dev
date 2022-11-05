@@ -49,23 +49,9 @@
 {:else}
   <h3>Minecraft version: {mcVersion}</h3>
 
-  <div class="addons">
+  <div class="grid grid--col-2">
     {#each addonsList as addon}
       <Addon {defaultImage} {releaseUrl} version={packVersion} json={addon} />
     {/each}
   </div>
 {/if}
-
-<style lang="scss">
-  .addons {
-    --columns: 1;
-
-    display: grid;
-    grid-template-columns: repeat(var(--columns), 1fr);
-    gap: var(--margin);
-
-    @media (min-width: 900px) {
-      --columns: 2;
-    }
-  }
-</style>

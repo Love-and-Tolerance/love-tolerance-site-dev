@@ -52,18 +52,20 @@
   }
 </script>
 
-<div class="addon">
-  <img
-    class="addon__image"
-    class:default={currentImage === defaultImage}
-    src={currentImage}
-    alt="Addon icon"
-  />
+<div class="card card--row">
+  <div class="card__image">
+    <img
+      class="img--pixelated"
+      class:img--faded={currentImage === defaultImage}
+      src={currentImage}
+      alt="Addon icon"
+    />
+  </div>
 
-  <div class="addon__content">
-    <h5 class="addon__name">{name}</h5>
+  <div class="card__body flex flex--xsmall">
+    <h5 class="card__title">{name}</h5>
 
-    <div class="addon__variants flex flex--row flex--small">
+    <div class="flex flex--row flex--small">
       {#each variants as variant}
         <Variant
           {currentVariantID}
@@ -74,7 +76,7 @@
       {/each}
     </div>
 
-    <div class="addon__description">
+    <div class="card__content">
       {description}
       {#if url !== undefined}
         (<a href={url}>GitHub</a>)
@@ -82,33 +84,3 @@
     </div>
   </div>
 </div>
-
-<style lang="scss">
-  .addon {
-    border-radius: var(--border-radius);
-    box-shadow: var(--drop-shadow);
-    padding: 1em;
-
-    display: flex;
-    gap: 1em;
-
-    &__image {
-      image-rendering: pixelated;
-      object-fit: cover;
-
-      width: 6.125em;
-      height: 6.125em;
-
-      &.default {
-        filter: grayscale(1);
-        opacity: 0.75;
-      }
-    }
-
-    &__content {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5em;
-    }
-  }
-</style>

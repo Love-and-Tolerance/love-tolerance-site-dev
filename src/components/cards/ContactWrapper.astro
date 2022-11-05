@@ -7,22 +7,6 @@ export type Props = ContactCardsInfo;
 const Props = Astro.props as Props;
 ---
 
-<div class="contact-cards">
+<div class="grid grid--col-2">
   {Props.cards.map((card) => <Card {...card} namespace={Props.name} />)}
 </div>
-
-<style lang="scss">
-  .contact-cards {
-    --columns: 1;
-
-    display: grid;
-    grid-template-columns: repeat(var(--columns), 1fr);
-    gap: var(--margin);
-  }
-
-  @media (min-width: 900px) {
-    .contact-cards {
-      --columns: 2;
-    }
-  }
-</style>

@@ -114,6 +114,7 @@ function link(name: keyof typeof Links, path?: string): URL {
 
   .home-content {
     padding: 0 var(--gutter) var(--gutter);
+    margin-top: calc(-1 * var(--cards-overlap));
 
     h1,
     h2,
@@ -174,10 +175,6 @@ function link(name: keyof typeof Links, path?: string): URL {
         height: 3em;
       }
     }
-  }
-
-  .home-content :global(.cards:first-child) {
-    margin-top: calc(-1 * var(--cards-overlap));
   }
 
   .did-you-know {

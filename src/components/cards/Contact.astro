@@ -10,11 +10,13 @@ const Props = Astro.props as Props;
 const path = `/cards/${Props.namespace}/${Props.avatar}`;
 ---
 
-<div class="contact-card">
-  <img class="contact-card__image" src={path} alt={Props.name} />
+<div class="card card--row">
+  <div class="card__image card__image--round">
+    <img src={path} alt={Props.name} />
+  </div>
 
-  <div class="contact-card__body">
-    <h5 class="contact-card__title">
+  <div class="card__body">
+    <h5 class="card__title">
       {Props.name}
 
       {
@@ -28,15 +30,20 @@ const path = `/cards/${Props.namespace}/${Props.avatar}`;
 
     {
       !Props.social || (
-        <div class="contact-card__links">
+        <div class="flex flex--row flex--xsmall flex--center">
           {Props.social.email ? (
-            <a href={`mailto:${Props.social.email}`} title="E-Mail">
+            <a
+              class="icon-link"
+              href={`mailto:${Props.social.email}`}
+              title="E-Mail"
+            >
               <Icon icon="envelope" />
             </a>
           ) : null}
 
           {Props.social.github ? (
             <a
+              class="icon-link"
               href={`https://github.com/${Props.social.github}`}
               title="GitHub"
             >
@@ -46,6 +53,7 @@ const path = `/cards/${Props.namespace}/${Props.avatar}`;
 
           {Props.social.twitter ? (
             <a
+              class="icon-link"
               href={`https://twitter.com/${Props.social.twitter}`}
               title="Twitter"
             >
@@ -54,13 +62,17 @@ const path = `/cards/${Props.namespace}/${Props.avatar}`;
           ) : null}
 
           {Props.social.vk ? (
-            <a href={`https://vk.com/${Props.social.vk}`} title="VK">
+            <a
+              class="icon-link"
+              href={`https://vk.com/${Props.social.vk}`}
+              title="VK"
+            >
               <Icon icon="vk" />
             </a>
           ) : null}
 
           {Props.social.discord ? (
-            <span class="contact-card__link--discord">
+            <span class="discord-tag">
               <Icon icon="discord" /> {Props.social.discord}
             </span>
           ) : null}
@@ -68,55 +80,13 @@ const path = `/cards/${Props.namespace}/${Props.avatar}`;
       )
     }
 
-    <div class="contact-card__content">{Props.role}</div>
+    <div class="card__content">{Props.role}</div>
   </div>
 </div>
 
 <style lang="scss">
-  .contact-card {
-    --avatar-size: 4.5em;
-
-    border: 1px solid var(--color-gray-900);
-    border-radius: var(--border-radius);
-    line-height: calc(var(--avatar-size) / 3);
-    padding: var(--margin);
-
-    display: grid;
-    gap: var(--margin);
-    grid-template-columns: auto 1fr;
-
-    &__image {
-      border-radius: 50%;
-      object-fit: cover;
-
-      width: var(--avatar-size);
-      height: var(--avatar-size);
-    }
-
-    &__nickname {
-      color: var(--color-gray-600);
-    }
-
-    &__links {
-      a {
-        --size: 1.2em;
-
-        color: var(--color-gray-600) !important;
-        display: inline-block;
-        font-size: var(--size);
-        text-align: center;
-
-        width: var(--size);
-
-        &:hover {
-          color: var(--color-primary) !important;
-        }
-      }
-    }
-
-    &__link--discord {
-      color: var(--color-gray-500);
-      white-space: nowrap;
-    }
+  .discord-tag {
+    color: var(--color-gray-500);
+    white-space: nowrap;
   }
 </style>

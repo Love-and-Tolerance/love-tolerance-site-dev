@@ -73,7 +73,7 @@
 {:else}
   <h3>Minecraft version: {mcVersion}</h3>
 
-  <div class="controls">
+  <div class="flex flex--row flex--small">
     <button class="btn btn--primary btn--medium" type="button" on:click={reset}>
       Reset
     </button>
@@ -95,7 +95,7 @@
     </a>
   </div>
 
-  <div class="addons">
+  <div class="grid grid--col-2">
     {#each addonsList as addon, index}
       <Addon
         {defaultImage}
@@ -106,23 +106,3 @@
     {/each}
   </div>
 {/if}
-
-<style lang="scss">
-  .controls {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5em;
-  }
-
-  .addons {
-    --columns: 1;
-
-    display: grid;
-    grid-template-columns: repeat(var(--columns), 1fr);
-    gap: var(--margin);
-
-    @media (min-width: 900px) {
-      --columns: 2;
-    }
-  }
-</style>

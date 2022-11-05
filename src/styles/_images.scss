@@ -1,0 +1,11 @@
+.img {
+  &--pixelated {
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+  }
+
+  &--faded {
+    filter: grayscale(1);
+    opacity: 0.75;
+  }
+}

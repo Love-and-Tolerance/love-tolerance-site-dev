@@ -3,6 +3,10 @@
   flex-direction: column;
   gap: var(--margin);
 
+  &--xsmall {
+    gap: calc(var(--margin) / 4);
+  }
+
   &--small {
     gap: calc(var(--margin) / 2);
   }
@@ -10,5 +14,9 @@
   &--row {
     flex-direction: row;
     flex-wrap: wrap;
+  }
+
+  &--center {
+    align-items: center;
   }
 }

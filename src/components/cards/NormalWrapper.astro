@@ -7,7 +7,7 @@ export type Props = NormalCardsInfo;
 const Props = Astro.props as Props;
 ---
 
-<div class="cards">
+<div class="grid">
   {Props.cards.map((card) => <Card {...card} namespace={Props.name} />)}
 </div>
 
