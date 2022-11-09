@@ -1,4 +1,4 @@
-declare module '*.yml' {
-  const yaml: any
-  export default yaml
+declare module "*.yml" {
+  const yaml: any;
+  export default yaml;
 }
