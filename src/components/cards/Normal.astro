@@ -1,4 +1,5 @@
 ---
+import { renderMarkdown } from "@astrojs/markdown-remark";
 import { NormalCard } from "./types";
 
 export interface Props extends NormalCard {
@@ -7,9 +8,7 @@ export interface Props extends NormalCard {
 
 const Props = Astro.props as Props;
 const path = `/cards/${Props.namespace}/${Props.image}`;
-const content = await (Astro as any).__renderMarkdown(Props.content, {
-  mode: "md",
-});
+const content = await renderMarkdown(Props.content, { mode: "md" });
 ---
 
 <div class="card">
@@ -19,6 +18,6 @@ const content = await (Astro as any).__renderMarkdown(Props.content, {
 
   <div class="card__body">
     <h5 class="card__title">{Props.title}</h5>
-    <div class="card__content" set:html={content}></div>
+    <div class="card__content" set:html={content.code}></div>
   </div>
 </div>
