@@ -1,15 +1,12 @@
 .card {
   $root: #{&};
 
-  // background: var(--color-white);
   border-radius: var(--border-radius);
   box-shadow: 0 0 2px var(--color-shadow), var(--drop-shadow);
   overflow: hidden;
   text-align: center;
 
   &__image {
-    // box-shadow: var(--drop-shadow);
-
     img {
       display: block;
 
