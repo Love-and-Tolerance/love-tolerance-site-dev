@@ -1,8 +1,8 @@
 ---
 import Downloads from "../../data/downloads.json";
 import Layout from "../../layouts/Layout.astro";
-import Addons from "./_addons.svelte";
-import Bedrock from "./_bedrock.svelte";
+import { Addons as BedrockAddons } from "./_components/bedrock/Addons";
+import { Addons as JavaAddons } from "./_components/java/Addons";
 import { Content as Installation } from "./_install.md";
 
 const title = "Downloads";
@@ -11,11 +11,11 @@ const menuEntry = "Downloads";
 ---
 
 <Layout title={title} description={description} menuEntry={menuEntry}>
-  <Addons client:only="svelte" />
+  <JavaAddons client:only="solid-js" />
 
   <hr />
 
-  <Bedrock client:only="svelte" />
+  <BedrockAddons client:only="solid-js" />
 
   <h2>Old Java Edition releases</h2>
 
