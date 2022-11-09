@@ -17,12 +17,9 @@
 
   const addonInstances: Array<Addon> = [];
 
-  $: filename = releaseUrl
-    .replace("{version}", packVersion)
-    .replace("{ids}", ids.join(""));
+  $: filename = releaseUrl.replace("{version}", packVersion).replace("{ids}", ids.join(""));
 
-  const ASSETS_JSON =
-    "https://raw.githubusercontent.com/Love-and-Tolerance/pack-release-builder/mane/assets/java.json";
+  const ASSETS_JSON = "https://raw.githubusercontent.com/Love-and-Tolerance/pack-release-builder/mane/assets/java.json";
 
   onMount(async () => {
     const r = await fetch(ASSETS_JSON);
@@ -42,9 +39,7 @@
     mcVersion = base.mc_versions;
     packVersion = base.version;
 
-    releaseUrl = base.release_url
-      .replace("{tag}", base.tag)
-      .replace("{filename}", base.filename);
+    releaseUrl = base.release_url.replace("{tag}", base.tag).replace("{filename}", base.filename);
 
     addonsList = repos.addons;
   });
@@ -74,17 +69,9 @@
   <h3>Minecraft version: {mcVersion}</h3>
 
   <div class="flex flex--row flex--small">
-    <button class="btn btn--primary btn--medium" type="button" on:click={reset}>
-      Reset
-    </button>
+    <button class="btn btn--primary btn--medium" type="button" on:click={reset}> Reset </button>
 
-    <button
-      class="btn btn--primary btn--medium"
-      type="button"
-      on:click={resetDefaults}
-    >
-      Select defaults
-    </button>
+    <button class="btn btn--primary btn--medium" type="button" on:click={resetDefaults}> Select defaults </button>
 
     <a class="btn btn--primary btn--medium" href={filename}>
       <span class="btn-label">Download</span>
@@ -97,12 +84,7 @@
 
   <div class="grid grid--col-2">
     {#each addonsList as addon, index}
-      <Addon
-        {defaultImage}
-        json={addon}
-        on:variant={onVariantSelect}
-        bind:this={addonInstances[index]}
-      />
+      <Addon {defaultImage} json={addon} on:variant={onVariantSelect} bind:this={addonInstances[index]} />
     {/each}
   </div>
 {/if}

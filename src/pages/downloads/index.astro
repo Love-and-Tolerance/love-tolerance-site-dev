@@ -6,8 +6,7 @@ import Bedrock from "./_bedrock.svelte";
 import { Content as Installation } from "./_install.md";
 
 const title = "Downloads";
-const description =
-  "Download Love & Tolerance resource pack for Minecraft Java and Bedrock editions";
+const description = "Download Love & Tolerance resource pack for Minecraft Java and Bedrock editions";
 const menuEntry = "Downloads";
 ---
 
@@ -21,11 +20,7 @@ const menuEntry = "Downloads";
   <h2>Old Java Edition releases</h2>
 
   <div class="java-releases flex flex--row flex--small">
-    {
-      Object.entries(Downloads.java).map(([version, url]) => (
-        <a href={url}>{version}</a>
-      ))
-    }
+    {Object.entries(Downloads.java).map(([version, url]) => <a href={url}>{version}</a>)}
   </div>
 
   <Installation />

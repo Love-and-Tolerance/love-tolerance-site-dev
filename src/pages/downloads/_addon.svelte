@@ -54,12 +54,7 @@
 
 <div class="card card--row">
   <div class="card__image">
-    <img
-      class="img--pixelated"
-      class:img--faded={currentImage === defaultImage}
-      src={currentImage}
-      alt="Addon icon"
-    />
+    <img class="img--pixelated" class:img--faded={currentImage === defaultImage} src={currentImage} alt="Addon icon" />
   </div>
 
   <div class="card__body flex flex--xsmall">
@@ -67,12 +62,7 @@
 
     <div class="flex flex--row flex--small">
       {#each variants as variant}
-        <Variant
-          {currentVariantID}
-          json={variant}
-          on:click={onVariantClick}
-          on:info={onVariantInfo}
-        />
+        <Variant {currentVariantID} json={variant} on:click={onVariantClick} on:info={onVariantInfo} />
       {/each}
     </div>
 

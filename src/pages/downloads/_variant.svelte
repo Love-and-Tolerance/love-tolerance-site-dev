@@ -2,12 +2,7 @@
   import { createEventDispatcher, onMount } from "svelte";
   import { JavaAssetsAddonVariant } from "./_schemas";
   import { VariantEvents } from "./_types";
-  import {
-    GitHubRepo,
-    parseGitHubUrl,
-    rawContent,
-    stringifyGitHubUrl,
-  } from "./_utils";
+  import { GitHubRepo, parseGitHubUrl, rawContent, stringifyGitHubUrl } from "./_utils";
 
   export let json: JavaAssetsAddonVariant;
   export let currentVariantID: string;
@@ -41,14 +36,11 @@
       }
 
       if (description === undefined) {
-        const r = await fetch(
-          `https://api.github.com/repos/${repo.owner}/${repo.name}`,
-          {
-            headers: {
-              Accept: "application/vnd.github.v3+json",
-            },
-          }
-        );
+        const r = await fetch(`https://api.github.com/repos/${repo.owner}/${repo.name}`, {
+          headers: {
+            Accept: "application/vnd.github.v3+json",
+          },
+        });
 
         const repoJson = await r.json();
         description = repoJson["description"];
@@ -61,10 +53,6 @@
   });
 </script>
 
-<button
-  class={`btn ${selected ? "btn--primary" : "btn--light"}`}
-  type="button"
-  on:click={onClick}
->
+<button class={`btn ${selected ? "btn--primary" : "btn--light"}`} type="button" on:click={onClick}>
   {name}
 </button>

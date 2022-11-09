@@ -11,10 +11,7 @@
   const { name, filename, url } = json;
 
   const defaultDescription = "No description";
-  const downloadUrl = releaseUrl.replace(
-    "{filename}",
-    filename.replace("{version}", version)
-  );
+  const downloadUrl = releaseUrl.replace("{filename}", filename.replace("{version}", version));
 
   let description = defaultDescription;
   let image = defaultImage;
@@ -24,14 +21,11 @@
 
     image = rawContent(repo, undefined, "pack_icon.png");
 
-    const r = await fetch(
-      `https://api.github.com/repos/${repo.owner}/${repo.name}`,
-      {
-        headers: {
-          Accept: "application/vnd.github.v3+json",
-        },
-      }
-    );
+    const r = await fetch(`https://api.github.com/repos/${repo.owner}/${repo.name}`, {
+      headers: {
+        Accept: "application/vnd.github.v3+json",
+      },
+    });
 
     const repoJson = await r.json();
     description = repoJson["description"];

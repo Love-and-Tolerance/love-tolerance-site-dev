@@ -10,9 +10,7 @@ import Servers from "../data/servers.json";
 import Layout from "../layouts/Layout.astro";
 
 const globs = await Astro.glob("../../public/home/screenshots/*");
-const images = globs.map((glob) =>
-  (glob["default"] as string).replace("/public", "")
-);
+const images = globs.map((glob) => (glob["default"] as string).replace("/public", ""));
 
 function link(name: keyof typeof Links, path?: string): URL {
   const url = new URL(Links[name]);
@@ -32,16 +30,13 @@ function link(name: keyof typeof Links, path?: string): URL {
         <img class="hero__logo" src="/logo.svg" alt="Love & Tolerance logo" />
         <h3>A My Little Pony: Friendship is Magic Inspired Resource Pack!</h3>
         <p>
-          However, this is only in the sense that it's brightly colored and
-          features some mild pony references, meaning it's not overtly
-          pony-themed and won't make your world look totally different.
+          However, this is only in the sense that it's brightly colored and features some mild pony references, meaning it's not overtly pony-themed
+          and won't make your world look totally different.
         </p>
       </div>
 
       <div class="hero__section flex">
-        <a href="/downloads" class="btn btn--primary btn--large btn--fill">
-          Download
-        </a>
+        <a href="/downloads" class="btn btn--primary btn--large btn--fill"> Download</a>
 
         <div class="hero__servers flex flex--small">
           <h5 class="hero__servers-title">Our Minecraft servers</h5>
@@ -49,10 +44,7 @@ function link(name: keyof typeof Links, path?: string): URL {
           {Servers.map((server) => <Server server={server} client:load />)}
         </div>
 
-        <a
-          class="btn btn--kofi btn--medium btn--grid btn--fill"
-          href={link("kofi")}
-        >
+        <a class="btn btn--kofi btn--medium btn--grid btn--fill" href={link("kofi")}>
           <span class="btn-icon btn-icon--left">
             <img src="/Kofi_pixel_logo.png" alt="Ko-fi logo" />
           </span>
@@ -71,11 +63,7 @@ function link(name: keyof typeof Links, path?: string): URL {
             <a class="link" href={link("googleArchive")}>Archive</a>
           </div>
 
-          <a
-            class="link link--discord"
-            href={link("discordInvite")}
-            title="Join our Discord server!"
-          >
+          <a class="link link--discord" href={link("discordInvite")} title="Join our Discord server!">
             <img src="/discord-logo.svg" alt="Discord logo" />
           </a>
         </div>
@@ -92,10 +80,7 @@ function link(name: keyof typeof Links, path?: string): URL {
 
   <div class="did-you-know flex">
     <h2>Did you know?</h2>
-    <p>
-      This pack's style is used in Jan Animation Studios' popular animation
-      "Don't Mine at Night"
-    </p>
+    <p>This pack's style is used in Jan Animation Studios' popular animation "Don't Mine at Night"</p>
     <YouTube video="X_TMtgjQuZI" />
   </div>
 </Layout>

@@ -13,8 +13,7 @@
 
   let error: ValidationError | undefined;
 
-  const ASSETS_JSON =
-    "https://raw.githubusercontent.com/Love-and-Tolerance/pack-release-builder/mane/assets/bedrock.json";
+  const ASSETS_JSON = "https://raw.githubusercontent.com/Love-and-Tolerance/pack-release-builder/mane/assets/bedrock.json";
 
   onMount(async () => {
     const r = await fetch(ASSETS_JSON);
@@ -35,10 +34,7 @@
     packVersion = base.version;
     releaseUrl = base.release_url.replace("{tag}", base.tag);
 
-    addonsList = [
-      { name: "Base resourcepack", filename: base.filename, url: base.url },
-      ...repos.addons,
-    ];
+    addonsList = [{ name: "Base resourcepack", filename: base.filename, url: base.url }, ...repos.addons];
   });
 </script>
 
