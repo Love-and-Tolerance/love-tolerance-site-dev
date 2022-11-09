@@ -94,7 +94,7 @@ function link(name: keyof typeof Links, path?: string): URL {
     margin: 0 !important;
     padding: 0 !important;
 
-    gap: 0;
+    gap: 0 !important;
   }
 
   .home-content {
@@ -172,8 +172,8 @@ function link(name: keyof typeof Links, path?: string): URL {
   @media (min-width: 800px) {
     .hero {
       &__content {
-        display: grid;
-        gap: var(--gutter);
+        display: grid !important;
+        gap: var(--gutter) !important;
         grid-template-columns: 1fr 350px;
       }
     }
