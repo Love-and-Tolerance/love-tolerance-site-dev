@@ -4,7 +4,7 @@ import { handleError } from "../utils";
 import { Addon } from "./Addon";
 import { AssetsSchema, RawAddon, RawAssets } from "./schemas";
 
-const ASSETS_JSON = "https://raw.githubusercontent.com/Love-and-Tolerance/pack-release-builder/mane/assets/bedrock.json";
+const ASSETS_JSON = "https://raw.githubusercontent.com/Love-and-Tolerance/pack-dev-tools/mane/assets/bedrock.json";
 
 async function fetchAssetsJson(): Promise<RawAssets> {
   const r = await fetch(ASSETS_JSON, {

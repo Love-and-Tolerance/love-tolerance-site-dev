@@ -5,7 +5,7 @@ import { Addon } from "./Addon";
 import { AddonsInfo } from "./AddonsInfo";
 import { AssetsSchema } from "./schemas";
 
-const ASSETS_JSON = "https://raw.githubusercontent.com/Love-and-Tolerance/pack-release-builder/mane/assets/java.json";
+const ASSETS_JSON = "https://raw.githubusercontent.com/Love-and-Tolerance/pack-dev-tools/mane/assets/java.json";
 
 async function fetchAssetsJson(): Promise<AddonsInfo> {
   const r = await fetch(ASSETS_JSON, {
