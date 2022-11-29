@@ -1,0 +1,64 @@
+.mc-server {
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  background: rgba(white, 0.125);
+  border-radius: var(--border-radius);
+  padding: calc(var(--margin) / 2);
+  white-space: nowrap;
+
+  &__info {
+    display: flex;
+    gap: 0.5em;
+  }
+
+  &__name {
+    font-weight: bold;
+
+    flex-grow: 1;
+  }
+
+  &__version {
+    opacity: 0.75;
+  }
+
+  &__online:empty {
+    display: none;
+  }
+
+  &__hostname {
+    background: none;
+    color: inherit;
+    display: block;
+    font-family: monospace;
+    font-size: 1.5em;
+    text-align: center;
+
+    width: 100%;
+
+    position: relative;
+
+    &::after {
+      background: rgba(black, 0.75);
+      border-radius: 5px;
+      font-size: 0.9rem;
+      padding: 5px;
+      transform: translate(-50%, -5px);
+
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+    }
+
+    &[data-copy="ready"]:hover::after {
+      content: "Click to copy";
+    }
+
+    &[data-copy="success"]::after {
+      content: "Copied!";
+    }
+
+    &[data-copy="error"]::after {
+      content: "Error occured";
+    }
+  }
+}

@@ -1,8 +1,8 @@
 ---
 import Cards from "../components/Cards.astro";
 import { NormalCardsInfo } from "../components/cards/types";
-import Server from "../components/Server.svelte";
-import Swiper from "../components/Swiper.svelte";
+import { Gallery } from "../components/gallery/Gallery";
+import { Server } from "../components/server/Server";
 import YouTube from "../components/YouTube.astro";
 import Features from "../data/cards/features.json";
 import Links from "../data/links.json";
@@ -41,7 +41,7 @@ function link(name: keyof typeof Links, path?: string): URL {
         <div class="hero__servers flex flex--small">
           <h5 class="hero__servers-title">Our Minecraft servers</h5>
 
-          {Servers.map((server) => <Server server={server} client:load />)}
+          {Servers.map((server) => <Server {...server} client:load />)}
         </div>
 
         <a class="btn btn--kofi btn--medium btn--grid btn--fill" href={link("kofi")}>
@@ -75,7 +75,7 @@ function link(name: keyof typeof Links, path?: string): URL {
     <Cards cards={Features as NormalCardsInfo} />
 
     <h2>Showcase</h2>
-    <Swiper images={images} client:load />
+    <Gallery paths={images} client:only="solid-js" />
   </div>
 
   <div class="did-you-know flex">
