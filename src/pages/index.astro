@@ -9,8 +9,8 @@ import Links from "../data/links.json";
 import Servers from "../data/servers.json";
 import Layout from "../layouts/Layout.astro";
 
-const globs = await Astro.glob("../../public/home/screenshots/*");
-const images = globs.map((glob) => (glob["default"] as string).replace("/public", ""));
+const globs = await Astro.glob("../images/home/screenshots/*");
+const galleryPaths = globs.map((glob) => glob["default"] as string);
 
 function link(name: keyof typeof Links, path?: string): URL {
   const url = new URL(Links[name]);
@@ -75,7 +75,7 @@ function link(name: keyof typeof Links, path?: string): URL {
     <Cards cards={Features as NormalCardsInfo} />
 
     <h2>Showcase</h2>
-    <Gallery paths={images} client:only="solid-js" />
+    <Gallery paths={galleryPaths} client:only="solid-js" />
   </div>
 
   <div class="did-you-know flex">
