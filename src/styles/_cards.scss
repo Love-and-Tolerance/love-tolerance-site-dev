@@ -19,10 +19,14 @@
   }
 
   &--row {
+    align-items: center;
+  }
+
+  &--row,
+  &--row-start {
     padding: var(--margin);
 
     display: flex;
-    align-items: center;
     flex-direction: row;
     gap: var(--margin);
 

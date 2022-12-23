@@ -1,12 +1,12 @@
+import { assets as ASSETS_PATH } from "@/data/links.json";
 import { Component, createResource, ErrorBoundary, For, Show } from "solid-js";
-import { RawBaseRepo } from "../schemas";
-import { handleError } from "../utils";
+import { handleError } from "../utils/zod";
 import { Addon } from "./Addon";
-import { AssetsSchema, RawAddon, RawAssets } from "./schemas";
+import { BedrockAddon, BedrockAssets, BedrockAssetsSchema, BedrockBaseRepo } from "./schemas";
 
-const ASSETS_JSON = "https://raw.githubusercontent.com/Love-and-Tolerance/pack-dev-tools/mane/assets/bedrock.json";
+const ASSETS_JSON = `${ASSETS_PATH}/assets/bedrock.json`;
 
-async function fetchAssetsJson(): Promise<RawAssets> {
+async function fetchAssetsJson(): Promise<BedrockAssets> {
   const r = await fetch(ASSETS_JSON, {
     headers: {
       Accept: "application/json",
@@ -19,13 +19,13 @@ async function fetchAssetsJson(): Promise<RawAssets> {
 
   const json = await r.json();
 
-  return AssetsSchema.parse(json);
+  return BedrockAssetsSchema.parse(json);
 }
 
 export const Addons: Component = () => {
-  const [addons] = createResource(fetchAssetsJson);
+  const [assets] = createResource(fetchAssetsJson);
 
-  function baseAddon(base: RawBaseRepo): RawAddon {
+  function baseAddon(base: BedrockBaseRepo): BedrockAddon {
     return { name: "Base resourcepack", filename: base.filename, url: base.url };
   }
 
@@ -34,15 +34,15 @@ export const Addons: Component = () => {
       <h2>Bedrock downloads</h2>
 
       <ErrorBoundary fallback={handleError}>
-        <Show when={addons()} keyed fallback={<h2>Loading...</h2>}>
-          {(addons) => (
+        <Show when={assets()} keyed fallback={<h2>Loading...</h2>}>
+          {(assets) => (
             <>
-              <h3>Minecraft Bedrock versions: {addons.repos.base.mc_versions}</h3>
+              <h3>Minecraft Bedrock versions: {assets.repos.base.mc_versions}</h3>
 
               <div class="grid grid--col-2">
-                <Addon base={addons.repos.base} raw={baseAddon(addons.repos.base)} />
+                <Addon assets={assets} addon={baseAddon(assets.repos.base)} />
 
-                <For each={addons.repos.addons}>{(addon) => <Addon base={addons.repos.base} raw={addon} />}</For>
+                <For each={assets.repos.addons}>{(addon) => <Addon assets={assets} addon={addon} />}</For>
               </div>
             </>
           )}

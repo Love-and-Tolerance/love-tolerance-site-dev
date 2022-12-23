@@ -59,12 +59,18 @@
   align-self: start;
   flex-shrink: 1;
 
-  &:hover {
-    --button-background: var(--button-background-hover);
+  &:not(:disabled) {
+    &:hover {
+      --button-background: var(--button-background-hover);
+    }
+
+    &:active {
+      --button-background: var(--button-background-active);
+    }
   }
 
-  &:active {
-    --button-background: var(--button-background-active);
+  &:disabled {
+    opacity: 0.75;
   }
 
   &--fill {

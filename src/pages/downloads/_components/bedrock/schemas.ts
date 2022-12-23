@@ -1,18 +1,30 @@
 import { z } from "zod";
-import { BaseRepoSchema } from "../schemas";
 
-export interface RawAddon extends z.infer<typeof AddonSchema> {}
-export interface RawAssets extends z.infer<typeof AssetsSchema> {}
+export type BedrockAssets = z.infer<typeof BedrockAssetsSchema>;
+export type BedrockBaseRepo = z.infer<typeof BedrockBaseRepoSchema>;
+export type BedrockAddon = z.infer<typeof BedrockAddonSchema>;
 
-export const AddonSchema = z.object({
+const BedrockBaseRepoSchema = z.object({
+  mc_versions: z.string(),
+  pack_format: z.string(),
+  tag: z.string(),
+  version: z.string(),
+  filename: z.string(),
+  url: z.string(),
+});
+
+const BedrockAddonSchema = z.object({
   name: z.string(),
   filename: z.string(),
   url: z.string(),
 });
 
-export const AssetsSchema = z.object({
+export const BedrockAssetsSchema = z.object({
+  templates: z.object({
+    asset_url: z.string(),
+  }),
   repos: z.object({
-    base: BaseRepoSchema,
-    addons: z.array(AddonSchema),
+    base: BedrockBaseRepoSchema,
+    addons: BedrockAddonSchema.array(),
   }),
 });

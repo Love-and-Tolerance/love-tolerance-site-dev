@@ -1,39 +1,50 @@
-import { Component, createResource, Suspense } from "solid-js";
-import { GitHubRepo } from "../GitHubRepo";
-import { RawBaseRepo } from "../schemas";
-import { RawAddon } from "./schemas";
+import { Component, createMemo, createResource, Suspense } from "solid-js";
+import { fetchRepoInfo, getRawContentUrl, parseGitHubUrl } from "../utils/git";
+import { BedrockAddon, BedrockAssets } from "./schemas";
 
 export interface AddonProps {
-  raw: RawAddon;
-  base: RawBaseRepo;
+  assets: BedrockAssets;
+  addon: BedrockAddon;
 }
 
-export const Addon: Component<AddonProps> = (props) => {
-  const repo = GitHubRepo.fromUrl(props.raw.url);
-  const image = repo.rawContentUrl("pack_icon.png");
+export const Addon: Component<AddonProps> = ({ assets, addon }) => {
+  const repo = createMemo(() => {
+    return parseGitHubUrl(addon.url);
+  });
 
-  const filename = props.raw.filename.replace("{version}", props.base.version);
-  const url = props.base.release_url.replace("{tag}", props.base.tag).replace("{filename}", filename);
+  const image = createMemo(() => {
+    const [owner, name] = repo();
+
+    return getRawContentUrl(owner, name, "HEAD", "pack_icon.png");
+  });
+
+  const filename = createMemo(() => {
+    return addon.filename.replace("{version}", assets.repos.base.version);
+  });
+
+  const url = createMemo(() => {
+    return assets.templates.asset_url.replace("{tag}", assets.repos.base.tag).replace("{filename}", filename());
+  });
 
   const [description] = createResource(async () => {
-    const info = await repo.fetchInfo();
-    return info.description;
+    const { description } = await fetchRepoInfo(...repo());
+    return description;
   });
 
   return (
     <div class="card card--row">
       <div class="card__image">
-        <img class="img--pixelated" src={image} alt="Addon icon" />
+        <img class="img--pixelated" src={image()} alt="Addon icon" />
       </div>
 
       <div class="card__body flex flex--xsmall">
-        <h5 class="card__title">{props.raw.name}</h5>
+        <h5 class="card__title">{addon.name}</h5>
 
         <div class="card__content">
-          <Suspense fallback="Loading ...">{description() ?? "No description"}</Suspense> (<a href={repo.getUrl()}>GitHub</a>)
+          <Suspense fallback="Loading ...">{description() ?? "No description"}</Suspense> (<a href={addon.url}>GitHub</a>)
         </div>
 
-        <a class="btn btn--primary" href={url}>
+        <a class="btn btn--primary" href={url()}>
           <span class="btn-label">Download</span>
 
           <span class="btn-icon btn-icon--right">
