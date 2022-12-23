@@ -1,4 +1,4 @@
-import { ConditionalLicense, ExclusiveAddonVariant } from "../java/schemas";
+import { ConditionalLicense, ExclusiveAddonVariant } from "../java/schemas/assets";
 import { isTriggerred } from "./trigger";
 
 export function getLicense(selectedVariants: ExclusiveAddonVariant[], license: ConditionalLicense | undefined): string | undefined {

@@ -2,30 +2,18 @@ import { assets as ASSETS_PATH } from "@/data/links.json";
 import { Component, createMemo, createResource, createSignal, ErrorBoundary, For, Show } from "solid-js";
 import { getVariant } from "../utils/addon";
 import { getRawContentUrl, parseGitHubUrl } from "../utils/git";
+import { fetchJson } from "../utils/json";
 import { handleError } from "../utils/zod";
 import { build } from "./build";
+import { Downgrades } from "./Downgrades";
 import { ExclusiveAddon } from "./ExclusiveAddon";
 import { ModAddon } from "./ModAddon";
 import { RegularAddon } from "./RegularAddon";
-import { ExclusiveAddonRaw, ExclusiveAddonVariant, JavaAssets, JavaAssetsSchema } from "./schemas";
+import { ExclusiveAddonRaw, ExclusiveAddonVariant, JavaAssets, JavaAssetsSchema } from "./schemas/assets";
+import { DowngradesSchema, RawDowngrades } from "./schemas/downgrades";
 
 const ASSETS_JSON = `${ASSETS_PATH}/assets/java.json`;
-
-async function fetchAssetsJson(): Promise<JavaAssets> {
-  const r = await fetch(ASSETS_JSON, {
-    headers: {
-      Accept: "application/json",
-    },
-  });
-
-  if (r.status !== 200) {
-    throw new Error(`Failed to fetch assets json: ${r.status}`);
-  }
-
-  const json = await r.json();
-
-  return JavaAssetsSchema.parse(json);
-}
+const DOWNGRADES_JSON = `${ASSETS_PATH}/assets/downgrades/java.json`;
 
 function getRecommendedExclusives(addons: ExclusiveAddonRaw[]): ExclusiveAddonVariant[] {
   return addons.map((addon) => {
@@ -50,15 +38,18 @@ function getRecommendedOthers(addons: OtherAddon[]): Record<string, boolean> {
 
 interface InternalProps {
   assets: JavaAssets;
+  downgrades: RawDowngrades;
 }
 
-const AddonsInternal: Component<InternalProps> = ({ assets }) => {
+const AddonsInternal: Component<InternalProps> = ({ assets, downgrades }) => {
   const [busy, setBusy] = createSignal(false);
   const [message, setMessage] = createSignal("");
 
   const [selectedExclusives, setSelectedExclusives] = createSignal(getRecommendedExclusives(assets.repos.addons.exclusive));
   const [selectedRegulars, setSelectedRegulars] = createSignal(getRecommendedOthers(assets.repos.addons.regular));
   const [selectedMods, setSelectedMods] = createSignal(getRecommendedOthers(assets.repos.addons.mods));
+
+  const [selectedDowngrade, setSelectedDowngrade] = createSignal("none");
 
   const defaultImage = createMemo(() => {
     const [owner, name] = parseGitHubUrl(assets.repos.base.url);
@@ -108,7 +99,7 @@ const AddonsInternal: Component<InternalProps> = ({ assets }) => {
     setBusy(true);
 
     try {
-      await build(ASSETS_PATH, assets, selectedExclusives(), selectedRegulars(), selectedMods(), setMessage);
+      await build(ASSETS_PATH, assets, downgrades, selectedExclusives(), selectedRegulars(), selectedMods(), selectedDowngrade(), setMessage);
     } catch (err) {
       if (err instanceof Error) {
         setMessage(`${err.name}: ${err.message}`);
@@ -121,15 +112,12 @@ const AddonsInternal: Component<InternalProps> = ({ assets }) => {
 
     setTimeout(() => {
       setMessage("");
+      setBusy(false);
     }, 3000);
-
-    setBusy(false);
   }
 
   return (
     <>
-      <h3>Minecraft versions: {assets.repos.base.mc_versions}</h3>
-
       <div class="flex flex--row flex--small flex--center">
         <button class="btn btn--primary btn--medium" type="button" onClick={resetDefaults}>
           Reset defaults
@@ -153,6 +141,8 @@ const AddonsInternal: Component<InternalProps> = ({ assets }) => {
 
         <div>{message()}</div>
       </div>
+
+      <Downgrades json={downgrades} latestVersion={assets.repos.base.mc_versions} value={selectedDowngrade()} onChange={setSelectedDowngrade} />
 
       <h4>Exclusive addons</h4>
 
@@ -204,15 +194,22 @@ const AddonsInternal: Component<InternalProps> = ({ assets }) => {
 };
 
 export const Addons: Component = () => {
-  const [assets] = createResource(fetchAssetsJson);
+  async function fetchJsons(): Promise<[JavaAssets, RawDowngrades]> {
+    const assets = fetchJson(ASSETS_JSON, JavaAssetsSchema);
+    const downgrades = fetchJson(DOWNGRADES_JSON, DowngradesSchema);
+
+    return Promise.all([assets, downgrades]);
+  }
+
+  const [jsons] = createResource(fetchJsons);
 
   return (
     <>
       <h2>Custom Java downloads</h2>
 
       <ErrorBoundary fallback={handleError}>
-        <Show when={assets()} keyed fallback={<h2>Loading...</h2>}>
-          {(assets) => <AddonsInternal assets={assets} />}
+        <Show when={jsons()} keyed fallback={<h2>Loading...</h2>}>
+          {([assets, downgrades]) => <AddonsInternal assets={assets} downgrades={downgrades} />}
         </Show>
       </ErrorBoundary>
     </>

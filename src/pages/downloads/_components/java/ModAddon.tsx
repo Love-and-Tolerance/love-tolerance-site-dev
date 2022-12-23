@@ -1,6 +1,6 @@
 import { Component, createMemo, createResource, For, Suspense } from "solid-js";
 import { fetchRepoInfo, getRawContentUrl, parseGitHubUrl } from "../utils/git";
-import { ExclusiveAddonVariant, ModAddonRaw } from "./schemas";
+import { ExclusiveAddonVariant, ModAddonRaw } from "./schemas/assets";
 
 export interface ModAddonProps {
   addon: ModAddonRaw;

@@ -1,4 +1,4 @@
-import { ExclusiveAddonRaw, ExclusiveAddonVariant } from "../java/schemas";
+import { ExclusiveAddonRaw, ExclusiveAddonVariant } from "../java/schemas/assets";
 
 export function getVariant(addon: ExclusiveAddonRaw, id: string): ExclusiveAddonVariant {
   const variant = addon.variants.find((variant) => {

@@ -1,7 +1,7 @@
 import { Component, createMemo, createResource, Show, Suspense } from "solid-js";
 import { getBranch } from "../utils/branch";
 import { fetchRepoInfo, getRawContentUrl, parseGitHubUrl } from "../utils/git";
-import { ExclusiveAddonVariant, RegularAddonRaw } from "./schemas";
+import { ExclusiveAddonVariant, RegularAddonRaw } from "./schemas/assets";
 
 export interface RegularAddonProps {
   addon: RegularAddonRaw;

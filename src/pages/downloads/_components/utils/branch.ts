@@ -1,4 +1,4 @@
-import { ConditionalBranch, ExclusiveAddonVariant } from "../java/schemas";
+import { ConditionalBranch, ExclusiveAddonVariant } from "../java/schemas/assets";
 import { isTriggerred } from "./trigger";
 
 export function getBranch(selectedVariants: ExclusiveAddonVariant[], branch: ConditionalBranch | undefined): string {

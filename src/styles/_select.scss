@@ -1,0 +1,41 @@
+.select {
+  --select-background: var(--color-light);
+  --select-background-hover: var(--color-light-hover);
+  --select-background-active: var(--color-light-active);
+  --select-border: var(--color-light-border);
+  --select-color: var(--color-black);
+
+  --select-padding-x: var(--margin);
+  --select-padding-y: calc(var(--margin) / 2);
+
+  background: var(--select-background);
+  border-radius: var(--border-radius);
+  box-shadow: 0 0 0 1px var(--select-border) inset;
+  color: var(--select-color) !important;
+  font: inherit;
+  padding: var(--select-padding-y) var(--select-padding-x);
+
+  display: block;
+
+  align-self: start;
+  flex-shrink: 1;
+
+  &:not(:disabled) {
+    &:hover {
+      --select-background: var(--select-background-hover);
+    }
+
+    &:active {
+      --select-background: var(--select-background-active);
+    }
+  }
+
+  &:disabled {
+    opacity: 0.75;
+  }
+
+  &--fill {
+    align-self: stretch;
+    flex-shrink: 0;
+  }
+}

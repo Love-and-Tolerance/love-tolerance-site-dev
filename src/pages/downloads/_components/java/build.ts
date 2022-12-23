@@ -1,19 +1,14 @@
 import { saveAs } from "file-saver";
 import JSZip from "jszip";
-import { makeRe } from "minimatch";
 import { getBranch } from "../utils/branch";
+import { fetchJson } from "../utils/json";
 import { getLicense } from "../utils/license";
-import { ExclusiveAddonVariant, JavaAssets } from "./schemas";
+import { parseGlob } from "../utils/path";
+import { globZip, moveFiles } from "../utils/zip";
+import { ExclusiveAddonVariant, JavaAssets } from "./schemas/assets";
+import { FormatDowngradeSchema, RawDowngradeLang, RawDowngrades } from "./schemas/downgrades";
 
-const langsRe = (() => {
-  const result = makeRe("assets/*/lang/*.json");
-
-  if (result === false) {
-    throw new Error("Invalid glob");
-  }
-
-  return result;
-})();
+const langsRe = parseGlob("assets/*/lang/*.json");
 
 interface ParseAddonsResult {
   zips: string[];
@@ -83,17 +78,17 @@ function parseAddons(
   return { zips, license };
 }
 
-function collectLangs(zip: JSZip): Map<string, Record<string, string>> {
+async function collectLangs(zip: JSZip): Promise<Map<string, Record<string, string>>> {
   const result = new Map<string, Record<string, string>>();
 
-  zip.forEach(async (path, file) => {
-    if (langsRe.test(path)) {
-      const raw = await file.async("string");
-      const json = JSON.parse(raw) as Record<string, string>;
+  const files = zip.file(langsRe);
 
-      result.set(path, json);
-    }
-  });
+  for (const file of files) {
+    const raw = await file.async("string");
+    const json = JSON.parse(raw) as Record<string, string>;
+
+    result.set(file.name, json);
+  }
 
   return result;
 }
@@ -105,12 +100,135 @@ function getIds(addons: Record<string, boolean>): string {
     .join("-");
 }
 
+function applyLangDowngrade(lang: Record<string, string>, langDowngrade: RawDowngradeLang): void {
+  if (langDowngrade.set !== undefined) {
+    for (const [key, value] of Object.entries(langDowngrade.set)) {
+      lang[key] = value;
+    }
+  }
+
+  if (Array.isArray(langDowngrade.remove)) {
+    for (const key of langDowngrade.remove) {
+      delete lang[key];
+    }
+  }
+}
+
+async function applyDowngrade(
+  assetsPath: string,
+  downgrades: RawDowngrades,
+  base: JSZip,
+  version: string,
+  feedback: (msg: string) => void
+): Promise<void> {
+  const name = downgrades.templates.format_name.replace("{version}", version);
+  const jsonPath = downgrades.templates.format_path.replace("{name}", name);
+
+  const json = await fetchJson(`${assetsPath}/${jsonPath}`, FormatDowngradeSchema);
+
+  if (json.extends !== undefined) {
+    await applyDowngrade(assetsPath, downgrades, base, json.extends, feedback);
+  }
+
+  if (json.files !== undefined) {
+    let zip;
+
+    if (json.files.copy === true) {
+      feedback("Downloading downgrade assets ...");
+
+      const zipPath = downgrades.templates.zips_path.replace("{name}", name);
+
+      const r = await fetch(`${assetsPath}/${zipPath}`);
+      zip = await JSZip.loadAsync(r.arrayBuffer());
+    }
+
+    if (Array.isArray(json.files.move)) {
+      feedback('Applying downgrade action "move" ...');
+      for (const action of json.files.move) {
+        moveFiles(base, action.from, action.to);
+      }
+    }
+
+    if (zip !== undefined) {
+      feedback("Copying downgrade assets ...");
+      await base.loadAsync(zip.generateAsync({ type: "arraybuffer" }), { createFolders: true });
+    }
+
+    if (Array.isArray(json.files.remove)) {
+      const paths = globZip(base, json.files.remove);
+
+      for (const path of paths) {
+        base.remove(path);
+      }
+    }
+  }
+
+  if (json.langs !== undefined) {
+    feedback("Applying language downgrade ...");
+
+    const langs = await collectLangs(base);
+
+    for (const [key, value] of Object.entries(json.langs)) {
+      if (key === "*") {
+        langs.forEach((lang) => {
+          applyLangDowngrade(lang, value);
+        });
+      } else {
+        let lang;
+
+        for (const [path, value] of langs) {
+          if (path.endsWith(`${key}.json`)) {
+            lang = value;
+            break;
+          }
+        }
+
+        if (lang === undefined) {
+          throw new Error(`No lang with name "${key}"`);
+        }
+
+        if (value.extends !== undefined) {
+          const parent = json.langs[value.extends];
+
+          if (parent === undefined) {
+            throw new Error(`No lang downgrade for "${value.extends}" inherited from "${key}"`);
+          }
+
+          applyLangDowngrade(lang, parent);
+        }
+
+        applyLangDowngrade(lang, value);
+      }
+    }
+
+    langs.forEach((value, path) => {
+      base.file(path, JSON.stringify(value, null, 2));
+    });
+  }
+
+  feedback("Updating pack.mcmeta ...");
+  const mcmeta = base.file("pack.mcmeta");
+
+  if (mcmeta === null) {
+    throw new Error(`No pack.mcmeta`);
+  }
+
+  const mcmetaContent = await mcmeta.async("string");
+  const mcmetaJson = JSON.parse(mcmetaContent);
+
+  mcmetaJson.pack.pack_format = version;
+
+  base.file("pack.mcmeta", JSON.stringify(mcmetaJson, null, 2));
+}
+
 export async function build(
   assetsPath: string,
   assets: JavaAssets,
+  downgrades: RawDowngrades,
   exclusives: ExclusiveAddonVariant[],
   regulars: Record<string, boolean>,
   mods: Record<string, boolean>,
+  downgrade: string,
   feedback: (msg: string) => void
 ): Promise<void> {
   feedback("Downloading assets ...");
@@ -123,7 +241,7 @@ export async function build(
 
       feedback(`Downloading assets (${++zipsDone}/${parseResult.zips.length}) ...`);
 
-      return JSZip.loadAsync(r.blob());
+      return JSZip.loadAsync(r.arrayBuffer());
     })
   );
 
@@ -136,12 +254,12 @@ export async function build(
   let addonsDone = 0;
 
   for (const addon of addons) {
-    feedback(`Building the pack (${++addonsDone}/${addons.length}) ...`);
+    feedback(`Applying addons (${++addonsDone}/${addons.length}) ...`);
 
-    const oldLangs = collectLangs(base);
-    const newLangs = collectLangs(addon);
+    const oldLangs = await collectLangs(base);
+    const newLangs = await collectLangs(addon);
 
-    await base.loadAsync(addon.generateAsync({ type: "blob" }), { createFolders: true });
+    await base.loadAsync(addon.generateAsync({ type: "arraybuffer" }), { createFolders: true });
 
     for (const [name, newLang] of newLangs) {
       const oldLang = oldLangs.get(name);
@@ -166,14 +284,31 @@ export async function build(
     base.file("LICENSE", r.arrayBuffer());
   }
 
+  let formatVersion = assets.repos.base.pack_format;
+
+  if (downgrade !== "none") {
+    feedback("Applying downgrade ...");
+
+    await applyDowngrade(assetsPath, downgrades, base, downgrade, feedback);
+
+    formatVersion = downgrade;
+  }
+
   feedback("Preparing the result ...");
-  const blob = await base.generateAsync({ type: "blob" }, ({ percent }) => {
-    feedback(`Preparing the result ${percent.toFixed(0)}% ...`);
-  });
+  const blob = await base.generateAsync(
+    {
+      type: "blob",
+      compression: "DEFLATE",
+      compressionOptions: { level: 9 },
+    },
+    ({ percent }) => {
+      feedback(`Preparing the result ${percent.toFixed(0)}% ...`);
+    }
+  );
 
   feedback("Saving the result ...");
   const ids = [exclusives.map((variant) => variant.id).join(""), getIds(regulars), getIds(mods)].filter((value) => value.length > 0).join("-");
-  const filename = assets.templates.filename.replace("{version}", assets.repos.base.version).replace("{ids}", ids);
+  const filename = assets.templates.filename.replace("{version}", assets.repos.base.version).replace("{format}", formatVersion).replace("{ids}", ids);
 
   saveAs(blob, filename);
 
