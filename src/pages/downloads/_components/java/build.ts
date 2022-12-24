@@ -216,7 +216,7 @@ async function applyDowngrade(
   const mcmetaContent = await mcmeta.async("string");
   const mcmetaJson = JSON.parse(mcmetaContent);
 
-  mcmetaJson.pack.pack_format = version;
+  mcmetaJson.pack.pack_format = parseInt(version);
 
   base.file("pack.mcmeta", JSON.stringify(mcmetaJson, null, 2));
 }
