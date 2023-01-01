@@ -21,7 +21,7 @@ const path = `/cards/${Props.namespace}/${Props.avatar}`;
 
       {
         Props.nickname ? (
-          <span class="contact-card__nickname" title="Minecraft nickname">
+          <span class="text-muted" title="Minecraft nickname">
             {Props.nickname}
           </span>
         ) : null
@@ -32,41 +32,25 @@ const path = `/cards/${Props.namespace}/${Props.avatar}`;
       !Props.social || (
         <div class="flex flex--row flex--xsmall flex--center">
           {Props.social.email ? (
-            <a
-              class="icon-link"
-              href={`mailto:${Props.social.email}`}
-              title="E-Mail"
-            >
+            <a class="icon-link" href={`mailto:${Props.social.email}`} title="E-Mail">
               <Icon icon="envelope" />
             </a>
           ) : null}
 
           {Props.social.github ? (
-            <a
-              class="icon-link"
-              href={`https://github.com/${Props.social.github}`}
-              title="GitHub"
-            >
+            <a class="icon-link" href={`https://github.com/${Props.social.github}`} title="GitHub">
               <Icon icon="github" />
             </a>
           ) : null}
 
           {Props.social.twitter ? (
-            <a
-              class="icon-link"
-              href={`https://twitter.com/${Props.social.twitter}`}
-              title="Twitter"
-            >
+            <a class="icon-link" href={`https://twitter.com/${Props.social.twitter}`} title="Twitter">
               <Icon icon="twitter" />
             </a>
           ) : null}
 
           {Props.social.vk ? (
-            <a
-              class="icon-link"
-              href={`https://vk.com/${Props.social.vk}`}
-              title="VK"
-            >
+            <a class="icon-link" href={`https://vk.com/${Props.social.vk}`} title="VK">
               <Icon icon="vk" />
             </a>
           ) : null}
