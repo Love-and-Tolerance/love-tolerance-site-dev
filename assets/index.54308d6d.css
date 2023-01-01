@@ -1,1 +1,0 @@
-.discord-tag:where(.astro-VZVY4XDQ){color:var(--color-gray-500);white-space:nowrap}.cards:where(.astro-JMECD6XF){--columns: 1;display:grid;grid-template-columns:repeat(var(--columns),1fr);gap:var(--margin)}@media (min-width: 700px){.cards:where(.astro-JMECD6XF){--columns: 2}}@media (min-width: 900px){.cards:where(.astro-JMECD6XF){--columns: 3}}
