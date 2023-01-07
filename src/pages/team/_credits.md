@@ -51,7 +51,7 @@ So, without further ado, we would like to thank:
 
 ### Side A
 
-The music for side A is located in the resource pack [repository][base repo].
+The music for side A is located in an add-on, its repository can be found [here][side a].
 
 - Disc 13: **[FelixMoog]** - Love Bloom
 - Disc cat: **[FelixMoog]** - Building Buddies
@@ -74,7 +74,7 @@ The music for side A is located in the resource pack [repository][base repo].
 The music for side B is located in an add-on, its repository can be found [here][side b].
 
 - Disc 13: **[Prince Whateverer]** - Goodbye
-- Disc cat: **[4EverfreeBrony]** - The Way She Flies (feat. FritzyBeat & Brittney Ackerman)[Original by Phileo]
+- Disc cat: **[4EverfreeBrony]** - The Way She Flies (feat. FritzyBeat & Brittney Ackerman) [Original by Phileo]
 - Disc blocks: **[Etherium Apex]** - Flight of the Wonderbolts
 - Disc chirp: **[Prince Whateverer]** - Between Fairytales And Happy Endings (feat. Kaspuuh & Senra)
 - Disc far: **[Jyc Row]** - Onward (ft. Aloma Steele)
@@ -92,16 +92,17 @@ The music for side B is located in an add-on, its repository can be found [here]
 [silk rose]: https://github.com/SilkRose/ "github"
 [autumn meadow]: https://github.com/autumnblazey/ "github"
 [email]: mailto:contact@love-tolerance.com
-[sciencemare]: https://steamcommunity.com/profiles/76561198850316221/ "steam"
-[side b]: https://github.com/Love-and-Tolerance/Music-side-B "github"
 [felixmoog]: https://felixmoog.bandcamp.com/
 [sonic rainboom]: https://jexpsytrance.bandcamp.com/ "bandcamp"
 [extaticus]: https://www.youtube.com/user/Extaticus "youtube"
 [shadyvox]: https://shadyvox.bandcamp.com/ "bandcamp"
 [jananimations]: https://www.youtube.com/user/jananimationstudios "youtube"
+[sciencemare]: https://steamcommunity.com/profiles/76561198850316221/ "steam"
 [thorinair]: https://thorinair.bandcamp.com/ "bandcamp"
+[jyc row]: https://jycrow.bandcamp.com/ "bandcamp"
 [prince whateverer]: https://princewhateverer.bandcamp.com/ "bandcamp"
 [4everfreebrony]: https://4everfreebrony.bandcamp.com/ "bandcamp"
 [etherium apex]: https://etheriumapex.bandcamp.com/ "bandcamp"
-[jyc row]: https://jycrow.bandcamp.com/ "bandcamp"
 [archie]: https://mrarchie.bandcamp.com/ "bandcamp"
+[side a]: https://github.com/Love-and-Tolerance/Music-side-A "github"
+[side b]: https://github.com/Love-and-Tolerance/Music-side-B "github"
