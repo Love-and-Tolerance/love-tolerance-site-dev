@@ -1,5 +1,4 @@
 ---
-import Icon from "../Icon.astro";
 import { ContactCard } from "./types";
 
 export interface Props extends ContactCard {
@@ -33,31 +32,31 @@ const path = `/cards/${Props.namespace}/${Props.avatar}`;
         <div class="flex flex--row flex--xsmall flex--center">
           {Props.social.email ? (
             <a class="icon-link" href={`mailto:${Props.social.email}`} title="E-Mail">
-              <Icon icon="envelope" />
+              <i class="fa fa-envelope" />
             </a>
           ) : null}
 
           {Props.social.github ? (
             <a class="icon-link" href={`https://github.com/${Props.social.github}`} title="GitHub">
-              <Icon icon="github" />
+              <i class="fab fa-github" />
             </a>
           ) : null}
 
           {Props.social.twitter ? (
             <a class="icon-link" href={`https://twitter.com/${Props.social.twitter}`} title="Twitter">
-              <Icon icon="twitter" />
+              <i class="fab fa-twitter" />
             </a>
           ) : null}
 
           {Props.social.vk ? (
             <a class="icon-link" href={`https://vk.com/${Props.social.vk}`} title="VK">
-              <Icon icon="vk" />
+              <i class="fab fa-vk" />
             </a>
           ) : null}
 
           {Props.social.discord ? (
             <span class="discord-tag">
-              <Icon icon="discord" /> {Props.social.discord}
+              <i class="fab fa-discord" /> {Props.social.discord}
             </span>
           ) : null}
         </div>

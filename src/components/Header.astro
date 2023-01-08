@@ -1,6 +1,5 @@
 ---
 import Menus from "../data/menus.json";
-import Icon from "./Icon.astro";
 
 export interface Props {
   menuEntry?: string | undefined;
@@ -21,20 +20,14 @@ const isCurrentMenuEntry = (title: string) => title === Props.menuEntry;
   <input id="nav-state" type="checkbox" />
 
   <label class="header__bars" for="nav-state">
-    <Icon icon="bars" />
-    <Icon icon="xmark" />
+    <i class="fas fa-bars"></i>
+    <i class="fas fa-xmark"></i>
   </label>
 
   <nav class="header__nav nav">
     {
       Menus.main.map(({ title, path }) => (
-        <a
-          class:list={[
-            "nav__link",
-            { "nav__link--current": isCurrentMenuEntry(title) },
-          ]}
-          href={path}
-        >
+        <a class:list={["nav__link", { "nav__link--current": isCurrentMenuEntry(title) }]} href={path}>
           {title}
         </a>
       ))
@@ -103,16 +96,16 @@ const isCurrentMenuEntry = (title: string) => title === Props.menuEntry;
         color: var(--color-primary);
       }
 
-      & :global(.fa:last-child) {
+      .fa-xmark {
         display: none;
       }
 
-      #nav-state:checked + & :global(.fa) {
-        &:first-child {
+      #nav-state:checked + & .fa {
+        &-bars {
           display: none;
         }
 
-        &:last-child {
+        &-xmark {
           display: block;
         }
       }
