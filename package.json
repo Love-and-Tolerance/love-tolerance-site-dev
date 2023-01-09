@@ -20,6 +20,7 @@
     "zod-validation-error": "^0.2.1"
   },
   "devDependencies": {
+    "@astrojs/markdown-remark": "^1.2.0",
     "@astrojs/solid-js": "^1.2.2",
     "@keupoz/typescript-config": "^1.5.0",
     "@octokit/types": "^8.0.0",

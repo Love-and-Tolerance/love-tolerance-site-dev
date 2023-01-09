@@ -1,0 +1,22 @@
+---
+import { renderMarkdown } from "@astrojs/markdown-remark";
+
+interface Props {
+  image: string;
+  title: string;
+  description: string;
+}
+
+const { code: description } = await renderMarkdown(Astro.props.description, { mode: "md" });
+---
+
+<div class="vcard">
+  <div class="vcard-image">
+    <img src={Astro.props.image} alt="Card image" />
+  </div>
+
+  <div class="vcard-body">
+    <h5>{Astro.props.title}</h5>
+    <p set:html={description} />
+  </div>
+</div>

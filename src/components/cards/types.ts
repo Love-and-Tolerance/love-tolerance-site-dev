@@ -1,9 +1,3 @@
-export interface NormalCard {
-  image: string;
-  title: string;
-  content: string;
-}
-
 export interface ContactCard {
   name: string;
   role: string;
@@ -16,12 +10,6 @@ export interface ContactCard {
     vk?: string;
     discord?: string;
   };
-}
-
-export interface NormalCardsInfo {
-  name: string;
-  type: "normal";
-  cards: NormalCard[];
 }
 
 export interface ContactCardsInfo {
