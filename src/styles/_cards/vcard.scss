@@ -1,0 +1,42 @@
+@use "../_mixins/media";
+
+.vcards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--margin);
+
+  @include media.media(sm) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @include media.media(lg) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.vcard {
+  border-radius: var(--border-radius);
+  box-shadow: var(--drop-shadow);
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+
+  &-image {
+    img {
+      display: block;
+
+      width: 100%;
+    }
+  }
+
+  &-body {
+    padding: var(--margin);
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--margin-md);
+  }
+}

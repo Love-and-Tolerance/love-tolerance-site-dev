@@ -1,0 +1,10 @@
+@mixin hstack() {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: var(--margin-sm);
+}
+
+.hstack {
+  @include hstack();
+}
