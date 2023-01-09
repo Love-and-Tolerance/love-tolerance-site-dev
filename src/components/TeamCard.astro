@@ -16,7 +16,13 @@ type Props = TeamMember;
       <div class="hcard-title">
         <h5>{Astro.props.name}</h5>
 
-        {Astro.props.nickname !== undefined ? <span class="text-muted">{Astro.props.nickname}</span> : null}
+        {
+          Astro.props.nickname !== undefined ? (
+            <span class="text-muted" title="Minecraft nickname">
+              {Astro.props.nickname}
+            </span>
+          ) : null
+        }
       </div>
 
       <div class="hcard-actions">
