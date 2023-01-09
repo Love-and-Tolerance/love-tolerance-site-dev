@@ -6,7 +6,7 @@
   --select-color: var(--color-black);
 
   --select-padding-x: var(--margin);
-  --select-padding-y: calc(var(--margin) / 2);
+  --select-padding-y: var(--margin-md);
 
   background: var(--select-background);
   border-radius: var(--border-radius);

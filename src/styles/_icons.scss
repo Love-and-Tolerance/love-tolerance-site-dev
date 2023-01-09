@@ -1,14 +1,9 @@
 .icon-link {
-  --icon-link-size: 1.2em;
+  --icon-link-size: 24px;
 
-  color: var(--color-gray-600) !important;
+  color: var(--color-black-50);
   display: inline-block;
-  font-size: var(--icon-link-size);
   text-align: center;
 
   width: var(--icon-link-size);
-
-  &:hover {
-    color: var(--color-primary) !important;
-  }
 }

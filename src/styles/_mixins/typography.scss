@@ -1,0 +1,20 @@
+@mixin font(
+  $size: 16,
+  $line-height: 24,
+  $family: (
+    "Open Sans",
+    sans-serif,
+  ),
+  $weight: 400
+) {
+  $font-size: #{calc($size / 16)}em;
+  $line-height: calc($line-height / $size);
+
+  font: $weight $font-size / $line-height $family;
+}
+
+@mixin heading($level: 6, $size: 16, $line-height: 24) {
+  h#{$level} {
+    @include font($size, $line-height, ("Raleway", sans-serif), 700);
+  }
+}

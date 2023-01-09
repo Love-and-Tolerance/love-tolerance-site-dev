@@ -21,7 +21,7 @@ $color-light-active: functions.shift-color($color-light, $shade-percentage-activ
 $color-light-border: functions.shift-color($color-light, $shade-percentage-border);
 
 $color-white: white;
-$color-black: black;
+$color-black: #1f1c1e;
 
 $color-gray-100: color.mix($color-white, $color-black, 10%);
 $color-gray-200: color.mix($color-white, $color-black, 20%);
@@ -39,9 +39,9 @@ $color-shadow: rgba($color-black, 0.125);
 
 $max-content-width: 1120px;
 
-$gutter: 1.5rem;
-$margin: 1rem;
+$gutter: 24px;
+$margin: 16px;
 
-$border-radius: 0.5rem;
+$border-radius: 8px;
 
 $header-height: 4rem;

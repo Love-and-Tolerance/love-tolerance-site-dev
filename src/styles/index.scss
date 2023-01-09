@@ -1,4 +1,6 @@
 @use "variables";
+@use "_mixins/typography";
+@use "_mixins/media";
 
 @use "flex";
 @use "grid";
@@ -8,6 +10,7 @@
 @use "buttons";
 @use "select";
 @use "cards";
+@use "_cards/hcard";
 
 :root {
   --color-primary: #{variables.$color-primary};
@@ -35,26 +38,37 @@
   --color-gray-700: #{variables.$color-gray-700};
   --color-gray-800: #{variables.$color-gray-800};
   --color-gray-900: #{variables.$color-gray-900};
+
   --color-black: #{variables.$color-black};
+  --color-black-75: #{rgba(variables.$color-black, 0.75)};
+  --color-black-50: #{rgba(variables.$color-black, 0.5)};
+  --color-black-25: #{rgba(variables.$color-black, 0.25)};
+  --color-black-10: #{rgba(variables.$color-black, 0.1)};
+  --color-black-5: #{rgba(variables.$color-black, 0.05)};
 
   --color-primary-transparent: #{variables.$color-primary-transparent};
   --color-white-transparent: #{variables.$color-white-transparent};
   --color-shadow: #{variables.$color-shadow};
 
-  --box-shadow: 0 0 1rem var(--color-shadow);
-  --drop-shadow: 0 0.25rem 0.5rem var(--color-shadow);
+  --box-shadow: 0 0 16px var(--color-shadow);
+  --drop-shadow: 0px 0px 1px rgba(0, 0, 0, 0.25), 0px 0px 4px rgba(0, 0, 0, 0.04), 0px 4px 8px rgba(0, 0, 0, 0.06);
 
   --max-content-width: #{variables.$max-content-width};
 
-  --gutter: #{variables.$gutter};
   --margin: #{variables.$margin};
+  --margin-lg: calc(var(--margin) * 2);
+  --margin-md: calc(var(--margin) / 2);
+  --margin-sm: calc(var(--margin) / 4);
+  --margin-xsm: calc(var(--margin) / 8);
+
+  --gutter: var(--margin);
 
   --border-radius: #{variables.$border-radius};
 
   --header-height: #{variables.$header-height};
 
-  @media (max-width: 384px) {
-    --gutter: var(--margin);
+  @include media.media(sm) {
+    --gutter: #{variables.$gutter};
   }
 }
 
@@ -66,52 +80,30 @@
   box-sizing: border-box;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "Raleway";
+@include typography.heading(1, 40, 48);
+@include typography.heading(2, 32, 40);
+@include typography.heading(3, 28, 32);
+@include typography.heading(4, 24, 32);
+@include typography.heading(5, 20, 24);
+@include typography.heading(6, 16, 24);
+
+body {
+  @include typography.font();
+
+  color: var(--color-black);
 }
 
-h1 {
-  font-size: 2.5em;
-}
+a {
+  color: var(--color-primary);
+  text-decoration: none;
 
-h2 {
-  font-size: 2em;
-}
+  &:hover {
+    color: var(--color-primary-hover);
+    text-decoration: underline;
+  }
 
-h3 {
-  font-size: 1.75em;
-}
-
-h4 {
-  font-size: 1.5em;
-}
-
-h5 {
-  font-size: 1.25em;
-}
-
-h6 {
-  font-size: 1em;
-}
-
-.body-content__main {
-  a {
-    color: var(--color-primary);
-    text-decoration: none;
-
-    &:hover {
-      color: var(--color-primary-hover);
-      text-decoration: underline;
-    }
-
-    &:active {
-      color: var(--color-primary-active);
-    }
+  &:active {
+    color: var(--color-primary-active);
   }
 }
 
@@ -139,5 +131,5 @@ ul img {
 }
 
 .text-muted {
-  color: var(--color-gray-600);
+  color: var(--color-black-50);
 }

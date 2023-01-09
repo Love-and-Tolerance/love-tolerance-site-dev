@@ -1,3 +1,5 @@
+@use "_mixins/typography";
+
 .btn {
   &--primary {
     --button-background: var(--color-primary);
@@ -25,31 +27,30 @@
 
   &--medium {
     --button-padding-x: var(--margin);
-    --button-padding-y: calc(var(--margin) / 2);
+    --button-padding-y: var(--margin-md);
     --button-font-weight: bold;
   }
 
   &--large {
-    --button-padding-x: calc(var(--margin) * 1.5);
-    --button-padding-y: calc(var(--margin) * 3 / 4);
-    --button-font-size: 1.25em;
+    --button-padding-x: var(--margin-lg);
+    --button-padding-y: var(--margin);
     --button-font-weight: bold;
+
+    @include typography.font(20, 24, ("Raleway", sans-serif), 700);
   }
 
-  --button-padding-x: calc(var(--margin) / 2);
-  --button-padding-y: calc(var(--margin) / 8);
-  --button-font-size: 1em;
-  --button-font-weight: normal;
+  --button-padding-x: var(--margin-md);
+  --button-padding-y: var(--margin-xsm);
   --button-icon-size: 2em;
+
+  @include typography.font(16, 24, ("Raleway", sans-serif), 700);
 
   background: var(--button-background);
   border-radius: var(--border-radius);
   box-shadow: 0 0 0 1px var(--button-border) inset;
   color: var(--button-color) !important;
-  font: inherit;
-  font-size: var(--button-font-size);
-  font-weight: var(--button-font-weight);
   padding: var(--button-padding-y) var(--button-padding-x);
+  white-space: nowrap;
 
   display: inline-flex;
   align-items: center;
