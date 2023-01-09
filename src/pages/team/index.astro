@@ -1,7 +1,6 @@
 ---
-import Cards from "../../components/Cards.astro";
-import { ContactCardsInfo } from "../../components/cards/types";
-import Team from "../../data/cards/team.json";
+import TeamCard from "@/components/TeamCard.astro";
+import { TeamMembers } from "@/data/team/list";
 import Layout from "../../layouts/Layout.astro";
 import { Content as Credits } from "./_credits.md";
 
@@ -13,7 +12,9 @@ const menuEntry = "Team";
 <Layout title={title} description={description} menuEntry={menuEntry}>
   <h2>The Development team</h2>
 
-  <Cards cards={Team as ContactCardsInfo} />
+  <div class="hcards">
+    {TeamMembers.map((member) => <TeamCard {...member} />)}
+  </div>
 
   <Credits />
 </Layout>

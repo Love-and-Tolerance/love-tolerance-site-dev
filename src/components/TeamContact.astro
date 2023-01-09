@@ -1,0 +1,20 @@
+---
+import { ContactLink } from "@/data/team/links";
+
+interface Props extends ContactLink {
+  value: string;
+}
+---
+
+{
+  Astro.props.url === undefined ? (
+    <div class="hstack text-muted" title={Astro.props.title}>
+      <i class="fab fa-discord" />
+      <span>{Astro.props.value}</span>
+    </div>
+  ) : (
+    <a href={Astro.props.url.replace("%s", Astro.props.value)} class="icon-link" title={Astro.props.title}>
+      <i class={Astro.props.icon} />
+    </a>
+  )
+}

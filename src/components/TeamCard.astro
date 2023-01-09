@@ -1,0 +1,38 @@
+---
+import { ContactLinks } from "@/data/team/links";
+import { TeamMember } from "@/data/team/list";
+import TeamContact from "./TeamContact.astro";
+
+type Props = TeamMember;
+---
+
+<div class="hcard">
+  <div class="hcard-body">
+    <div class="hcard-avatar">
+      <img src={Astro.props.avatar} alt={`${Astro.props.name}' avatar`} />
+    </div>
+
+    <div class="hcard-content">
+      <div class="hcard-title">
+        <h5>{Astro.props.name}</h5>
+
+        {Astro.props.nickname !== undefined ? <span class="text-muted">{Astro.props.nickname}</span> : null}
+      </div>
+
+      <div class="hcard-actions">
+        {
+          ContactLinks.map((link) => {
+            const value = Astro.props.contacts[link.id];
+            if (value === undefined) {
+              return null;
+            }
+
+            return <TeamContact {...link} value={value} />;
+          })
+        }
+      </div>
+
+      <p>{Astro.props.role}</p>
+    </div>
+  </div>
+</div>
