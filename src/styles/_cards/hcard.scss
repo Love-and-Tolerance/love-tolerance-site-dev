@@ -63,10 +63,17 @@
     }
   }
 
+  &-image {
+    &--muted {
+      filter: grayscale(1);
+      opacity: 0.75;
+    }
+  }
+
   &-avatar {
     img {
       // 3 line-heights + 2 gaps
-      --size: calc(1.5em * 3 + 4px * 2);
+      --size: calc(1.5em * 3 + var(--margin-sm) * 2);
 
       border-radius: 50%;
       object-fit: cover;
@@ -92,6 +99,10 @@
 
     &__left {
       flex-grow: 1;
+    }
+
+    &__right {
+      gap: var(--margin-md);
     }
   }
 

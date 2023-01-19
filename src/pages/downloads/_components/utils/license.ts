@@ -1,10 +1,9 @@
-import { ConditionalLicense, ExclusiveAddonVariant } from "../java/schemas/assets";
-import { isTriggerred } from "./trigger";
+import { ConditionalLicense } from "../java/schemas/assets";
 
-export function getLicense(selectedVariants: ExclusiveAddonVariant[], license: ConditionalLicense | undefined): string | undefined {
+export function getLicense(triggers: string[], license: ConditionalLicense | undefined): string | undefined {
   if (Array.isArray(license)) {
     for (const condition of license) {
-      if (condition.trigger === "DEFAULT" || isTriggerred(selectedVariants, condition.trigger)) {
+      if (condition.trigger === "DEFAULT" || triggers.includes(condition.trigger)) {
         return typeof condition.value === "string" ? condition.value : undefined;
       }
     }

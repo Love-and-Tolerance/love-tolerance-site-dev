@@ -1,8 +1,10 @@
 import { Endpoints } from "@octokit/types";
 
+export type RepoTuple = [owner: string, name: string];
+
 export const GITHUB_REGEX = /^https:\/\/github\.com\/([\w+-_]+)\/([\w+-_]+)$/;
 
-export function parseGitHubUrl(url: string): [owner: string, name: string] {
+export function parseGitHubUrl(url: string): RepoTuple {
   const match = url.match(GITHUB_REGEX);
 
   if (match === null) {
@@ -20,6 +22,7 @@ export function parseGitHubUrl(url: string): [owner: string, name: string] {
 
 export async function fetchRepoInfo(owner: string, name: string): Promise<Endpoints["GET /repos/{owner}/{repo}"]["response"]["data"]> {
   const r = await fetch(`https://api.github.com/repos/${owner}/${name}`, {
+    cache: "force-cache",
     headers: {
       Accept: "application/vnd.github.v3+json",
     },

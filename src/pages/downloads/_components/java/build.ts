@@ -5,7 +5,7 @@ import { fetchJson } from "../utils/json";
 import { getLicense } from "../utils/license";
 import { parseGlob } from "../utils/path";
 import { globZip, moveFiles } from "../utils/zip";
-import { ExclusiveAddonVariant, JavaAssets } from "./schemas/assets";
+import { BasicAddonRaw, JavaAssets, VariantAddonRaw, VariantRaw } from "./schemas/assets";
 import { FormatDowngradeSchema, RawDowngradeLang, RawDowngrades } from "./schemas/downgrades";
 
 const langsRe = parseGlob("assets/*/lang/*.json");
@@ -17,63 +17,53 @@ interface ParseAddonsResult {
 
 function parseAddons(
   assets: JavaAssets,
-  exclusives: ExclusiveAddonVariant[],
-  regulars: Record<string, boolean>,
-  mods: Record<string, boolean>
+  triggers: string[],
+  variantAddons: [VariantAddonRaw, VariantRaw | null][],
+  regularAddons: BasicAddonRaw[],
+  modAddons: BasicAddonRaw[]
 ): ParseAddonsResult {
-  const sortedExclusives = [...assets.repos.addons.exclusive].sort((a, b) => {
+  const sortedVariants = [...variantAddons].sort(([a], [b]) => {
     return a.apply_order - b.apply_order;
   });
 
   const zips = [assets.templates.base_zip_name];
   let license;
 
-  for (const addon of sortedExclusives) {
-    const variant = exclusives[addon.id_pos - 1];
+  for (const [addon, variant] of sortedVariants) {
+    if (variant?.url === undefined) continue;
 
-    if (variant === undefined) {
-      throw new Error(`No variant at index ${addon.id_pos}`);
-    }
-
-    if (variant.url === undefined) continue;
-
-    const branch = getBranch(exclusives, variant.branch);
-    const filename = assets.templates.exclusive_addon_zip_name
+    const branch = getBranch(triggers, variant.branch);
+    const filename = assets.templates.variant_addon_zip_name
       .replace("{id_pos}", addon.id_pos.toString())
       .replace("{variant}", variant.id)
       .replace("{branch}", branch);
 
     zips.push(filename);
 
-    const addonLicense = getLicense(exclusives, addon.license);
+    const addonLicense = getLicense(triggers, addon.license);
 
     if (addonLicense !== undefined) {
       license = addonLicense;
     }
   }
 
-  for (const addon of assets.repos.addons.regular) {
-    if (regulars[addon.id] !== true) continue;
+  function processBasicAddons(addons: BasicAddonRaw[], filenameTemplate: string) {
+    for (const addon of addons) {
+      const branch = getBranch(triggers, addon.branch);
+      const filename = filenameTemplate.replace("{id}", addon.id).replace("{branch}", branch);
 
-    const branch = getBranch(exclusives, addon.branch);
-    const filename = assets.templates.regular_addon_zip_name.replace("{id}", addon.id).replace("{branch}", branch);
+      zips.push(filename);
 
-    zips.push(filename);
+      const addonLicense = getLicense(triggers, addon.license);
 
-    const addonLicense = getLicense(exclusives, addon.license);
-
-    if (addonLicense !== undefined) {
-      license = addonLicense;
+      if (addonLicense !== undefined) {
+        license = addonLicense;
+      }
     }
   }
 
-  for (const addon of assets.repos.addons.mods) {
-    if (mods[addon.id] !== true) continue;
-
-    const filename = assets.templates.mod_addon_zip_name.replace("{id}", addon.id);
-
-    zips.push(filename);
-  }
+  processBasicAddons(regularAddons, assets.templates.regular_addon_zip_name);
+  processBasicAddons(modAddons, assets.templates.mod_addon_zip_name);
 
   return { zips, license };
 }
@@ -93,11 +83,8 @@ async function collectLangs(zip: JSZip): Promise<Map<string, Record<string, stri
   return result;
 }
 
-function getIds(addons: Record<string, boolean>): string {
-  return Object.entries(addons)
-    .filter(([, value]) => value)
-    .map(([key]) => key)
-    .join("-");
+function getIds(addons: BasicAddonRaw[]): string {
+  return addons.map((addon) => addon.id).join("-");
 }
 
 function applyLangDowngrade(lang: Record<string, string>, langDowngrade: RawDowngradeLang): void {
@@ -225,15 +212,16 @@ export async function build(
   assetsPath: string,
   assets: JavaAssets,
   downgrades: RawDowngrades,
-  exclusives: ExclusiveAddonVariant[],
-  regulars: Record<string, boolean>,
-  mods: Record<string, boolean>,
+  triggers: string[],
+  variantAddons: [VariantAddonRaw, VariantRaw | null][],
+  regularAddons: BasicAddonRaw[],
+  modAddons: BasicAddonRaw[],
   downgrade: string,
   feedback: (msg: string) => void
 ): Promise<void> {
   feedback("Downloading assets ...");
   let zipsDone = 0;
-  const parseResult = parseAddons(assets, exclusives, regulars, mods);
+  const parseResult = parseAddons(assets, triggers, variantAddons, regularAddons, modAddons);
   const zips = await Promise.all(
     parseResult.zips.map(async (name) => {
       name = assets.templates.zips_path.replace("{name}", name);
@@ -307,7 +295,12 @@ export async function build(
   );
 
   feedback("Saving the result ...");
-  const ids = [exclusives.map((variant) => variant.id).join(""), getIds(regulars), getIds(mods)].filter((value) => value.length > 0).join("-");
+
+  const variantIds = variantAddons.map(([, variant]) => variant?.id ?? "?").join("");
+  const regularIds = getIds(regularAddons);
+  const modIds = getIds(modAddons);
+  const ids = [variantIds, regularIds, modIds].filter((value) => value.length > 0).join("-");
+
   const filename = assets.templates.filename.replace("{version}", assets.repos.base.version).replace("{format}", formatVersion).replace("{ids}", ids);
 
   saveAs(blob, filename);
