@@ -9,6 +9,19 @@
     --button-color: var(--color-white);
   }
 
+  &--danger {
+    --button-background: transparent;
+    --button-background-hover: var(--color-danger-hover);
+    --button-background-active: var(--color-danger-active);
+    --button-border: var(--color-danger-border);
+    --button-color: var(--color-danger);
+
+    &:hover,
+    &:active {
+      color: var(--color-white) !important;
+    }
+  }
+
   &--kofi {
     --button-background: var(--color-kofi);
     --button-background-hover: var(--color-kofi-hover);

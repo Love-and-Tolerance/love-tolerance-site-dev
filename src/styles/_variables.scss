@@ -10,6 +10,11 @@ $color-primary-hover: functions.shift-color($color-primary, $shade-percentage-ho
 $color-primary-active: functions.shift-color($color-primary, $shade-percentage-active);
 $color-primary-border: functions.shift-color($color-primary, $shade-percentage-border);
 
+$color-danger: #fe1b1b;
+$color-danger-hover: functions.shift-color($color-danger, $shade-percentage-hover);
+$color-danger-active: functions.shift-color($color-danger, $shade-percentage-active);
+$color-danger-border: functions.shift-color($color-danger, $shade-percentage-border);
+
 $color-kofi: #13c3ff;
 $color-kofi-hover: functions.shift-color($color-kofi, $shade-percentage-hover);
 $color-kofi-active: functions.shift-color($color-kofi, $shade-percentage-active);
