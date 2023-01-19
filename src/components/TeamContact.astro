@@ -9,7 +9,7 @@ interface Props extends ContactLink {
 {
   Astro.props.url === undefined ? (
     <div class="hstack text-muted" title={Astro.props.title}>
-      <i class="fab fa-discord" />
+      <i class={Astro.props.icon} />
       <span>{Astro.props.value}</span>
     </div>
   ) : (

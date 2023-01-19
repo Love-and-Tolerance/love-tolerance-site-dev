@@ -29,6 +29,7 @@ type Props = TeamMember;
         {
           ContactLinks.map((link) => {
             const value = Astro.props.contacts[link.id];
+
             if (value === undefined) {
               return null;
             }
