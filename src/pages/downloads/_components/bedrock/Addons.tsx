@@ -37,12 +37,12 @@ export const Addons: Component = () => {
         <Show when={assets()} keyed fallback={<h2>Loading...</h2>}>
           {(assets) => (
             <>
-              <h3>Minecraft Bedrock versions: {assets.repos.base.mc_versions}</h3>
+              <h4>Minecraft Bedrock versions: {assets.repos.base.mc_versions}</h4>
 
-              <div class="grid grid--col-2">
-                <Addon assets={assets} addon={baseAddon(assets.repos.base)} />
+              <div class="hcards">
+                <Addon assets={assets} data={baseAddon(assets.repos.base)} />
 
-                <For each={assets.repos.addons}>{(addon) => <Addon assets={assets} addon={addon} />}</For>
+                <For each={assets.repos.addons}>{(addon) => <Addon assets={assets} data={addon} />}</For>
               </div>
             </>
           )}
