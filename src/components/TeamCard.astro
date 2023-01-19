@@ -18,9 +18,9 @@ type Props = TeamMember;
 
         {
           Astro.props.nickname !== undefined ? (
-            <span class="text-muted" title="Minecraft nickname">
+            <samp class="hstack hcard-mc-nickname" title="Minecraft nickname">
               {Astro.props.nickname}
-            </span>
+            </samp>
           ) : null
         }
       </div>

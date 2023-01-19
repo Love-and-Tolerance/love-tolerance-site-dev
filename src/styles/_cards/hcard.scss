@@ -1,4 +1,5 @@
 @use "../_mixins/media";
+@use "../_mixins/typography";
 @use "../hstack";
 
 .hcards {
@@ -104,6 +105,12 @@
     &__right {
       gap: var(--margin-md);
     }
+  }
+
+  &-mc-nickname {
+    @include typography.font(20, 24, monospace, 700);
+
+    color: var(--color-black-50);
   }
 
   &-actions {
