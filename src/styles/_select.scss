@@ -8,13 +8,21 @@
   --select-padding-x: var(--margin);
   --select-padding-y: var(--margin-md);
 
-  background: var(--select-background);
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48IS0tISBGb250IEF3ZXNvbWUgUHJvIDYuMi4xIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlIChDb21tZXJjaWFsIExpY2Vuc2UpIENvcHlyaWdodCAyMDIyIEZvbnRpY29ucywgSW5jLiAtLT48cGF0aCBkPSJNMjMzLjQgNDA2LjZjMTIuNSAxMi41IDMyLjggMTIuNSA0NS4zIDBsMTkyLTE5MmMxMi41LTEyLjUgMTIuNS0zMi44IDAtNDUuM3MtMzIuOC0xMi41LTQ1LjMgMEwyNTYgMzM4LjcgODYuNiAxNjkuNGMtMTIuNS0xMi41LTMyLjgtMTIuNS00NS4zIDBzLTEyLjUgMzIuOCAwIDQ1LjNsMTkyIDE5MnoiLz48L3N2Zz4=");
+  background-color: var(--select-background);
+  background-repeat: no-repeat;
+  background-position: right var(--select-padding-x) center;
+  background-size: 16px 12px;
+
   border-radius: var(--border-radius);
   box-shadow: 0 0 0 1px var(--select-border) inset;
   color: var(--select-color) !important;
   font: inherit;
-  padding: var(--select-padding-y) var(--select-padding-x);
+  padding: var(--select-padding-y);
+  padding-left: var(--select-padding-x);
+  padding-right: calc(var(--select-padding-x) * 2 + 24px);
 
+  appearance: none;
   display: block;
 
   align-self: start;
