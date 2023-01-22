@@ -1,6 +1,8 @@
 ---
 import FeatureCard from "@/components/FeatureCard.astro";
-import { Gallery } from "../components/gallery/Gallery";
+import { getImage } from "@astrojs/image";
+import { ImageMetadata } from "@astrojs/image/dist/vite-plugin-astro-image";
+import { Gallery, GalleryPicture } from "../components/gallery/Gallery";
 import { Server } from "../components/server/Server";
 import YouTube from "../components/YouTube.astro";
 import Features from "../data/features.json";
@@ -8,8 +10,28 @@ import Links from "../data/links.json";
 import Servers from "../data/servers.json";
 import Layout from "../layouts/Layout.astro";
 
-const globs = await Astro.glob("../images/home/screenshots/*");
-const galleryPaths = globs.map((glob) => glob["default"] as string);
+const images = (await Astro.glob("../images/home/screenshots/*")) as { default: ImageMetadata }[];
+const galleryPictures = await Promise.all(
+  images.map(async (glob, i): Promise<GalleryPicture> => {
+    const original = glob["default"];
+    const thumbnail = await getImage({
+      src: original,
+      alt: "N/A",
+      width: 300,
+      format: "png",
+    });
+
+    if (thumbnail.src === undefined || thumbnail.src === null) {
+      throw new Error(`Thumbnail src is undefined for image "${original.src}"`);
+    }
+
+    return {
+      alt: `Screenshot #${i + 1}`,
+      originalSrc: original.src,
+      thumbnailSrc: thumbnail.src,
+    };
+  })
+);
 
 function link(name: keyof typeof Links, path?: string): URL {
   const url = new URL(Links[name]);
@@ -76,7 +98,7 @@ function link(name: keyof typeof Links, path?: string): URL {
     </div>
 
     <h2>Showcase</h2>
-    <Gallery paths={galleryPaths} client:only="solid-js" />
+    <Gallery pictures={galleryPictures} client:only="solid-js" />
   </div>
 
   <div class="did-you-know flex">

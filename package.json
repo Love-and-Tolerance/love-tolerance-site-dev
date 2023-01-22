@@ -10,11 +10,13 @@
     "preview": "astro preview"
   },
   "dependencies": {
+    "@astrojs/image": "^0.12.1",
     "classnames": "^2.3.2",
     "clipboard": "^2.0.11",
     "file-saver": "^2.0.5",
     "jszip": "^3.10.1",
     "minimatch": "^5.1.1",
+    "sharp": "^0.31.3",
     "solid-js": "^1.6.1",
     "swiper": "^8.4.4",
     "zod": "^3.19.1",

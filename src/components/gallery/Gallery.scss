@@ -1,8 +1,38 @@
 @import "swiper/css";
+@import "swiper/css/lazy";
+@import "swiper/css/zoom";
 @import "swiper/css/navigation";
 
 :root {
   --swiper-theme-color: var(--color-white) !important;
+}
+
+.swiper {
+  &-icon {
+    color: var(--swiper-theme-color) !important;
+    font-size: 2em;
+    line-height: 1;
+    text-align: center;
+
+    width: 1em;
+
+    position: absolute;
+    z-index: 1;
+
+    &--top {
+      top: var(--margin);
+    }
+
+    &--right {
+      right: var(--margin);
+    }
+  }
+
+  &-lazy {
+    &:not(&-loaded) {
+      visibility: hidden;
+    }
+  }
 }
 
 .gallery {

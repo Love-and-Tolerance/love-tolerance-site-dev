@@ -1,12 +1,17 @@
 import "./Gallery.scss";
 
 import { Component, createSignal, For } from "solid-js";
-import type { Swiper as SwiperInstance } from "swiper";
-import { FreeMode, Navigation, Thumbs } from "swiper";
+import { FreeMode, Lazy, Navigation, Swiper as SwiperInstance, Thumbs, Zoom } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/solid";
 
+export interface GalleryPicture {
+  alt: string;
+  originalSrc: string;
+  thumbnailSrc: string;
+}
+
 export interface GalleryProps {
-  paths: string[];
+  pictures: GalleryPicture[];
 }
 
 export const Gallery: Component<GalleryProps> = (props) => {
@@ -14,11 +19,22 @@ export const Gallery: Component<GalleryProps> = (props) => {
 
   return (
     <div class="gallery">
-      <Swiper class="gallery__display" modules={[Navigation, Thumbs]} spaceBetween={10} navigation thumbs={{ swiper: thumbsSwiper() }}>
-        <For each={props.paths}>
-          {(path, i) => (
+      <Swiper
+        class="gallery__display"
+        modules={[Lazy, Zoom, Navigation, Thumbs]}
+        spaceBetween={10}
+        lazy
+        zoom
+        navigation
+        thumbs={{ swiper: thumbsSwiper() }}
+      >
+        <For each={props.pictures}>
+          {(picture) => (
             <SwiperSlide>
-              <img src={path} alt={`Slide ${i() + 1}`} />
+              <div class="swiper-zoom-container">
+                <img data-src={picture.originalSrc} alt={picture.alt} class="swiper-lazy" />
+              </div>
+              <div class="swiper-lazy-preloader swiper-lazy-preloader-white" />
             </SwiperSlide>
           )}
         </For>
@@ -26,7 +42,8 @@ export const Gallery: Component<GalleryProps> = (props) => {
 
       <Swiper
         class="gallery__thumbs"
-        modules={[FreeMode]}
+        modules={[Lazy, FreeMode]}
+        lazy
         freeMode
         slidesOffsetAfter={10}
         slidesOffsetBefore={10}
@@ -36,10 +53,11 @@ export const Gallery: Component<GalleryProps> = (props) => {
         breakpoints={{ 750: { slidesPerView: 3 }, 1000: { slidesPerView: 4 } }}
         onSwiper={setThumbsSwiper}
       >
-        <For each={props.paths}>
-          {(path, i) => (
+        <For each={props.pictures}>
+          {(picture) => (
             <SwiperSlide>
-              <img src={path} alt={`Slide ${i() + 1}`} />
+              <img data-src={picture.thumbnailSrc} alt={picture.alt} class="swiper-lazy" />
+              <div class="swiper-lazy-preloader swiper-lazy-preloader-white" />
             </SwiperSlide>
           )}
         </For>
