@@ -13,20 +13,5 @@
     "image": "/features/vanilla-close.png",
     "title": "Close to Vanilla",
     "description": "Being similar to the default textures, doesn't make your builds look completely different"
-  },
-  {
-    "image": "/features/minelp.png",
-    "title": "Ponified Mobs",
-    "description": "Compatible with [Mine Little Pony](https://minelittlepony-mod.com/) ponified mobs"
-  },
-  {
-    "image": "/features/cross-platform.png",
-    "title": "Cross-Platform",
-    "description": "Available for both Java and Bedrock (MCPE and Windows 10) editions"
-  },
-  {
-    "image": "/features/addons.png",
-    "title": "Add-on Packs",
-    "description": "Has various add-on packs to customize the look and feel of the pack"
   }
 ]

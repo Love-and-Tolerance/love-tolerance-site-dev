@@ -2,9 +2,9 @@
 import FeatureCard from "@/components/FeatureCard.astro";
 import { getImage } from "@astrojs/image";
 import { ImageMetadata } from "@astrojs/image/dist/vite-plugin-astro-image";
+import YouTube from "../components/YouTube.astro";
 import { Gallery, GalleryPicture } from "../components/gallery/Gallery";
 import { Server } from "../components/server/Server";
-import YouTube from "../components/YouTube.astro";
 import Features from "../data/features.json";
 import Links from "../data/links.json";
 import Servers from "../data/servers.json";
@@ -49,15 +49,25 @@ function link(name: keyof typeof Links, path?: string): URL {
     <div class="hero__content flex">
       <div class="hero__section flex">
         <img class="hero__logo" src="/logo.svg" alt="Love & Tolerance logo" />
-        <h3>A My Little Pony: Friendship is Magic Inspired Resource Pack!</h3>
-        <p>
-          However, this is only in the sense that it's brightly colored and features some mild pony references, meaning it's not overtly pony-themed
-          and won't make your world look totally different.
-        </p>
+        <h3>A re-imagining of L&T with 16 times the detail!</h3>
+        <p>Every block now contains 256 individual block textures, increasing the pixel count by 256 times.</p>
       </div>
 
       <div class="hero__section flex">
-        <a href="/downloads" class="btn btn--primary btn--large btn--fill"> Download</a>
+        <a
+          href="https://github.com/Love-and-Tolerance/Block-Edition/releases/download/1.0.0/Love-and-Tolerance-Block-Edition-1.0.0.zip"
+          class="btn btn--primary btn--large btn--fill"
+        >
+          Download
+        </a>
+
+        <a
+          href="https://github.com/Love-and-Tolerance/Block-Edition/releases/download/1.0.0/Vanilla-Block-Edition-1.0.0.zip"
+          class="btn btn--primary btn--large btn--fill"
+          style="background-color: #00AA00 !important;"
+        >
+          Download Vanilla
+        </a>
 
         <div class="hero__servers flex flex--small">
           <h5 class="hero__servers-title">Our Minecraft servers</h5>
