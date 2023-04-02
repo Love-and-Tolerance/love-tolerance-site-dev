@@ -1,4 +1,5 @@
 ---
+import { p } from "@/utils";
 import { renderMarkdown } from "@astrojs/markdown-remark";
 
 interface Props {
@@ -12,7 +13,7 @@ const { code: description } = await renderMarkdown(Astro.props.description, { mo
 
 <div class="vcard">
   <div class="vcard-image">
-    <img src={Astro.props.image} alt="Card image" />
+    <img src={p(Astro.props.image)} alt="Card image" />
   </div>
 
   <div class="vcard-body">

@@ -1,4 +1,5 @@
 ---
+import { p } from "@/utils";
 import Menus from "../data/menus.json";
 
 export interface Props {
@@ -13,7 +14,7 @@ const isCurrentMenuEntry = (title: string) => title === Props.menuEntry;
 <header class="header">
   <div class="header__logo logo">
     <a href={Astro.site?.pathname}>
-      <img class="logo__image" src="/lt.svg" alt="Love & Tolerance logo" />
+      <img class="logo__image" src={p("lt.svg")} alt="Love & Tolerance logo" />
     </a>
   </div>
 
@@ -27,7 +28,7 @@ const isCurrentMenuEntry = (title: string) => title === Props.menuEntry;
   <nav class="header__nav nav">
     {
       Menus.main.map(({ title, path }) => (
-        <a class:list={["nav__link", { "nav__link--current": isCurrentMenuEntry(title) }]} href={path}>
+        <a class:list={["nav__link", { "nav__link--current": isCurrentMenuEntry(title) }]} href={p(path)}>
           {title}
         </a>
       ))

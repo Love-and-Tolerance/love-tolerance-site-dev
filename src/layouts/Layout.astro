@@ -3,6 +3,7 @@ import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import Site from "../data/site.json";
 
+import { p } from "@/utils";
 import "../../icons/style.css";
 import "../styles/index.scss";
 
@@ -35,11 +36,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:url" content={Astro.site} />
     <meta property="og:site_name" content={Site.name} />
 
-    <meta property="og:image" content={new URL("/banner.png", Astro.site)} />
+    <meta property="og:image" content={new URL(p("banner.png"), Astro.site)} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="theme-color" content={Site.primaryColor} />
 
-    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="shortcut icon" href={p("favicon.ico")} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

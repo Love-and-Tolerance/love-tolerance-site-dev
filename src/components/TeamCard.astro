@@ -1,6 +1,7 @@
 ---
 import { ContactLinks } from "@/data/team/links";
 import { TeamMember } from "@/data/team/list";
+import { p } from "@/utils";
 import TeamContact from "./TeamContact.astro";
 
 type Props = TeamMember;
@@ -9,7 +10,7 @@ type Props = TeamMember;
 <div class="hcard">
   <div class="hcard-body">
     <div class="hcard-avatar">
-      <img src={Astro.props.avatar} alt={`${Astro.props.name}' avatar`} />
+      <img src={p(Astro.props.avatar)} alt={`${Astro.props.name}' avatar`} />
     </div>
 
     <div class="hcard-content">

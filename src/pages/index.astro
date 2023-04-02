@@ -1,5 +1,6 @@
 ---
 import FeatureCard from "@/components/FeatureCard.astro";
+import { p } from "@/utils";
 import { getImage } from "@astrojs/image";
 import { ImageMetadata } from "@astrojs/image/dist/vite-plugin-astro-image";
 import YouTube from "../components/YouTube.astro";
@@ -48,7 +49,7 @@ function link(name: keyof typeof Links, path?: string): URL {
   <div class="hero">
     <div class="hero__content flex">
       <div class="hero__section flex">
-        <img class="hero__logo" src="/logo.svg" alt="Love & Tolerance logo" />
+        <img class="hero__logo" src={p("/logo.svg")} alt="Love & Tolerance logo" />
         <h3>A re-imagining of L&T with 16 times the detail!</h3>
         <p>Every block now contains 256 individual block textures, increasing the pixel count by 256 times.</p>
       </div>
@@ -77,7 +78,7 @@ function link(name: keyof typeof Links, path?: string): URL {
 
         <a class="btn btn--kofi btn--medium btn--grid btn--fill" href={link("kofi")}>
           <span class="btn-icon btn-icon--left">
-            <img src="/Kofi_pixel_logo.png" alt="Ko-fi logo" />
+            <img src={p("Kofi_pixel_logo.png")} alt="Ko-fi logo" />
           </span>
 
           <span class="btn-label">Support us on Ko-fi</span>
@@ -95,7 +96,7 @@ function link(name: keyof typeof Links, path?: string): URL {
           </div>
 
           <a class="link link--discord" href={link("discordInvite")} title="Join our Discord server!">
-            <img src="/discord-logo.svg" alt="Discord logo" />
+            <img src={p("discord-logo.svg")} alt="Discord logo" />
           </a>
         </div>
       </div>
@@ -118,7 +119,7 @@ function link(name: keyof typeof Links, path?: string): URL {
   </div>
 </Layout>
 
-<style lang="scss">
+<style lang="scss" define:vars={{ hero: `url("${p("home/hero.png")}")` }}>
   :root {
     --cards-overlap: var(--gutter);
   }
@@ -145,7 +146,7 @@ function link(name: keyof typeof Links, path?: string): URL {
   }
 
   .hero {
-    background: url("/home/hero.png") no-repeat center / cover, rgba(black, 0.5);
+    background: var(--hero) no-repeat center / cover, rgba(black, 0.5);
     background-blend-mode: multiply;
     color: var(--color-white);
     padding-top: var(--header-height);
