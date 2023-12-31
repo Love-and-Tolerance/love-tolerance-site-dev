@@ -8,20 +8,18 @@ import { emptyObject } from "../utils/object";
 import { handleError } from "../utils/zod";
 import { BasicAddon } from "./BasicAddon";
 import { build } from "./build";
-import { Downgrades } from "./Downgrades";
 import { BasicAddonRaw, JavaAssets, JavaAssetsSchema, VariantAddonRaw, VariantRaw } from "./schemas/assets";
-import { DowngradesSchema, RawDowngrades } from "./schemas/downgrades";
 import { VariantAddon } from "./VariantAddon";
 
 const ASSETS_JSON = `${ASSETS_PATH}/assets/java.json`;
-const DOWNGRADES_JSON = `${ASSETS_PATH}/assets/downgrades/java.json`;
+// const DOWNGRADES_JSON = `${ASSETS_PATH}/assets/downgrades/java.json`;
 
 export const Addons: Component = () => {
-  async function fetchJsons(): Promise<[JavaAssets, RawDowngrades]> {
+  async function fetchJsons(): Promise<[JavaAssets /* , RawDowngrades */]> {
     const assets = fetchJson(ASSETS_JSON, JavaAssetsSchema);
-    const downgrades = fetchJson(DOWNGRADES_JSON, DowngradesSchema);
+    // const downgrades = fetchJson(DOWNGRADES_JSON, DowngradesSchema);
 
-    return Promise.all([assets, downgrades]);
+    return Promise.all([assets /* , downgrades */]);
   }
 
   const [jsons] = createResource(fetchJsons);
@@ -32,7 +30,7 @@ export const Addons: Component = () => {
 
       <ErrorBoundary fallback={handleError}>
         <Show when={jsons()} keyed fallback={<h2>Loading...</h2>}>
-          {([assets, downgrades]) => <AddonsInternal assets={assets} downgrades={downgrades} />}
+          {([assets /* , downgrades */]) => <AddonsInternal assets={assets} /* downgrades={downgrades} */ />}
         </Show>
       </ErrorBoundary>
     </>
@@ -41,7 +39,7 @@ export const Addons: Component = () => {
 
 interface InternalProps {
   assets: JavaAssets;
-  downgrades: RawDowngrades;
+  // downgrades: RawDowngrades;
 }
 
 function collectVariantAddons(state: Record<number, string>, addons: VariantAddonRaw[]): [VariantAddonRaw, VariantRaw | null][] {
@@ -66,7 +64,7 @@ const AddonsInternal: Component<InternalProps> = (props) => {
 
   const [busy, setBusy] = createSignal(false);
   const [message, setMessage] = createSignal("");
-  const [selectedDowngrade, setSelectedDowngrade] = createSignal("none");
+  // const [selectedDowngrade, setSelectedDowngrade] = createSignal("none");
 
   const defaultImage = createMemo(() => {
     const [owner, name] = parseGitHubUrl(props.assets.repos.base.url);
@@ -100,7 +98,7 @@ const AddonsInternal: Component<InternalProps> = (props) => {
 
   function reset() {
     batch(() => {
-      setSelectedDowngrade("none");
+      // setSelectedDowngrade("none");
       emptyObject(variantsState);
       emptyObject(regularState);
       emptyObject(modsState);
@@ -112,15 +110,15 @@ const AddonsInternal: Component<InternalProps> = (props) => {
 
     try {
       await build(
-        ASSETS_PATH,
+        // ASSETS_PATH,
         ZIPS_PATH,
         props.assets,
-        props.downgrades,
+        // props.downgrades,
         triggers(),
         finalVariants(),
         finalRegular(),
         finalMods(),
-        selectedDowngrade(),
+        // selectedDowngrade(),
         setMessage
       );
     } catch (err) {
@@ -155,12 +153,12 @@ const AddonsInternal: Component<InternalProps> = (props) => {
         <div>{message}</div>
       </div>
 
-      <Downgrades
+      {/* <Downgrades
         data={props.downgrades}
         latestVersion={props.assets.repos.base.mc_versions}
         value={selectedDowngrade()}
         onChange={setSelectedDowngrade}
-      />
+      /> */}
 
       <VariantAddons
         title="Exclusive add-ons"

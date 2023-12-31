@@ -1,12 +1,9 @@
 import { saveAs } from "file-saver";
 import JSZip from "jszip";
 import { getBranch } from "../utils/branch";
-import { fetchJson } from "../utils/json";
 import { getLicense } from "../utils/license";
 import { parseGlob } from "../utils/path";
-import { globZip, moveFiles } from "../utils/zip";
 import { BasicAddonRaw, JavaAssets, VariantAddonRaw, VariantRaw } from "./schemas/assets";
-import { FormatDowngradeSchema, RawDowngradeLang, RawDowngrades } from "./schemas/downgrades";
 
 const langsRe = parseGlob("assets/*/lang/*.json");
 
@@ -87,7 +84,7 @@ function getIds(addons: BasicAddonRaw[]): string {
   return addons.map((addon) => addon.id).join("-");
 }
 
-function applyLangDowngrade(lang: Record<string, string>, langDowngrade: RawDowngradeLang): void {
+/* function applyLangDowngrade(lang: Record<string, string>, langDowngrade: RawDowngradeLang): void {
   if (langDowngrade.set !== undefined) {
     for (const [key, value] of Object.entries(langDowngrade.set)) {
       lang[key] = value;
@@ -99,9 +96,9 @@ function applyLangDowngrade(lang: Record<string, string>, langDowngrade: RawDown
       delete lang[key];
     }
   }
-}
+} */
 
-async function applyDowngrade(
+/* async function applyDowngrade(
   assetsPath: string,
   downgrades: RawDowngrades,
   base: JSZip,
@@ -206,18 +203,18 @@ async function applyDowngrade(
   mcmetaJson.pack.pack_format = parseInt(version);
 
   base.file("pack.mcmeta", JSON.stringify(mcmetaJson, null, 2));
-}
+} */
 
 export async function build(
-  assetsPath: string,
+  // assetsPath: string,
   zipsPath: string,
   assets: JavaAssets,
-  downgrades: RawDowngrades,
+  // downgrades: RawDowngrades,
   triggers: string[],
   variantAddons: [VariantAddonRaw, VariantRaw | null][],
   regularAddons: BasicAddonRaw[],
   modAddons: BasicAddonRaw[],
-  downgrade: string,
+  // downgrade: string,
   feedback: (msg: string) => void
 ): Promise<void> {
   feedback("Downloading assets ...");
@@ -275,13 +272,13 @@ export async function build(
 
   let formatVersion = assets.repos.base.pack_format;
 
-  if (downgrade !== "none") {
+  /* if (downgrade !== "none") {
     feedback("Applying downgrade ...");
 
     await applyDowngrade(assetsPath, downgrades, base, downgrade, feedback);
 
     formatVersion = downgrade;
-  }
+  } */
 
   feedback("Preparing the result ...");
   const blob = await base.generateAsync(
