@@ -160,6 +160,10 @@ const AddonsInternal: Component<InternalProps> = (props) => {
         onChange={setSelectedDowngrade}
       /> */}
 
+      <div>
+        <strong>Minecraft version: {props.assets.repos.base.mc_versions}</strong>
+      </div>
+
       <VariantAddons
         title="Exclusive add-ons"
         triggers={triggers()}
