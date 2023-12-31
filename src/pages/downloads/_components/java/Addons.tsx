@@ -1,4 +1,4 @@
-import { assets as ASSETS_PATH } from "@/data/links.json";
+import { assets as ASSETS_PATH, zips as ZIPS_PATH } from "@/data/links.json";
 import classNames from "classnames";
 import { batch, Component, createMemo, createResource, createSignal, ErrorBoundary, For, Show } from "solid-js";
 import { createMutable } from "solid-js/store";
@@ -113,6 +113,7 @@ const AddonsInternal: Component<InternalProps> = (props) => {
     try {
       await build(
         ASSETS_PATH,
+        ZIPS_PATH,
         props.assets,
         props.downgrades,
         triggers(),

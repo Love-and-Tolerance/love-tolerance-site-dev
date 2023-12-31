@@ -210,6 +210,7 @@ async function applyDowngrade(
 
 export async function build(
   assetsPath: string,
+  zipsPath: string,
   assets: JavaAssets,
   downgrades: RawDowngrades,
   triggers: string[],
@@ -225,7 +226,7 @@ export async function build(
   const zips = await Promise.all(
     parseResult.zips.map(async (name) => {
       name = assets.templates.zips_path.replace("{name}", name);
-      const r = await fetch(`${assetsPath}/${name}`);
+      const r = await fetch(`${zipsPath}/${name}`);
 
       feedback(`Downloading assets (${++zipsDone}/${parseResult.zips.length}) ...`);
 
